@@ -210,14 +210,14 @@ const Hero = () => {
                   className="relative z-10 rounded-full overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800"
                 >
                   <img
-                    src="./src/images/profile.jpg" // Fixed path from "/src/..." to "./src/..."
+                    src="/images/profile.jpg" // Updated path to absolute path from root
                     alt="Darshan Gaikwad - Frontend Developer"
                     className="w-full h-full object-cover"
                     width="320"
                     height="320"
                     loading="eager"
                     fetchPriority="high"
-                    onError={(e) => { // Add error handler for image
+                    onError={(e) => {
                       e.currentTarget.src = "https://via.placeholder.com/320?text=Profile";
                     }}
                   />

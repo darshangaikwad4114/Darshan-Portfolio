@@ -18,6 +18,7 @@ export default defineConfig({
       },
     },
     chunkSizeWarningLimit: 1000,
+    assetsInlineLimit: 4096, // Only files below 4kb will be inlined
   },
   resolve: {
     alias: {
@@ -32,4 +33,6 @@ export default defineConfig({
       allow: ['.', '..']
     }
   },
+  // Add publicDir explicitly
+  publicDir: 'public',
 });

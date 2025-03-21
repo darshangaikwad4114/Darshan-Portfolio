@@ -7,7 +7,7 @@ const projects = [
   {
     title: 'QuickCart E-Commerce App',
     description: 'Full-stack e-commerce solution with real-time product data, advanced filtering, and a feature-rich shopping cart.',
-    image: './src/images/QuickCart.png', // Fixed path
+    image: '/images/QuickCart.png', // Updated path to absolute path from root
     techStack: ['React.js', 'Node.js', 'Tailwind CSS', 'FakeStoreAPI'],
     achievements: [
       'Improved page load efficiency by 40%',
@@ -23,7 +23,7 @@ const projects = [
   {
     title: 'FlimFinder Movie App',
     description: 'Movie discovery platform with real-time search, local storage for favorites, and a refined UI.',
-    image: './src/images/FlimFinder.png', // Fixed path
+    image: '/images/FlimFinder.png', // Updated path to absolute path from root
     techStack: ['React', 'Node.js', 'Bootstrap', 'OMDB API'],
     achievements: [
       'Enhanced performance by 40% using lazy loading',
@@ -39,7 +39,7 @@ const projects = [
   {
     title: 'Crypto Price Tracker App',
     description: 'Real-time cryptocurrency tracking tool with advanced filtering and automated data refresh.',
-    image: './src/images/CryptoCurrency.png', // Fixed path
+    image: '/images/CryptoCurrency.png', // Updated path to absolute path from root
     techStack: ['React.js', 'Axios', 'CSS3', 'Coin Gecko API'],
     achievements: [
       'Ensured 100% cross-device compatibility',
