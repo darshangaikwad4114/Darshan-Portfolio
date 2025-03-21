@@ -1,74 +1,252 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Instagram, FileText, ChevronDown, Briefcase } from 'lucide-react';
+import { Link } from 'react-scroll';
+import DecryptedText from './DecryptedText';
 
 const Hero = () => {
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
+  const [key, setKey] = useState(0); 
+  const titles = [
+    'Full Stack Developer',
+    'Freelance Web Developer',
+    'Technology Enthusiast',
+    'Mountain Explorer',
+    'Open Source Contributor',
+  ];
+
+  useEffect(() => {
+    // Title rotation logic
+    const interval = setInterval(() => {
+      setCurrentTitleIndex((prevIndex) => (prevIndex + 1) % titles.length);
+      setKey(prev => prev + 1);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 pt-20">
-      <div className="container mx-auto px-6 py-12 md:py-24">
+    <section id="about" className="min-h-screen flex flex-col justify-center relative bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 pt-20 overflow-hidden">
+      {/* Animated background shapes */}
+      <motion.div 
+        className="absolute top-20 right-0 w-72 h-72 bg-primary-100/30 dark:bg-primary-900/10 rounded-full filter blur-3xl"
+        animate={{
+          x: [0, 30, 0],
+          y: [0, -30, 0],
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 10,
+          ease: "easeInOut"
+        }}
+      />
+      
+      <div className="container mx-auto px-6 py-12 md:py-24 z-10">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-12">
+            {/* Content column */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
               className="lg:w-1/2 text-center lg:text-left"
             >
-              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-                Frontend Developer
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8">
-                React Specialist | Building Modern Web Experiences
-              </p>
-              <p className="text-lg text-gray-600 dark:text-gray-400 mb-12">
-                A passionate Frontend Developer with expertise in React, JavaScript, and modern web development tools.
-                Experienced in building responsive, high-performance web applications and optimizing user experiences.
-              </p>
-              <div className="flex justify-center lg:justify-start space-x-6">
-                <a
-                  href="https://github.com/yourusername"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                  aria-label="GitHub Profile"
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                <motion.span 
+                  className="inline-block px-3 py-1 mb-6 text-xs font-medium text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 rounded-full"
+                  whileHover={{ scale: 1.05 }}
                 >
-                  <Github className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                </a>
-                <a
-                  href="https://linkedin.com/in/yourusername"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                  aria-label="LinkedIn Profile"
-                >
-                  <Linkedin className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                </a>
-                <a
-                  href="mailto:your.email@example.com"
-                  className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                  aria-label="Email Contact"
-                >
-                  <Mail className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-                </a>
+                  Welcome to my portfolio
+                </motion.span>
+              </motion.div>
+              
+              <motion.h1 
+                className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              >
+                Hi, I'm <span className="text-primary-600 dark:text-primary-400">Darshan</span>
+              </motion.h1>
+              
+              <div className="text-xl md:text-3xl font-bold mb-6 text-primary-600 dark:text-primary-400 h-[60px] md:h-[72px] flex items-center justify-center lg:justify-start">
+                <span className="mr-2 text-gray-700 dark:text-gray-300">I'm a </span>
+                <DecryptedText 
+                  key={key}
+                  text={titles[currentTitleIndex]} 
+                  speed={25} 
+                  sequential={true}
+                  animateOn="view"
+                  maxIterations={15}
+                  className="text-primary-600 dark:text-primary-400"
+                  encryptedClassName="text-primary-400 dark:text-primary-600 opacity-70"
+                  revealDirection="center"
+                  parentClassName="transition-all duration-300 ease-in-out"
+                />
               </div>
+              
+              <motion.p 
+                className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                I craft responsive, high-performance web applications with modern technologies
+                that deliver exceptional user experiences. Passionate about clean code,
+                performance optimization, and staying on the cutting edge of web development.
+              </motion.p>
+              
+              {/* Call-to-action buttons */}
+              <motion.div 
+                className="flex flex-wrap justify-center lg:justify-start gap-3 mb-10"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+              >
+                <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                  <motion.a
+                    href="./src/assets/Darshan_Gaikwad_Resume.pdf" 
+                    download
+                    className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-all duration-200 shadow-sm hover:shadow-md focus-ring"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <FileText className="w-5 h-5 mr-2 flex-shrink-0" />
+                    <span>View Resume</span>
+                  </motion.a>
+                  
+                  <Link
+                    to="contact"
+                    spy={true}
+                    smooth={true}
+                    offset={-80}
+                    duration={800}
+                    className="w-full sm:w-auto"
+                  >
+                    <motion.button
+                      className="w-full inline-flex items-center justify-center px-6 py-3 bg-secondary-600 hover:bg-secondary-700 text-white rounded-lg transition-all duration-200 shadow-sm hover:shadow-md focus-ring"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Briefcase className="w-5 h-5 mr-2 flex-shrink-0" />
+                      <span>Hire Me</span>
+                    </motion.button>
+                  </Link>
+                </div>
+              </motion.div>
+              
+              {/* Social links */}
+              <motion.div 
+                className="flex justify-center lg:justify-start space-x-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7 }}
+              >
+                <motion.a
+                  href="https://github.com/darshangaikwad4114"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors duration-200 focus-ring"
+                  aria-label="GitHub Profile"
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Github className="w-5 h-5" />
+                </motion.a>
+                <motion.a
+                  href="https://www.linkedin.com/in/darshan-gaikwad/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors duration-200 focus-ring"
+                  aria-label="LinkedIn Profile"
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Linkedin className="w-5 h-5" />
+                </motion.a>
+                <motion.a
+                  href="https://www.instagram.com/darshan_4114_/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors duration-200 focus-ring"
+                  aria-label="Instagram Profile"
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Instagram className="w-5 h-5" />
+                </motion.a>
+              </motion.div>
             </motion.div>
+            
+            {/* Profile image column */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
               className="lg:w-1/2 flex justify-center"
             >
               <div className="relative w-64 h-64 md:w-80 md:h-80">
-                <img
-                  src="https://i.imgur.com/YOhYmLv.png"
-                  alt="Darshan Gaikwad"
-                  className="rounded-full w-full h-full object-cover shadow-2xl"
+                {/* Animated glow effect */}
+                <motion.div 
+                  className="absolute -inset-4 bg-primary-500/30 dark:bg-primary-400/20 rounded-full blur-lg"
+                  animate={{ 
+                    scale: [1, 1.05, 1],
+                    opacity: [0.7, 0.9, 0.7]
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 3,
+                    ease: "easeInOut"
+                  }}
                 />
-                <div className="absolute inset-0 rounded-full bg-gradient-to-b from-primary-500/10 to-transparent"></div>
+                
+                {/* Profile image with subtle hover effect */}
+                <motion.div 
+                  whileHover={{ rotate: 5 }} 
+                  className="relative z-10 rounded-full overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800"
+                >
+                  <img
+                    src="./src/images/profile.jpg" // Fixed path from "/src/..." to "./src/..."
+                    alt="Darshan Gaikwad - Frontend Developer"
+                    className="w-full h-full object-cover"
+                    width="320"
+                    height="320"
+                    loading="eager"
+                    fetchPriority="high"
+                    onError={(e) => { // Add error handler for image
+                      e.currentTarget.src = "https://via.placeholder.com/320?text=Profile";
+                    }}
+                  />
+                </motion.div>
               </div>
             </motion.div>
           </div>
         </div>
+      </div>
+      
+      {/* Scroll down indicator */}
+      <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+        <Link
+          to="skills"
+          spy={true}
+          smooth={true}
+          offset={-80}
+          duration={800}
+          className="cursor-pointer"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+            className="flex flex-col items-center"
+          >
+            <span className="text-xs text-gray-500 dark:text-gray-400 mb-1">Scroll Down</span>
+            <ChevronDown className="w-5 h-5 text-primary-500 dark:text-primary-400" />
+          </motion.div>
+        </Link>
       </div>
     </section>
   );

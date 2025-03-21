@@ -1,3 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  
+  body {
+    @apply antialiased text-gray-800 dark:text-gray-200 leading-relaxed;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white;
+  }
+  
+  .section-subtitle {
+    @apply text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto;
+  }
+  
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900;
+  }
+
+  /* New classes for consistent spacing */
+  .card-padding {
+    @apply p-6 sm:p-8;
+  }
+  
+  .section-spacing {
+    @apply py-16 md:py-24;
+  }
+  
+  .section-container {
+    @apply container mx-auto px-4 sm:px-6;
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 0.8s infinite;
+}
+
+/* Fix for inconsistent button heights */
+.btn-reset {
+  line-height: 1.5;
+}
+
+/* Fix for mobile spacing issues */
+@media (max-width: 640px) {
+  .sm\:gap-adjusted {
+    gap: 0.5rem;
+  }
+}
