@@ -15,8 +15,9 @@ const projects = [
       'Increased checkout completion rates by 20%',
     ],
     links: {
-      github: 'https://github.com/darshangaikwad4114/quickcart',
-      live: 'https://quickcart-demo.vercel.app',
+      // Updated links with the correct URLs
+      github: 'https://github.com/darshangaikwad4114/ecommerce-app',
+      live: 'https://quick-cart-ecommerce-shop.netlify.app/',
     },
     spotlightColor: 'rgba(26, 171, 255, 0.2)', // Primary color with opacity
   },
@@ -31,8 +32,9 @@ const projects = [
       'Ensured WCAG-compliant accessibility',
     ],
     links: {
-      github: 'https://github.com/darshangaikwad4114/filmfinder',
-      live: 'https://filmfinder-demo.vercel.app',
+      // Updated links with the correct URLs
+      github: 'https://github.com/darshangaikwad4114/Movie-app',
+      live: 'https://darshan-movie-app.netlify.app/',
     },
     spotlightColor: 'rgba(100, 121, 167, 0.2)', // Secondary color with opacity
   },
@@ -47,8 +49,9 @@ const projects = [
       'Implemented real-time price updates',
     ],
     links: {
-      github: 'https://github.com/darshangaikwad4114/crypto-tracker',
-      live: 'https://crypto-tracker-demo.vercel.app',
+      // Updated links with the correct URLs
+      github: 'https://github.com/darshangaikwad4114/Cryptocurrency-Price-Tracker',
+      live: 'https://darshan-cryptocurrency-price-tracker.netlify.app/',
     },
     spotlightColor: 'rgba(70, 199, 255, 0.2)', // Different primary shade with opacity
   },
