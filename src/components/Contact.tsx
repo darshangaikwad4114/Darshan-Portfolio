@@ -4,7 +4,6 @@ import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { MdEmail, MdOutlineSend } from 'react-icons/md';
 import SpotlightCard from './SpotlightCard';
 import { trackEvent } from './AnalyticsProvider';
-import { trackMetric } from '@vercel/speed-insights/react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -47,31 +46,20 @@ const Contact = () => {
         hasName: Boolean(formData.name),
         hasEmail: Boolean(formData.email),
         timestamp: new Date().toISOString(),
-      });
-      
-      // Calculate and track form submission duration
-      const duration = performance.now() - startTime;
-      trackMetric('form-submission-time', duration, {
-        success: true,
-        formType: 'contact'
+        // Include duration in the analytics event instead of using trackMetric
+        duration: performance.now() - startTime
       });
       
       setSubmitSuccess(true);
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
-      // Track form submission error
+      // Track form submission error with error information
       trackEvent('contact_form_error', {
         success: false,
         errorType: error instanceof Error ? error.name : 'Unknown',
         timestamp: new Date().toISOString(),
-      });
-      
-      // Track error metrics
-      const duration = performance.now() - startTime;
-      trackMetric('form-submission-time', duration, {
-        success: false,
-        formType: 'contact',
-        errorType: error instanceof Error ? error.name : 'Unknown'
+        // Include duration in the analytics event
+        duration: performance.now() - startTime
       });
       
       setSubmitError('Something went wrong. Please try again.');

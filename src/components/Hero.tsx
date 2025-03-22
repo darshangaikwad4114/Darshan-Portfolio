@@ -4,7 +4,7 @@ import { Github, Linkedin, Instagram, FileText, ChevronDown, Briefcase } from 'l
 import { Link } from 'react-scroll';
 import DecryptedText from './DecryptedText';
 import { useAnalytics } from '../hooks/useAnalytics';
-import { trackMetric } from '@vercel/speed-insights/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const Hero = () => {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
@@ -21,11 +21,10 @@ const Hero = () => {
 
   // Track when hero section is fully loaded
   const trackHeroLoaded = useCallback(() => {
-    // Track time to hero loaded as a performance metric
-    trackMetric('hero-loaded', performance.now(), {
-      section: 'hero'
-    });
-  }, []);
+    // Track time to hero loaded - removed trackMetric as it's not exported
+    // Use analytics tracking instead
+    trackInteraction('hero_section_visible', 'view');
+  }, [trackInteraction]);
 
   useEffect(() => {
     // Title rotation logic

@@ -1,18 +1,20 @@
 import React, { ReactNode, useEffect } from 'react';
-import { trackMetric } from '@vercel/speed-insights/react';
+import { track } from '@vercel/analytics';
 
 interface SpeedInsightsProviderProps {
   children: ReactNode;
 }
 
 /**
- * Provider component for tracking Vercel Speed Insights metrics
- * This wrapper helps centralize performance monitoring
+ * Provider component for tracking performance metrics
+ * Using Vercel Analytics instead of Speed Insights trackMetric API
  */
 export function SpeedInsightsProvider({ children }: SpeedInsightsProviderProps) {
   useEffect(() => {
-    // Track metrics for initial page load
-    trackMetric('app-loaded', performance.now(), {
+    // Track metrics for initial page load using Vercel Analytics instead
+    track('performance_metric', {
+      metric_name: 'app-loaded',
+      value: performance.now(),
       event: 'initial-load',
     });
 
@@ -22,17 +24,23 @@ export function SpeedInsightsProvider({ children }: SpeedInsightsProviderProps) 
       
       if (navEntry) {
         // Track DOM Content Loaded time
-        trackMetric('dom-content-loaded', navEntry.domContentLoadedEventEnd, {
+        track('performance_metric', {
+          metric_name: 'dom-content-loaded',
+          value: navEntry.domContentLoadedEventEnd,
           navigationEntry: true,
         });
         
         // Track Load Complete time
-        trackMetric('load-complete', navEntry.loadEventEnd, {
+        track('performance_metric', {
+          metric_name: 'load-complete',
+          value: navEntry.loadEventEnd,
           navigationEntry: true,
         });
         
         // Track Time to First Byte
-        trackMetric('ttfb', navEntry.responseStart - navEntry.requestStart, {
+        track('performance_metric', {
+          metric_name: 'ttfb',
+          value: navEntry.responseStart - navEntry.requestStart,
           navigationEntry: true,
         });
       }
@@ -47,8 +55,9 @@ export function SpeedInsightsProvider({ children }: SpeedInsightsProviderProps) 
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               const sectionId = entry.target.id;
-              trackMetric(`section-visible-${sectionId}`, performance.now(), {
+              track('section_visible', {
                 section: sectionId,
+                time: performance.now(),
                 viewportHeight: window.innerHeight,
                 viewportWidth: window.innerWidth,
               });
@@ -86,7 +95,9 @@ export const measurePerformance = (metricName: string, properties?: Record<strin
   
   return () => {
     const duration = performance.now() - startTime;
-    trackMetric(metricName, duration, {
+    track('performance_metric', {
+      metric_name: metricName,
+      value: duration,
       ...properties,
       timestamp: new Date().toISOString(),
     });

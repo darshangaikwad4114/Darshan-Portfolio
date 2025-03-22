@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
-import { trackMetric } from '@vercel/speed-insights/react';
+import { track } from '@vercel/analytics';
 
 /**
- * Custom hook for tracking custom web vitals and performance metrics
- * with Vercel Speed Insights
+ * Custom hook for tracking performance metrics
+ * Uses Vercel Analytics instead of Speed Insights trackMetric API
  * 
- * @returns Object containing tracking functions for speed metrics
+ * @returns Object containing tracking functions for performance metrics
  */
 export function useSpeedInsights() {
   /**
@@ -23,7 +23,11 @@ export function useSpeedInsights() {
     if (!name || typeof value !== 'number') return;
     
     try {
-      trackMetric(name, value, attribution);
+      track('performance_metric', {
+        metric_name: name,
+        value: value,
+        ...attribution
+      });
     } catch (error) {
       // Silent fail in production, log in development
       if (import.meta.env.DEV) {
@@ -65,16 +69,20 @@ export function useSpeedInsights() {
   const trackInteraction = useCallback((
     interactionType: string,
     componentName: string,
-    fn: () => void
+    fn?: () => void
   ) => {
-    const measureEnd = startMeasurement(`interaction-${interactionType}`);
+    const startTime = performance.now();
     
-    // Execute the provided function
-    fn();
+    // Execute the provided function if it exists
+    if (fn) fn();
     
     // Record the measurement
-    measureEnd({ component: componentName });
-  }, [startMeasurement]);
+    track('interaction_performance', {
+      interaction_type: interactionType,
+      component: componentName,
+      duration: fn ? performance.now() - startTime : 0
+    });
+  }, []);
 
   return {
     trackCustomMetric,
