@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
-import { inject } from '@vercel/analytics';
+// No need to import inject here as we're using the AnalyticsProvider component
 
 // Add this for debugging image paths in production
 if (import.meta.env.PROD) {
@@ -16,5 +16,5 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>
 );
 
-// Initialize Vercel Analytics
-inject();
+// Remove this as we're handling it in AnalyticsProvider component
+// inject();

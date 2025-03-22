@@ -1,38 +1,60 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useCallback } from 'react';
 import { inject, track } from '@vercel/analytics';
 
 interface AnalyticsProviderProps {
   children: ReactNode;
 }
 
-// A wrapper component that initializes Vercel Analytics
+/**
+ * Analytics provider component that initializes Vercel Analytics
+ * and provides tracking functionality throughout the application
+ */
 export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
+  // Track page view with current path and referrer
+  const trackPageView = useCallback(() => {
+    track('page_view', { 
+      path: window.location.pathname,
+      referrer: document.referrer
+    });
+  }, []);
+
   useEffect(() => {
     // Initialize analytics once when the app loads
     inject();
     
     // Track initial page view
-    track('page_view', { path: window.location.pathname });
+    trackPageView();
     
-    // Optional: Track route changes if you implement client-side routing
-    const handleRouteChange = () => {
-      track('page_view', { 
-        path: window.location.pathname,
-        referrer: document.referrer
-      });
-    };
-    
-    // For SPA routing - add event listeners for your router here if needed
+    // For SPA with react-scroll, we can track section visibility
+    // but this would require more complex intersection observer logic
+    // which can be added if needed
     
     return () => {
-      // Clean up event listeners if added
+      // Cleanup if needed
     };
-  }, []);
+  }, [trackPageView]);
   
   return <>{children}</>;
 }
 
-// Export a utility function for custom event tracking
+/**
+ * Utility function for tracking custom events
+ * 
+ * @param eventName - Name of the event to track
+ * @param properties - Optional properties to include with the event
+ */
 export const trackEvent = (eventName: string, properties?: Record<string, any>) => {
-  track(eventName, properties);
+  if (!eventName) {
+    console.warn('Event name is required for tracking');
+    return;
+  }
+  
+  try {
+    track(eventName, properties);
+  } catch (error) {
+    // Silent fail in production, log in development
+    if (import.meta.env.DEV) {
+      console.error('Analytics tracking error:', error);
+    }
+  }
 };

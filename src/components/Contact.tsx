@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { MdEmail, MdOutlineSend } from 'react-icons/md';
@@ -24,7 +24,8 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Optimize handleSubmit with useCallback to prevent unnecessary re-renders
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError('');
@@ -34,24 +35,31 @@ const Contact = () => {
       // Replace with actual form submission logic
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // Track successful form submission
+      // Track successful form submission with more detailed info
       trackEvent('contact_form_submit', {
         success: true,
+        formLength: formData.message.length,
+        // Don't include actual form data for privacy reasons
+        hasName: Boolean(formData.name),
+        hasEmail: Boolean(formData.email),
+        timestamp: new Date().toISOString(),
       });
       
       setSubmitSuccess(true);
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
-      // Track form submission error
+      // Track form submission error with error information
       trackEvent('contact_form_error', {
         success: false,
+        errorType: error instanceof Error ? error.name : 'Unknown',
+        timestamp: new Date().toISOString(),
       });
       
       setSubmitError('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [formData]);
 
   return (
     <section id="contact" className="py-20 bg-white dark:bg-gray-900">
