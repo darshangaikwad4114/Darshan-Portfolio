@@ -149,7 +149,7 @@ const Hero = () => {
               >
                 <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                   <motion.a
-                    href="public\assets\Darshan_Gaikwad_Resume.pdf"
+                    href="/assets/Darshan_Gaikwad_Resume.pdf"
                     target="_blank" 
                     download
                     onClick={handleResumeClick}
