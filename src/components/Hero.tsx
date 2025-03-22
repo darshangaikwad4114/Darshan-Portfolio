@@ -190,38 +190,12 @@ const Hero = () => {
               className="lg:w-1/2 flex justify-center"
             >
               <div className="relative w-64 h-64 md:w-80 md:h-80">
-                {/* Animated glow effect */}
-                <motion.div 
-                  className="absolute -inset-4 bg-primary-500/30 dark:bg-primary-400/20 rounded-full blur-lg"
-                  animate={{ 
-                    scale: [1, 1.05, 1],
-                    opacity: [0.7, 0.9, 0.7]
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 3,
-                    ease: "easeInOut"
-                  }}
+                <img
+                  src="https://i.imgur.com/YOhYmLv.png"
+                  alt="Darshan Gaikwad"
+                  className="rounded-full w-full h-full object-cover shadow-2xl"
                 />
-                
-                {/* Profile image with subtle hover effect */}
-                <motion.div 
-                  whileHover={{ rotate: 5 }} 
-                  className="relative z-10 rounded-full overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800"
-                >
-                  <img
-                    src="./src/images/profile.jpg" // Fixed path from "/src/..." to "./src/..."
-                    alt="Darshan Gaikwad - Frontend Developer"
-                    className="w-full h-full object-cover"
-                    width="320"
-                    height="320"
-                    loading="eager"
-                    fetchPriority="high"
-                    onError={(e) => { // Add error handler for image
-                      e.currentTarget.src = "https://via.placeholder.com/320?text=Profile";
-                    }}
-                  />
-                </motion.div>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-b from-primary-500/10 to-transparent"></div>
               </div>
             </motion.div>
           </div>
