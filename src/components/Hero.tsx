@@ -149,7 +149,8 @@ const Hero = () => {
               >
                 <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                   <motion.a
-                    href="./src/assets/Darshan_Gaikwad_Resume.pdf" 
+                    href="public\assets\Darshan_Gaikwad_Resume.pdf"
+                    target="_blank" 
                     download
                     onClick={handleResumeClick}
                     className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-all duration-200 shadow-sm hover:shadow-md focus-ring"
@@ -233,7 +234,7 @@ const Hero = () => {
             >
               <div className="relative w-64 h-64 md:w-80 md:h-80">
                 <img
-                  src="./src/images/profile.jpg"
+                  src="/images/profile.jpg"
                   alt="Darshan Gaikwad"
                   className="rounded-full w-full h-full object-cover shadow-2xl"
                 />
