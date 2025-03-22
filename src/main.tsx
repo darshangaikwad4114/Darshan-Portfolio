@@ -2,7 +2,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
-// No need to import inject here as we're using the AnalyticsProvider component
+import { inject } from '@vercel/analytics';
+import { SpeedInsightsProvider } from './components/SpeedInsightsProvider';
 
 // Add this for debugging image paths in production
 if (import.meta.env.PROD) {
@@ -10,11 +11,14 @@ if (import.meta.env.PROD) {
   console.log('Public URL:', import.meta.env.BASE_URL);
 }
 
+// Wrap the app with the SpeedInsightsProvider for enhanced metrics tracking
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <SpeedInsightsProvider>
+      <App />
+    </SpeedInsightsProvider>
   </StrictMode>
 );
 
-// Remove this as we're handling it in AnalyticsProvider component
-// inject();
+// Initialize analytics
+inject();

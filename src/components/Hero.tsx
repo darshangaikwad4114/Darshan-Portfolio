@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Instagram, FileText, ChevronDown, Briefcase } from 'lucide-react';
 import { Link } from 'react-scroll';
 import DecryptedText from './DecryptedText';
+import { useAnalytics } from '../hooks/useAnalytics';
+import { trackMetric } from '@vercel/speed-insights/react';
 
 const Hero = () => {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-  const [key, setKey] = useState(0); 
+  const [key, setKey] = useState(0);
+  const { trackInteraction } = useAnalytics();
+  
   const titles = [
     'Full Stack Developer',
     'Freelance Web Developer',
@@ -15,6 +19,14 @@ const Hero = () => {
     'Open Source Contributor',
   ];
 
+  // Track when hero section is fully loaded
+  const trackHeroLoaded = useCallback(() => {
+    // Track time to hero loaded as a performance metric
+    trackMetric('hero-loaded', performance.now(), {
+      section: 'hero'
+    });
+  }, []);
+
   useEffect(() => {
     // Title rotation logic
     const interval = setInterval(() => {
@@ -22,8 +34,37 @@ const Hero = () => {
       setKey(prev => prev + 1);
     }, 2000);
 
-    return () => clearInterval(interval);
-  }, []);
+    // Track hero section visibility
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          trackHeroLoaded();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    const heroSection = document.getElementById('about');
+    if (heroSection) {
+      observer.observe(heroSection);
+    }
+
+    return () => {
+      clearInterval(interval);
+      observer.disconnect();
+    };
+  }, [titles.length, trackHeroLoaded]);
+
+  // Track resume download
+  const handleResumeClick = () => {
+    trackInteraction('resume_download', 'click');
+  };
+
+  // Track hire me button click  
+  const handleHireMeClick = () => {
+    trackInteraction('hire_me_button', 'click');
+  };
 
   return (
     <section id="about" className="min-h-screen flex flex-col justify-center relative bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 pt-20 overflow-hidden">
@@ -100,7 +141,7 @@ const Hero = () => {
                 performance optimization, and staying on the cutting edge of web development.
               </motion.p>
               
-              {/* Call-to-action buttons */}
+              {/* Call-to-action buttons with tracking */}
               <motion.div 
                 className="flex flex-wrap justify-center lg:justify-start gap-3 mb-10"
                 initial={{ opacity: 0, y: 10 }}
@@ -111,6 +152,7 @@ const Hero = () => {
                   <motion.a
                     href="./src/assets/Darshan_Gaikwad_Resume.pdf" 
                     download
+                    onClick={handleResumeClick}
                     className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-all duration-200 shadow-sm hover:shadow-md focus-ring"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -126,6 +168,7 @@ const Hero = () => {
                     offset={-80}
                     duration={800}
                     className="w-full sm:w-auto"
+                    onClick={handleHireMeClick}
                   >
                     <motion.button
                       className="w-full inline-flex items-center justify-center px-6 py-3 bg-secondary-600 hover:bg-secondary-700 text-white rounded-lg transition-all duration-200 shadow-sm hover:shadow-md focus-ring"
@@ -191,7 +234,7 @@ const Hero = () => {
             >
               <div className="relative w-64 h-64 md:w-80 md:h-80">
                 <img
-                  src="https://i.imgur.com/YOhYmLv.png"
+                  src="./src/images/profile.jpg"
                   alt="Darshan Gaikwad"
                   className="rounded-full w-full h-full object-cover shadow-2xl"
                 />
