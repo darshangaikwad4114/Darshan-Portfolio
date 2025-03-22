@@ -4,7 +4,6 @@ import { Github, Linkedin, Instagram, FileText, ChevronDown, Briefcase } from 'l
 import { Link } from 'react-scroll';
 import DecryptedText from './DecryptedText';
 import { useAnalytics } from '../hooks/useAnalytics';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const Hero = () => {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);

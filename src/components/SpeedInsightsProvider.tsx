@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 import { track } from '@vercel/analytics';
 
 interface SpeedInsightsProviderProps {
@@ -7,100 +7,112 @@ interface SpeedInsightsProviderProps {
 
 /**
  * Provider component for tracking performance metrics
- * Using Vercel Analytics instead of Speed Insights trackMetric API
+ * Using Vercel Analytics with optimized tracking code
  */
 export function SpeedInsightsProvider({ children }: SpeedInsightsProviderProps) {
+  const hasTrackedInitial = useRef(false);
+
   useEffect(() => {
-    // Track metrics for initial page load using Vercel Analytics instead
+    // Only track initial metrics once
+    if (hasTrackedInitial.current) return;
+    hasTrackedInitial.current = true;
+    
+    // Use requestIdleCallback for non-critical tracking to avoid impacting page load performance
+    const trackWhenIdle = (callback: () => void) => {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => callback(), { timeout: 2000 });
+      } else {
+        // Fallback for browsers that don't support requestIdleCallback
+        setTimeout(callback, 100);
+      }
+    };
+
+    // Track initial page load
     track('performance_metric', {
       metric_name: 'app-loaded',
       value: performance.now(),
       event: 'initial-load',
     });
 
-    // Track navigation timing metrics
-    if (performance && 'getEntriesByType' in performance) {
-      const navEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-      
-      if (navEntry) {
-        // Track DOM Content Loaded time
-        track('performance_metric', {
-          metric_name: 'dom-content-loaded',
-          value: navEntry.domContentLoadedEventEnd,
-          navigationEntry: true,
-        });
+    // Track navigation timing metrics in background
+    trackWhenIdle(() => {
+      if (performance && 'getEntriesByType' in performance) {
+        const navEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
         
-        // Track Load Complete time
-        track('performance_metric', {
-          metric_name: 'load-complete',
-          value: navEntry.loadEventEnd,
-          navigationEntry: true,
-        });
-        
-        // Track Time to First Byte
-        track('performance_metric', {
-          metric_name: 'ttfb',
-          value: navEntry.responseStart - navEntry.requestStart,
-          navigationEntry: true,
-        });
+        if (navEntry) {
+          const metrics = {
+            'dom-content-loaded': navEntry.domContentLoadedEventEnd,
+            'load-complete': navEntry.loadEventEnd,
+            'ttfb': navEntry.responseStart - navEntry.requestStart,
+          };
+          
+          // Send all metrics in a single batch to reduce network requests
+          track('performance_metrics_batch', {
+            metrics,
+            navigationEntry: true,
+            viewport: {
+              width: window.innerWidth,
+              height: window.innerHeight
+            }
+          });
+        }
       }
-    }
+    });
 
-    // Setup Intersection Observer to track when elements become visible
-    const setupElementVisibilityTracking = () => {
+    // Setup efficient section visibility tracking with fewer observers
+    const setupEfficientVisibilityTracking = () => {
       const sections = document.querySelectorAll('section[id]');
+      if (!sections.length) return;
       
+      // Create a single observer instead of many
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              const sectionId = entry.target.id;
-              track('section_visible', {
-                section: sectionId,
-                time: performance.now(),
-                viewportHeight: window.innerHeight,
-                viewportWidth: window.innerWidth,
-              });
+              const sectionId = entry.target.getAttribute('id');
+              if (sectionId) {
+                track('section_visible', { section: sectionId });
+                observer.unobserve(entry.target); // Track only once per section
+              }
             }
           });
         },
-        { threshold: 0.3 } // Consider visible when 30% in view
+        { threshold: 0.3 }
       );
       
-      sections.forEach((section) => observer.observe(section));
+      sections.forEach(section => observer.observe(section));
       
-      return () => {
-        sections.forEach((section) => observer.unobserve(section));
-      };
+      return () => observer.disconnect();
     };
     
-    // Delay setup to ensure DOM is fully rendered
-    const timer = setTimeout(setupElementVisibilityTracking, 1000);
+    // Delay visibility tracking setup until after critical render
+    const timer = setTimeout(setupEfficientVisibilityTracking, 2000);
     
-    return () => {
-      clearTimeout(timer);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   return <>{children}</>;
 }
 
 /**
- * Utility to measure and track a performance duration
- * @param metricName The name of the metric to track
- * @returns Function to stop measuring and record the metric
+ * Optimized utility to measure and track a performance duration
  */
 export const measurePerformance = (metricName: string, properties?: Record<string, any>) => {
   const startTime = performance.now();
   
   return () => {
     const duration = performance.now() - startTime;
-    track('performance_metric', {
-      metric_name: metricName,
-      value: duration,
-      ...properties,
-      timestamp: new Date().toISOString(),
-    });
+    
+    // Only track if duration is meaningful (avoid noise from very short operations)
+    if (duration > 5) {
+      track('performance_metric', {
+        metric_name: metricName,
+        value: Math.round(duration), // Round to avoid excessive precision
+        ...properties,
+        timestamp: new Date().toISOString(),
+      });
+    }
+    
     return duration;
   };
 };
