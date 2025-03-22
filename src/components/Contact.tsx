@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { MdEmail, MdOutlineSend } from 'react-icons/md';
 import SpotlightCard from './SpotlightCard';
+import { trackEvent } from './AnalyticsProvider';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -32,9 +33,20 @@ const Contact = () => {
     try {
       // Replace with actual form submission logic
       await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Track successful form submission
+      trackEvent('contact_form_submit', {
+        success: true,
+      });
+      
       setSubmitSuccess(true);
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
+      // Track form submission error
+      trackEvent('contact_form_error', {
+        success: false,
+      });
+      
       setSubmitError('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
