@@ -1,46 +1,94 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
 import { Moon, Sun, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Logo from './Logo';
 
 const Header = () => {
   const [isDark, setIsDark] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('about');
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    if (isDark) {
+    // Check system preference for dark mode
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      setIsDark(true);
       document.documentElement.classList.add('dark');
+    }
+    
+    // Add scroll event listener to detect active section and header scroll state
+    const handleScroll = () => {
+      // Update header shadow based on scroll position
+      setIsScrolled(window.scrollY > 10);
+      
+      const sections = navItems.map(item => item.to);
+      const current = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom > 100;
+        }
+        return false;
+      });
+      
+      if (current) {
+        setActiveSection(current);
+      }
+    };
+    
+    // Initial check to set active section on page load
+    setTimeout(handleScroll, 300);
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleDarkMode = () => {
+    setIsDark(!isDark);
+    if (!isDark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
-  }, [isDark]);
+  };
 
   const navItems = [
     { name: 'About', to: 'about' },
     { name: 'Skills', to: 'skills' },
     { name: 'Experience', to: 'experience' },
     { name: 'Projects', to: 'projects' },
+    { name: 'Services', to: 'services' },
     { name: 'Contact', to: 'contact' },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-md">
+    <header className={`fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md transition-all duration-300 ${
+      isScrolled ? 'shadow-md' : 'shadow-none'
+    }`}>
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Darshan Gaikwad
-          </h1>
+          {/* Logo */}
+          <Logo />
 
           {/* Mobile menu button */}
-          <button
+          <motion.button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-gray-700 dark:text-gray-200"
+            className="md:hidden bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus-ring"
             aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+            whileTap={{ scale: 0.95 }}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          </motion.button>
 
           {/* Desktop navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => (
               <Link
                 key={item.to}
@@ -49,63 +97,98 @@ const Header = () => {
                 smooth={true}
                 offset={-80}
                 duration={500}
-                className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer transition-colors"
+                className={`relative px-3 py-2 rounded-lg transition-all duration-300 ${
+                  activeSection === item.to
+                    ? 'text-primary-600 dark:text-primary-400 font-medium'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                } cursor-pointer focus-ring`}
+                aria-current={activeSection === item.to ? 'page' : undefined}
               >
                 {item.name}
+                {activeSection === item.to && (
+                  <motion.div 
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-500 dark:bg-primary-400 mx-3"
+                    layoutId="navIndicator"
+                  />
+                )}
               </Link>
             ))}
-            <button
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            <motion.button
+              onClick={toggleDarkMode}
+              className="p-2 ml-2 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 focus-ring"
               aria-label="Toggle dark mode"
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ rotate: 15 }}
             >
               {isDark ? (
-                <Sun className="text-yellow-500" size={24} />
+                <Sun className="text-yellow-500" size={20} />
               ) : (
-                <Moon className="text-gray-700" size={24} />
+                <Moon className="text-gray-700" size={20} />
               )}
-            </button>
+            </motion.button>
           </div>
         </div>
 
         {/* Mobile navigation */}
-        <div
-          className={`md:hidden ${
-            isMenuOpen ? 'block' : 'hidden'
-          } pt-4 pb-3 space-y-4`}
-        >
-          {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              spy={true}
-              smooth={true}
-              offset={-80}
-              duration={500}
-              className="block text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer transition-colors"
-              onClick={() => setIsMenuOpen(false)}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden overflow-hidden bg-white dark:bg-gray-900 rounded-lg mt-4 shadow-lg"
             >
-              {item.name}
-            </Link>
-          ))}
-          <button
-            onClick={() => setIsDark(!isDark)}
-            className="flex items-center space-x-2 text-gray-600 dark:text-gray-300"
-            aria-label="Toggle dark mode"
-          >
-            {isDark ? (
-              <>
-                <Sun className="text-yellow-500" size={24} />
-                <span>Light Mode</span>
-              </>
-            ) : (
-              <>
-                <Moon className="text-gray-700" size={24} />
-                <span>Dark Mode</span>
-              </>
-            )}
-          </button>
-        </div>
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, staggerChildren: 0.1 }}
+                className="pt-2 pb-3 space-y-1 px-2"
+              >
+                {navItems.map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    spy={true}
+                    smooth={true}
+                    offset={-80}
+                    duration={500}
+                    className={`block px-3 py-2 rounded-lg transition-colors ${
+                      activeSection === item.to
+                        ? 'bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 font-medium'
+                        : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800' 
+                    } focus-ring`}
+                    onClick={() => setIsMenuOpen(false)}
+                    aria-current={activeSection === item.to ? 'page' : undefined}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+                <div className="border-t border-gray-100 dark:border-gray-800 my-2 pt-2">
+                  <button
+                    onClick={() => {
+                      toggleDarkMode();
+                      setIsMenuOpen(false);
+                    }}
+                    className="flex items-center w-full px-3 py-2 space-x-3 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 focus-ring"
+                  >
+                    {isDark ? (
+                      <>
+                        <Sun className="text-yellow-500" size={20} />
+                        <span className="text-sm">Light Mode</span>
+                      </>
+                    ) : (
+                      <>
+                        <Moon className="text-gray-700" size={20} />
+                        <span className="text-sm">Dark Mode</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </header>
   );
