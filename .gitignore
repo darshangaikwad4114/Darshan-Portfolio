@@ -23,6 +23,20 @@ out
 
 # Local files
 *.local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Testing
+coverage
+.nyc_output
+
+# Documentation
+README.md
+LICENSE
+.gitignore
 
 # Editor directories and files
 .vscode/*
