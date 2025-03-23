@@ -11,6 +11,19 @@ if (import.meta.env.PROD) {
   console.log('Public URL:', import.meta.env.BASE_URL);
 }
 
+// Register service worker
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('SW registered: ', registration);
+      })
+      .catch(error => {
+        console.log('SW registration failed: ', error);
+      });
+  });
+}
+
 // Wrap the app with the SpeedInsightsProvider for enhanced metrics tracking
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-scroll';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo from './Logo';
+import { useTheme } from '../contexts/ThemeContextDefinition';
 
 const Header = () => {
-  const [isDark, setIsDark] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Use useMemo to avoid recreating navItems on each render
+  const navItems = useMemo(() => [
+    { name: 'About', to: 'about' },
+    { name: 'Skills', to: 'skills' },
+    { name: 'Experience', to: 'experience' },
+    { name: 'Projects', to: 'projects' },
+    { name: 'Services', to: 'services' },
+    { name: 'Contact', to: 'contact' },
+  ], []); // Empty dependency array means this will only be created once
+
   useEffect(() => {
-    // Check system preference for dark mode
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      setIsDark(true);
-      document.documentElement.classList.add('dark');
-    }
-    
     // Add scroll event listener to detect active section and header scroll state
     const handleScroll = () => {
       // Update header shadow based on scroll position
@@ -45,27 +47,7 @@ const Header = () => {
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const toggleDarkMode = () => {
-    setIsDark(!isDark);
-    if (!isDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  };
-
-  const navItems = [
-    { name: 'About', to: 'about' },
-    { name: 'Skills', to: 'skills' },
-    { name: 'Experience', to: 'experience' },
-    { name: 'Projects', to: 'projects' },
-    { name: 'Services', to: 'services' },
-    { name: 'Contact', to: 'contact' },
-  ];
+  }, [navItems]); // Now navItems won't change between renders
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md transition-all duration-300 ${
@@ -114,13 +96,13 @@ const Header = () => {
               </Link>
             ))}
             <motion.button
-              onClick={toggleDarkMode}
+              onClick={toggleTheme}
               className="p-2 ml-2 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 focus-ring"
               aria-label="Toggle dark mode"
               whileTap={{ scale: 0.95 }}
               whileHover={{ rotate: 15 }}
             >
-              {isDark ? (
+              {theme === 'dark' ? (
                 <Sun className="text-yellow-500" size={20} />
               ) : (
                 <Moon className="text-gray-700" size={20} />
@@ -167,12 +149,12 @@ const Header = () => {
                 <div className="border-t border-gray-100 dark:border-gray-800 my-2 pt-2">
                   <button
                     onClick={() => {
-                      toggleDarkMode();
+                      toggleTheme();
                       setIsMenuOpen(false);
                     }}
                     className="flex items-center w-full px-3 py-2 space-x-3 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 focus-ring"
                   >
-                    {isDark ? (
+                    {theme === 'dark' ? (
                       <>
                         <Sun className="text-yellow-500" size={20} />
                         <span className="text-sm">Light Mode</span>

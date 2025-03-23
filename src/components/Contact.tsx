@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { MdEmail, MdOutlineSend } from 'react-icons/md';
 import SpotlightCard from './SpotlightCard';
-import { trackEvent } from './AnalyticsProvider';
+import { trackEvent } from '../utils/analyticsUtils';
 
 const Contact = () => {
   const [formData, setFormData] = useState({

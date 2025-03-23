@@ -37,24 +37,5 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
   return <>{children}</>;
 }
 
-/**
- * Utility function for tracking custom events
- * 
- * @param eventName - Name of the event to track
- * @param properties - Optional properties to include with the event
- */
-export const trackEvent = (eventName: string, properties?: Record<string, any>) => {
-  if (!eventName) {
-    console.warn('Event name is required for tracking');
-    return;
-  }
-  
-  try {
-    track(eventName, properties);
-  } catch (error) {
-    // Silent fail in production, log in development
-    if (import.meta.env.DEV) {
-      console.error('Analytics tracking error:', error);
-    }
-  }
-};
+// Move utility function to a separate file
+// This fixes the react-refresh/only-export-components warning

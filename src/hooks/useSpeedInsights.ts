@@ -18,7 +18,7 @@ export function useSpeedInsights() {
   const trackCustomMetric = useCallback((
     name: string,
     value: number,
-    attribution?: Record<string, any>
+    attribution?: Record<string, unknown>
   ) => {
     if (!name || typeof value !== 'number') return;
     
@@ -46,7 +46,7 @@ export function useSpeedInsights() {
     const startTime = performance.now();
     
     // Return a function that, when called, will record the elapsed time
-    return (additionalData?: Record<string, any>) => {
+    return (additionalData?: Record<string, unknown>) => {
       const endTime = performance.now();
       const duration = endTime - startTime;
       

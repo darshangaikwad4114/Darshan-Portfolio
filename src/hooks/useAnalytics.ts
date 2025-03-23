@@ -13,7 +13,7 @@ export function useAnalytics() {
    * @param eventName - Name of the event to track
    * @param properties - Optional properties to include with the event
    */
-  const trackEvent = useCallback((eventName: string, properties?: Record<string, any>) => {
+  const trackEvent = useCallback((eventName: string, properties?: Record<string, unknown>) => {
     if (!eventName) return;
     
     try {
