@@ -34,6 +34,7 @@ coverage
 .nyc_output
 
 # Documentation
+Description.md
 README.md
 LICENSE
 .gitignore
