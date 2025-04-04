@@ -1,44 +1,50 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Code2, Smartphone, Search, Bug, Zap, Shield } from 'lucide-react';
-import SpotlightCard from './SpotlightCard';
+import React from "react";
+import { motion } from "framer-motion";
+import { Code2, Smartphone, Search, Bug, Zap, Shield } from "lucide-react";
+import SpotlightCard from "./SpotlightCard";
 
 const services = [
   {
     icon: <Code2 className="w-6 h-6" />,
-    title: 'Custom Website Design & Development',
-    description: 'Creating bespoke websites tailored to your unique needs using cutting-edge technologies.',
-    spotlightColor: 'rgba(26, 171, 255, 0.15)'
+    title: "Custom Website Design & Development",
+    description:
+      "Creating bespoke websites tailored to your unique needs using cutting-edge technologies.",
+    spotlightColor: "rgba(26, 171, 255, 0.15)",
   },
   {
     icon: <Smartphone className="w-6 h-6" />,
-    title: 'Fully Responsive & Mobile-Friendly Layouts',
-    description: 'Ensuring your website looks and functions perfectly across all devices and screen sizes.',
-    spotlightColor: 'rgba(100, 121, 167, 0.15)'
+    title: "Fully Responsive & Mobile-Friendly Layouts",
+    description:
+      "Ensuring your website looks and functions perfectly across all devices and screen sizes.",
+    spotlightColor: "rgba(100, 121, 167, 0.15)",
   },
   {
     icon: <Search className="w-6 h-6" />,
-    title: 'SEO Optimization',
-    description: 'Implementing best practices to improve your search engine rankings and online visibility.',
-    spotlightColor: 'rgba(26, 171, 255, 0.15)'
+    title: "SEO Optimization",
+    description:
+      "Implementing best practices to improve your search engine rankings and online visibility.",
+    spotlightColor: "rgba(26, 171, 255, 0.15)",
   },
   {
     icon: <Bug className="w-6 h-6" />,
-    title: 'Website Maintenance & Bug Fixes',
-    description: 'Providing ongoing support and quick resolution of any issues that arise.',
-    spotlightColor: 'rgba(100, 121, 167, 0.15)'
+    title: "Website Maintenance & Bug Fixes",
+    description:
+      "Providing ongoing support and quick resolution of any issues that arise.",
+    spotlightColor: "rgba(100, 121, 167, 0.15)",
   },
   {
     icon: <Zap className="w-6 h-6" />,
-    title: 'Page Speed Optimization',
-    description: 'Enhancing website performance for faster loading times and better user experience.',
-    spotlightColor: 'rgba(26, 171, 255, 0.15)'
+    title: "Page Speed Optimization",
+    description:
+      "Enhancing website performance for faster loading times and better user experience.",
+    spotlightColor: "rgba(26, 171, 255, 0.15)",
   },
   {
     icon: <Shield className="w-6 h-6" />,
-    title: 'Security & Performance Enhancements',
-    description: 'Implementing robust security measures and optimizing overall website performance.',
-    spotlightColor: 'rgba(100, 121, 167, 0.15)'
+    title: "Security & Performance Enhancements",
+    description:
+      "Implementing robust security measures and optimizing overall website performance.",
+    spotlightColor: "rgba(100, 121, 167, 0.15)",
   },
 ];
 
@@ -53,10 +59,14 @@ const Services = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Web Development & Optimization</h2>
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Web Development & Optimization
+          </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            I create fast, responsive, and user-friendly websites using modern technologies. Whether you need a business website, 
-            portfolio, blog, or landing page, I ensure top-notch performance and smooth functionality with SEO-friendly optimizations.
+            I create fast, responsive, and user-friendly websites using modern
+            technologies. Whether you need a business website, portfolio, blog,
+            or landing page, I ensure top-notch performance and smooth
+            functionality with SEO-friendly optimizations.
           </p>
         </motion.div>
 
@@ -69,7 +79,7 @@ const Services = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <SpotlightCard 
+              <SpotlightCard
                 className="h-full bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300"
                 spotlightColor={service.spotlightColor}
               >

@@ -1,11 +1,11 @@
-import React from 'react';
-import { Github, Linkedin, ArrowUp } from 'lucide-react';
-import { Link as ScrollLink } from 'react-scroll';
-import Logo from './Logo';
+import React from "react";
+import { Github, Linkedin, ArrowUp } from "lucide-react";
+import { Link as ScrollLink } from "react-scroll";
+import Logo from "./Logo";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <footer className="bg-gray-50 dark:bg-gray-800 py-12 relative">
       <div className="container mx-auto px-6">
@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="mb-6 md:mb-0">
             <Logo />
           </div>
-          
+
           <div className="flex space-x-6">
             <a
               href="https://github.com/darshangaikwad4114"
@@ -35,14 +35,14 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        
+
         <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 flex justify-center">
           <p className="text-center text-gray-600 dark:text-gray-300">
             © {currentYear} Darshan Gaikwad. All rights reserved.
           </p>
         </div>
       </div>
-      
+
       <ScrollLink
         to="about"
         spy={true}

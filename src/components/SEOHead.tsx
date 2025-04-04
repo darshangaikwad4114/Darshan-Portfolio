@@ -1,5 +1,5 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import React from "react";
+import { Helmet } from "react-helmet-async";
 
 interface SEOHeadProps {
   title?: string;
@@ -10,21 +10,23 @@ interface SEOHeadProps {
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
-  title = 'Darshan Gaikwad - Frontend Developer',
-  description = 'Portfolio of Darshan Gaikwad, Frontend Developer specializing in React and modern web development.',
-  canonicalUrl = 'https://darshan-portfolio.vercel.app',
-  ogImage = '/images/og-preview.jpg',
+  title = "Darshan Gaikwad - Frontend Developer",
+  description = "Portfolio of Darshan Gaikwad, Frontend Developer specializing in React and modern web development.",
+  canonicalUrl = "https://darshan-portfolio.vercel.app",
+  ogImage = "/images/og-preview.jpg",
   noIndex = false,
 }) => {
-  const fullTitle = title.includes('Darshan Gaikwad') ? title : `${title} | Darshan Gaikwad`;
-  
+  const fullTitle = title.includes("Darshan Gaikwad")
+    ? title
+    : `${title} | Darshan Gaikwad`;
+
   return (
     <Helmet>
       {/* Basic Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonicalUrl} />
-      
+
       {/* Open Graph / Facebook Meta Tags */}
       <meta property="og:type" content="website" />
       <meta property="og:url" content={canonicalUrl} />
@@ -37,7 +39,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
-      
+
       {/* If noIndex is true, tell search engines not to index this page */}
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
     </Helmet>

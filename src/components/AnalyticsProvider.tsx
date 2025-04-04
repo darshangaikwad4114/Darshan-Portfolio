@@ -1,5 +1,5 @@
-import { ReactNode, useEffect, useCallback } from 'react';
-import { inject, track } from '@vercel/analytics';
+import { ReactNode, useEffect, useCallback } from "react";
+import { inject, track } from "@vercel/analytics";
 
 interface AnalyticsProviderProps {
   children: ReactNode;
@@ -12,28 +12,28 @@ interface AnalyticsProviderProps {
 export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
   // Track page view with current path and referrer
   const trackPageView = useCallback(() => {
-    track('page_view', { 
+    track("page_view", {
       path: window.location.pathname,
-      referrer: document.referrer
+      referrer: document.referrer,
     });
   }, []);
 
   useEffect(() => {
     // Initialize analytics once when the app loads
     inject();
-    
+
     // Track initial page view
     trackPageView();
-    
+
     // For SPA with react-scroll, we can track section visibility
     // but this would require more complex intersection observer logic
     // which can be added if needed
-    
+
     return () => {
       // Cleanup if needed
     };
   }, [trackPageView]);
-  
+
   return <>{children}</>;
 }
 

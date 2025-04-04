@@ -1,37 +1,59 @@
-import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import Skills from './components/Skills';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
-import Services from './components/Services';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import { AnalyticsProvider } from './components/AnalyticsProvider';
-import { SpeedInsights } from '@vercel/speed-insights/react';
-import { ThemeProvider } from './contexts/ThemeContext';
-import { HelmetProvider } from 'react-helmet-async';
-import SEOHead from './components/SEOHead';
+import React, { useEffect } from "react";
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import Skills from "./components/Skills";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import GitHubActivity from "./components/GitHubActivity";
+import Services from "./components/Services";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import { AnalyticsProvider } from "./components/AnalyticsProvider";
+import { SpeedInsights } from "@vercel/speed-insights/react";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { HelmetProvider } from "react-helmet-async";
+import SEOHead from "./components/SEOHead";
+import ScrollProgressBar from "./components/ScrollProgressBar";
+import { motion, AnimatePresence } from "framer-motion";
 
 function App() {
+  // Add page load animation
+  useEffect(() => {
+    // Trigger initial animations
+    document.body.classList.add("page-loaded");
+
+    return () => document.body.classList.remove("page-loaded");
+  }, []);
+
   return (
     <HelmetProvider>
       <ThemeProvider>
         <AnalyticsProvider>
           <SEOHead />
-          <div className="min-h-screen bg-white dark:bg-gray-900">
-            <Header />
-            <Hero />
-            <Skills />
-            <Experience />
-            <Projects />
-            <Services />
-            <Contact />
-            <Footer />
-            
-            {/* Add Vercel Speed Insights - now that the package is installed */}
-            <SpeedInsights />
-          </div>
+          <ScrollProgressBar />
+          <AnimatePresence mode="wait">
+            <motion.div
+              className="min-h-screen bg-white dark:bg-gray-900"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Header />
+              <main>
+                <Hero />
+                <Skills />
+                <Experience />
+                <Projects />
+                <GitHubActivity username="darshangaikwad4114" />
+                <Services />
+                <Contact />
+              </main>
+              <Footer />
+
+              {/* Add Vercel Speed Insights */}
+              <SpeedInsights />
+            </motion.div>
+          </AnimatePresence>
         </AnalyticsProvider>
       </ThemeProvider>
     </HelmetProvider>

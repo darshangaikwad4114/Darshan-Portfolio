@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface OptimizedImageProps {
   src: string;
@@ -18,11 +18,11 @@ export default function OptimizedImage({
   alt,
   width,
   height,
-  className = '',
+  className = "",
   priority = false,
-  placeholder = 'https://via.placeholder.com/400x300?text=Loading...',
+  placeholder = "https://via.placeholder.com/400x300?text=Loading...",
   onLoad,
-  onError
+  onError,
 }: OptimizedImageProps) {
   const [loading, setLoading] = useState(!priority);
   const [error, setError] = useState(false);
@@ -35,7 +35,7 @@ export default function OptimizedImage({
     let isMounted = true;
     const img = new Image();
     img.src = src;
-    
+
     img.onload = () => {
       if (isMounted) {
         setImgSrc(src);
@@ -43,7 +43,7 @@ export default function OptimizedImage({
         if (onLoad) onLoad();
       }
     };
-    
+
     img.onerror = () => {
       if (isMounted) {
         setError(true);
@@ -58,11 +58,13 @@ export default function OptimizedImage({
 
   if (error) {
     return (
-      <div 
+      <div
         className={`bg-gray-200 dark:bg-gray-800 flex items-center justify-center ${className}`}
         style={{ width, height }}
       >
-        <span className="text-gray-500 dark:text-gray-400 text-sm">Failed to load image</span>
+        <span className="text-gray-500 dark:text-gray-400 text-sm">
+          Failed to load image
+        </span>
       </div>
     );
   }
@@ -75,7 +77,7 @@ export default function OptimizedImage({
         width={width}
         height={height}
         loading={priority ? "eager" : "lazy"}
-        className={`${className} ${loading ? 'filter blur-sm' : 'filter blur-0'} transition-all duration-300`}
+        className={`${className} ${loading ? "filter blur-sm" : "filter blur-0"} transition-all duration-300`}
         animate={{ opacity: loading ? 0.7 : 1 }}
         onError={() => {
           setError(true);

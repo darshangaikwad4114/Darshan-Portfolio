@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-scroll';
+import React from "react";
+import { Link } from "react-scroll";
 
 const Logo = () => {
   return (
@@ -17,7 +17,9 @@ const Logo = () => {
           d
         </div>
         <span className="text-gray-900 dark:text-white text-xl ml-2 font-medium">
-          <span className="text-primary-600 dark:text-primary-400">darshan</span>
+          <span className="text-primary-600 dark:text-primary-400">
+            darshan
+          </span>
           gaikwad
         </span>
       </div>

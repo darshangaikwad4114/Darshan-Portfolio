@@ -6,10 +6,10 @@ interface SpotlightCardProps {
   spotlightColor?: string;
 }
 
-const SpotlightCard = ({ 
-  children, 
-  className = "", 
-  spotlightColor = "rgba(255, 255, 255, 0.25)" 
+const SpotlightCard = ({
+  children,
+  className = "",
+  spotlightColor = "rgba(255, 255, 255, 0.25)",
 }: SpotlightCardProps) => {
   const divRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
