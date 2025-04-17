@@ -33,10 +33,10 @@ function App() {
       document.documentElement.style.fontSize = `${baseFontSize}px`;
     };
 
-    window.addEventListener('resize', setResponsiveFontSize);
+    window.addEventListener("resize", setResponsiveFontSize);
     setResponsiveFontSize();
 
-    return () => window.removeEventListener('resize', setResponsiveFontSize);
+    return () => window.removeEventListener("resize", setResponsiveFontSize);
   }, []);
 
   return (

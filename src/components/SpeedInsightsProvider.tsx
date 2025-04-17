@@ -94,11 +94,11 @@ export function SpeedInsightsProvider({
 
     // Add lazy loading for non-critical sections
     const lazyLoadSection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const section = entry.target as HTMLElement;
           const lazyImages = section.querySelectorAll('img[loading="lazy"]');
-          lazyImages.forEach(img => {
+          lazyImages.forEach((img) => {
             const image = img as HTMLImageElement;
             if (image.dataset.src) {
               image.src = image.dataset.src;
@@ -110,10 +110,10 @@ export function SpeedInsightsProvider({
 
     // Add to useEffect
     const lazyObserver = new IntersectionObserver(lazyLoadSection, {
-      rootMargin: '50px',
+      rootMargin: "50px",
     });
 
-    document.querySelectorAll('section').forEach(section => {
+    document.querySelectorAll("section").forEach((section) => {
       lazyObserver.observe(section);
     });
 

@@ -50,8 +50,8 @@ const services = [
 
 const Services = () => {
   return (
-    <section 
-      id="services" 
+    <section
+      id="services"
       className="py-20 bg-white dark:bg-gray-900"
       aria-labelledby="services-heading"
     >
@@ -63,7 +63,7 @@ const Services = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 
+          <h2
             id="services-heading"
             className="text-4xl font-bold text-gray-900 dark:text-white mb-4"
           >
