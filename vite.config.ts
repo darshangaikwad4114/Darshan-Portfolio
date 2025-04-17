@@ -65,4 +65,13 @@ export default defineConfig({
       "@": resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://darshan-gaikwad-portfolio.vercel.app",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 });

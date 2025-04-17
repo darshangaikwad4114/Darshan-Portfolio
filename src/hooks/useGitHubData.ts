@@ -54,6 +54,9 @@ interface GitHubStats {
 // Add cache duration (4 hours)
 const CACHE_DURATION = 4 * 60 * 60 * 1000;
 
+// Base API URL from environment variable
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+
 export const useGitHubData = (username: string): GitHubStats => {
   const [data, setData] = useState<GitHubStats>({
     totalContributions: 0,
@@ -100,7 +103,7 @@ export const useGitHubData = (username: string): GitHubStats => {
 
         // Fetch repositories to get count and stars
         const reposResponse = await fetch(
-          `https://api.github.com/users/${username}/repos`,
+          `${API_BASE_URL}api/github/repos?username=${username}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -140,14 +143,17 @@ export const useGitHubData = (username: string): GitHubStats => {
           }
         `;
 
-        const graphqlResponse = await fetch("https://api.github.com/graphql", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+        const graphqlResponse = await fetch(
+          `${API_BASE_URL}api/github/graphql`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ query }),
           },
-          body: JSON.stringify({ query }),
-        });
+        );
 
         if (!graphqlResponse.ok) {
           throw new Error(

@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import SpotlightCard from "./SpotlightCard";
+import OptimizedImage from "./OptimizedImage";
 
 const projects = [
   {
@@ -17,11 +18,10 @@ const projects = [
       "Increased checkout completion rates by 20%",
     ],
     links: {
-      // Updated links with the correct URLs
       github: "https://github.com/darshangaikwad4114/ecommerce-app",
       live: "https://quick-cart-ecommerce-shop.netlify.app/",
     },
-    spotlightColor: "rgba(26, 171, 255, 0.2)", // Primary color with opacity
+    spotlightColor: "rgba(26, 171, 255, 0.2)",
   },
   {
     title: "FlimFinder Movie App",
@@ -36,11 +36,10 @@ const projects = [
       "Ensured WCAG-compliant accessibility",
     ],
     links: {
-      // Updated links with the correct URLs
       github: "https://github.com/darshangaikwad4114/Movie-app",
       live: "https://darshan-movie-app.netlify.app/",
     },
-    spotlightColor: "rgba(100, 121, 167, 0.2)", // Secondary color with opacity
+    spotlightColor: "rgba(100, 121, 167, 0.2)",
   },
   {
     title: "Crypto Price Tracker App",
@@ -55,19 +54,21 @@ const projects = [
       "Implemented real-time price updates",
     ],
     links: {
-      // Updated links with the correct URLs
       github:
         "https://github.com/darshangaikwad4114/Cryptocurrency-Price-Tracker",
       live: "https://darshan-cryptocurrency-price-tracker.netlify.app/",
     },
-    spotlightColor: "rgba(70, 199, 255, 0.2)", // Different primary shade with opacity
+    spotlightColor: "rgba(70, 199, 255, 0.2)",
   },
 ];
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-6">
+    <section
+      id="projects"
+      className="section-spacing bg-gray-50 dark:bg-gray-800"
+    >
+      <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -98,14 +99,14 @@ const Projects = () => {
                 spotlightColor={project.spotlightColor}
               >
                 <div className="relative aspect-video overflow-hidden rounded-lg mb-4">
-                  <img
+                  <OptimizedImage
                     src={project.image}
                     alt={`${project.title} screenshot`}
                     className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700 ease-in-out"
-                    loading={index === 0 ? "eager" : "lazy"}
-                    onError={(e) => {
-                      e.currentTarget.src =
-                        "https://via.placeholder.com/16x9?text=Project+Image";
+                    priority={index === 0}
+                    loading="lazy"
+                    onError={() => {
+                      // fallback image logic if needed
                     }}
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
@@ -187,7 +188,6 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* View more projects button */}
         <div className="mt-16 text-center">
           <motion.a
             href="https://github.com/darshangaikwad4114?tab=repositories"

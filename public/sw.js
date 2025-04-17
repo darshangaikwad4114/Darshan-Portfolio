@@ -1,9 +1,9 @@
-const CACHE_NAME = "darshan-portfolio-v1";
+const CACHE_NAME = "darshan-portfolio-v2"; // incremented version
 const urlsToCache = [
   "/",
   "/index.html",
   "/favicon.svg",
-  "/manifest.webmanifest",
+  "/manifest.json", // use only one manifest
   "/icons/icon-192x192.png",
   "/icons/icon-512x512.png",
   "/icons/apple-touch-icon.png",

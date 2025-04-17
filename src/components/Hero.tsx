@@ -167,6 +167,7 @@ const Hero = () => {
                     href="/assets/Darshan_Gaikwad_Resume.pdf"
                     target="_blank"
                     download
+                    aria-label="Download Resume"
                     onClick={handleResumeClick}
                     className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-all duration-200 shadow-sm hover:shadow-md focus-ring"
                     whileHover={{ scale: 1.02 }}

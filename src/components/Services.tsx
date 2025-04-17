@@ -48,7 +48,7 @@ const services = [
   },
 ];
 
-const Services = () => {
+const Services = React.memo(() => {
   return (
     <section
       id="services"
@@ -108,6 +108,6 @@ const Services = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Services;

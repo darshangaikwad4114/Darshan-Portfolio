@@ -133,7 +133,7 @@ const skillCategories = [
   },
 ];
 
-const Skills = () => {
+const Skills = React.memo(() => {
   return (
     <section
       id="skills"
@@ -209,6 +209,6 @@ const Skills = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Skills;
