@@ -26,42 +26,33 @@ const Contact = () => {
     }));
   };
 
-  // Optimize handleSubmit with useCallback to prevent unnecessary re-renders
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
       setIsSubmitting(true);
       setSubmitError("");
 
-      // Measure form submission time
       const startTime = performance.now();
 
-      // Simulate form submission
       try {
-        // Replace with actual form submission logic
         await new Promise((resolve) => setTimeout(resolve, 1500));
 
-        // Track successful form submission with more detailed info
         trackEvent("contact_form_submit", {
           success: true,
           formLength: formData.message.length,
-          // Don't include actual form data for privacy reasons
           hasName: Boolean(formData.name),
           hasEmail: Boolean(formData.email),
           timestamp: new Date().toISOString(),
-          // Include duration in the analytics event instead of using trackMetric
           duration: performance.now() - startTime,
         });
 
         setSubmitSuccess(true);
         setFormData({ name: "", email: "", message: "" });
       } catch (error) {
-        // Track form submission error with error information
         trackEvent("contact_form_error", {
           success: false,
           errorType: error instanceof Error ? error.name : "Unknown",
           timestamp: new Date().toISOString(),
-          // Include duration in the analytics event
           duration: performance.now() - startTime,
         });
 
@@ -92,7 +83,6 @@ const Contact = () => {
 
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -170,7 +160,6 @@ const Contact = () => {
               </SpotlightCard>
             </motion.div>
 
-            {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -272,7 +261,7 @@ const Contact = () => {
                       <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-red-600 dark:text-red-400 text-sm bg-red-50 dark:bg-red-900/10 p-3 rounded-lg border border-red-100 dark:border-red-800/20"
+                        className="text-red-600 dark:text-red-400 text-sm bg-red-50 dark:bg-red-900/10 p-3 rounded-lg border border-red-100 dark:border-red-800/20 text-center mb-4"
                       >
                         {submitError}
                       </motion.div>
@@ -282,7 +271,7 @@ const Contact = () => {
                       <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-green-600 dark:text-green-400 text-sm bg-green-50 dark:bg-green-900/10 p-3 rounded-lg border border-green-100 dark:border-green-800/20"
+                        className="text-green-600 dark:text-green-400 text-sm bg-green-50 dark:bg-green-900/10 p-3 rounded-lg border border-green-100 dark:border-green-800/20 text-center mb-4"
                       >
                         <div className="flex items-center">
                           <svg
@@ -309,7 +298,7 @@ const Contact = () => {
                       <motion.button
                         type="submit"
                         disabled={isSubmitting}
-                        className={`w-full px-6 py-3 rounded-lg bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-800 text-white font-medium transition-all duration-200 flex items-center justify-center ${
+                        className={`w-full px-6 py-3 rounded-lg bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-800 text-white font-medium transition-all duration-200 flex items-center justify-center mt-4 ${
                           isSubmitting ? "opacity-70 cursor-not-allowed" : ""
                         }`}
                         whileHover={{ scale: 1.01 }}

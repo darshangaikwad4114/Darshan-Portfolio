@@ -180,7 +180,7 @@ const Skills = React.memo(() => {
                     <li key={skill.name}>
                       <motion.div
                         whileHover={{ scale: 1.1 }}
-                        className="flex flex-col items-center"
+                        className="flex flex-col items-center justify-center"
                       >
                         <div className="w-12 h-12 mb-3 flex items-center justify-center">
                           <img
@@ -189,7 +189,6 @@ const Skills = React.memo(() => {
                             className="w-10 h-10 object-contain"
                             loading="lazy"
                             onError={(e) => {
-                              // Fallback for any broken icon images
                               e.currentTarget.src =
                                 "https://via.placeholder.com/40?text=Icon";
                             }}

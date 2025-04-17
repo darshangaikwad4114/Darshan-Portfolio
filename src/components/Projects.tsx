@@ -162,7 +162,7 @@ const Projects = () => {
                     </ul>
                   </div>
 
-                  <div className="flex space-x-6 mt-auto pt-3 border-t border-gray-100 dark:border-gray-700">
+                  <div className="flex space-x-6 mt-auto pt-3 border-t border-gray-100 dark:border-gray-700 justify-between">
                     <a
                       href={project.links.github}
                       target="_blank"
