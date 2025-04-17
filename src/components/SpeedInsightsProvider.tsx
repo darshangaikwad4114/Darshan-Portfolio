@@ -92,7 +92,35 @@ export function SpeedInsightsProvider({
     // Delay visibility tracking setup until after critical render
     const timer = setTimeout(setupEfficientVisibilityTracking, 2000);
 
-    return () => clearTimeout(timer);
+    // Add lazy loading for non-critical sections
+    const lazyLoadSection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const section = entry.target as HTMLElement;
+          const lazyImages = section.querySelectorAll('img[loading="lazy"]');
+          lazyImages.forEach(img => {
+            const image = img as HTMLImageElement;
+            if (image.dataset.src) {
+              image.src = image.dataset.src;
+            }
+          });
+        }
+      });
+    };
+
+    // Add to useEffect
+    const lazyObserver = new IntersectionObserver(lazyLoadSection, {
+      rootMargin: '50px',
+    });
+
+    document.querySelectorAll('section').forEach(section => {
+      lazyObserver.observe(section);
+    });
+
+    return () => {
+      clearTimeout(timer);
+      lazyObserver.disconnect();
+    };
   }, []);
 
   return <>{children}</>;

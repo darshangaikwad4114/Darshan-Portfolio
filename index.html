@@ -45,6 +45,28 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Add preload for critical resources -->
+    <link 
+      rel="preload" 
+      href="/fonts/inter-var.woff2" 
+      as="font" 
+      type="font/woff2" 
+      crossorigin 
+    />
+    
+    <!-- Add resource hints -->
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+    
+    <!-- Add PWA meta tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    
+    <!-- Add security headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+
     <title>Darshan Gaikwad | Full Stack Developer</title>
   </head>
   <body>

@@ -50,7 +50,11 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-20 bg-white dark:bg-gray-900">
+    <section 
+      id="services" 
+      className="py-20 bg-white dark:bg-gray-900"
+      aria-labelledby="services-heading"
+    >
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -59,7 +63,10 @@ const Services = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 
+            id="services-heading"
+            className="text-4xl font-bold text-gray-900 dark:text-white mb-4"
+          >
             Web Development & Optimization
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">

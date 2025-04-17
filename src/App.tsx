@@ -25,6 +25,20 @@ function App() {
     return () => document.body.classList.remove("page-loaded");
   }, []);
 
+  // Add responsive font sizing
+  useEffect(() => {
+    const setResponsiveFontSize = () => {
+      const width = window.innerWidth;
+      const baseFontSize = width < 768 ? 14 : width < 1024 ? 16 : 18;
+      document.documentElement.style.fontSize = `${baseFontSize}px`;
+    };
+
+    window.addEventListener('resize', setResponsiveFontSize);
+    setResponsiveFontSize();
+
+    return () => window.removeEventListener('resize', setResponsiveFontSize);
+  }, []);
+
   return (
     <HelmetProvider>
       <ThemeProvider>

@@ -42,6 +42,25 @@ const SEOHead: React.FC<SEOHeadProps> = ({
 
       {/* If noIndex is true, tell search engines not to index this page */}
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+      {/* Add additional meta tags */}
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+      <meta name="theme-color" content="#0090f5" media="(prefers-color-scheme: light)" />
+      <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+      
+      {/* Add structured data */}
+      <script type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Darshan Gaikwad",
+            "url": "${canonicalUrl}",
+            "jobTitle": "Frontend Developer",
+            "image": "${ogImage}"
+          }
+        `}
+      </script>
     </Helmet>
   );
 };
