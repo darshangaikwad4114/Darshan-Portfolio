@@ -1,9 +1,13 @@
-import React, { useState, useCallback } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { MdEmail, MdOutlineSend } from "react-icons/md";
 import SpotlightCard from "./SpotlightCard";
 import { trackEvent } from "../utils/analyticsUtils";
+import { useForm, ValidationError } from "@formspree/react";
+
+// Use the form ID provided by Formspree
+const FORMSPREE_FORM_ID = "moveowzg";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,9 +16,12 @@ const Contact = () => {
     message: "",
   });
   const [focusedField, setFocusedField] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState("");
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+  // Use Formspree's useForm hook
+  const [state, handleSubmit] = useForm(FORMSPREE_FORM_ID);
+  const isSubmitting = state.submitting;
+  const submitSuccess = state.succeeded;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -26,43 +33,37 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent) => {
-      e.preventDefault();
-      setIsSubmitting(true);
-      setSubmitError("");
-
-      const startTime = performance.now();
-
+  // Handle form submission success
+  useEffect(() => {
+    if (submitSuccess) {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-
         trackEvent("contact_form_submit", {
           success: true,
           formLength: formData.message.length,
           hasName: Boolean(formData.name),
           hasEmail: Boolean(formData.email),
           timestamp: new Date().toISOString(),
-          duration: performance.now() - startTime,
         });
-
-        setSubmitSuccess(true);
-        setFormData({ name: "", email: "", message: "" });
       } catch (error) {
-        trackEvent("contact_form_error", {
-          success: false,
-          errorType: error instanceof Error ? error.name : "Unknown",
-          timestamp: new Date().toISOString(),
-          duration: performance.now() - startTime,
-        });
-
-        setSubmitError("Something went wrong. Please try again.");
-      } finally {
-        setIsSubmitting(false);
+        // Prevent analytics errors from affecting form functionality
+        console.error("Analytics error:", error);
       }
-    },
-    [formData],
-  );
+
+      // Reset form data after successful submission
+      setFormData({ name: "", email: "", message: "" });
+
+      // Show success message
+      setShowSuccessMessage(true);
+
+      // Hide success message after 4 seconds
+      const timer = setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 4000);
+
+      // Clean up timer on component unmount
+      return () => clearTimeout(timer);
+    }
+  }, [submitSuccess, formData]);
 
   return (
     <section id="contact" className="py-20 bg-white dark:bg-gray-900">
@@ -200,6 +201,11 @@ const Contact = () => {
                             placeholder="Your name"
                             required
                           />
+                          <ValidationError
+                            prefix="Name"
+                            field="name"
+                            errors={state.errors}
+                          />
                         </div>
                       </div>
 
@@ -224,6 +230,11 @@ const Contact = () => {
                             className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:border-primary-500 dark:focus:border-primary-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-200"
                             placeholder="your.email@example.com"
                             required
+                          />
+                          <ValidationError
+                            prefix="Email"
+                            field="email"
+                            errors={state.errors}
                           />
                         </div>
                       </div>
@@ -251,48 +262,58 @@ const Contact = () => {
                           placeholder="How can I help you?"
                           required
                         />
+                        <ValidationError
+                          prefix="Message"
+                          field="message"
+                          errors={state.errors}
+                        />
                       </div>
                       <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
                         I'll get back to you as soon as possible.
                       </p>
                     </div>
 
-                    {submitError && (
+                    {state.errors && state.errors.length > 0 && (
                       <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
                         className="text-red-600 dark:text-red-400 text-sm bg-red-50 dark:bg-red-900/10 p-3 rounded-lg border border-red-100 dark:border-red-800/20 text-center mb-4"
                       >
-                        {submitError}
+                        There was an error submitting the form. Please check
+                        your inputs and try again.
                       </motion.div>
                     )}
 
-                    {submitSuccess && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-green-600 dark:text-green-400 text-sm bg-green-50 dark:bg-green-900/10 p-3 rounded-lg border border-green-100 dark:border-green-800/20 text-center mb-4"
-                      >
-                        <div className="flex items-center">
-                          <svg
-                            className="w-5 h-5 mr-2"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                              clipRule="evenodd"
-                            ></path>
-                          </svg>
-                          <span>
-                            Your message has been sent successfully! I'll get
-                            back to you soon.
-                          </span>
-                        </div>
-                      </motion.div>
-                    )}
+                    <AnimatePresence>
+                      {showSuccessMessage && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="text-green-600 dark:text-green-400 text-sm bg-green-50 dark:bg-green-900/10 p-3 rounded-lg border border-green-100 dark:border-green-800/20 text-center mb-4"
+                        >
+                          <div className="flex items-center">
+                            <svg
+                              className="w-5 h-5 mr-2"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clipRule="evenodd"
+                              ></path>
+                            </svg>
+                            <span>
+                              Your message has been sent successfully! I'll get
+                              back to you soon.
+                            </span>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
                     <div>
                       <motion.button
