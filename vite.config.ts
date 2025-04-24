@@ -45,10 +45,13 @@ export default defineConfig({
     minify: "terser",
     terserOptions: {
       compress: {
-        drop_console: true, // Remove console logs in production
+        drop_console: false, // Enable console logs temporarily to debug size issues
         drop_debugger: true,
       },
     },
+    // Add CSS size controls
+    cssMinify: 'lightningcss',
+    cssCodeSplit: false, // Use a single CSS file
     rollupOptions: {
       output: {
         manualChunks: {
@@ -59,6 +62,12 @@ export default defineConfig({
       },
     },
   },
+  
+  // Add consistent CSS configuration for development
+  css: {
+    devSourcemap: true,
+  },
+  
   // Add path aliases for cleaner imports
   resolve: {
     alias: {
@@ -66,6 +75,11 @@ export default defineConfig({
     },
   },
   server: {
+    host: true, // Listen on all addresses, including LAN and public addresses
+    // Add consistent viewport size
+    hmr: {
+      overlay: true,
+    },
     proxy: {
       "/api": {
         target: "https://darshan-gaikwad-portfolio.vercel.app",
@@ -73,5 +87,11 @@ export default defineConfig({
         secure: false,
       },
     },
+  },
+  
+  // Enable consistent preview mode
+  preview: {
+    port: 5173,
+    host: true,
   },
 });

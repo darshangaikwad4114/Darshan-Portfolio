@@ -25,12 +25,16 @@ function App() {
     return () => document.body.classList.remove("page-loaded");
   }, []);
 
-  // Add responsive font sizing
+  // Add responsive font sizing with more specific controls
   useEffect(() => {
     const setResponsiveFontSize = () => {
       const width = window.innerWidth;
-      const baseFontSize = width < 768 ? 14 : width < 1024 ? 16 : 18;
+      // Use more conservative font size changes to prevent large differences
+      const baseFontSize = width < 768 ? 14 : width < 1024 ? 15 : 16;
       document.documentElement.style.fontSize = `${baseFontSize}px`;
+      
+      // Add a data attribute to help debug size issues
+      document.documentElement.setAttribute('data-viewport-width', width.toString());
     };
 
     window.addEventListener("resize", setResponsiveFontSize);
