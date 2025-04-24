@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import SpotlightCard from "./SpotlightCard";
 import OptimizedImage from "./OptimizedImage";
+import MotionCard from "./MotionCard";
 
 const projects = [
   {
@@ -64,11 +65,8 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section
-      id="projects"
-      className="section-spacing bg-gray-50 dark:bg-gray-800"
-    >
-      <div className="section-container">
+    <section id="projects" className="py-20 bg-white dark:bg-gray-900">
+      <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -94,96 +92,98 @@ const Projects = () => {
               viewport={{ once: true }}
               className="flex"
             >
-              <SpotlightCard
-                className="h-full w-full bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-700 flex flex-col hover:shadow-xl transition-shadow duration-300"
-                spotlightColor={project.spotlightColor}
-              >
-                <div className="relative aspect-video overflow-hidden rounded-lg mb-4">
-                  <OptimizedImage
-                    src={project.image}
-                    alt={`${project.title} screenshot`}
-                    className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700 ease-in-out"
-                    priority={index === 0}
-                    loading="lazy"
-                    onError={() => {
-                      // fallback image logic if needed
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
-                    <a
-                      href={project.links.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white dark:bg-gray-800 p-2 rounded-full transform scale-75 hover:scale-100 transition-all duration-200"
-                      aria-label={`View ${project.title} demo`}
-                    >
-                      <ExternalLink className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                    </a>
-                  </div>
-                </div>
-                <div className="flex-1 flex flex-col p-4">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-                    {project.description}
-                  </p>
-
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
-                      Tech Stack:
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.techStack.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-0.5 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded-full text-xs"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+              <MotionCard className="h-full w-full">
+                <SpotlightCard
+                  className="h-full w-full bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-700 flex flex-col hover:shadow-xl transition-shadow duration-300"
+                  spotlightColor={project.spotlightColor || "rgba(26, 171, 255, 0.15)"}
+                >
+                  <div className="relative aspect-video overflow-hidden rounded-lg mb-4">
+                    <OptimizedImage
+                      src={project.image}
+                      alt={`${project.title} screenshot`}
+                      className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700 ease-in-out"
+                      priority={index === 0}
+                      loading="lazy"
+                      onError={() => {
+                        // fallback image logic if needed
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-white dark:bg-gray-800 p-2 rounded-full transform scale-75 hover:scale-100 transition-all duration-200"
+                        aria-label={`View ${project.title} demo`}
+                      >
+                        <ExternalLink className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                      </a>
                     </div>
                   </div>
+                  <div className="flex-1 flex flex-col p-4">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+                      {project.description}
+                    </p>
 
-                  <div className="mb-6">
-                    <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
-                      Key Achievements:
-                    </h4>
-                    <ul className="space-y-2">
-                      {project.achievements.map((achievement) => (
-                        <li
-                          key={achievement}
-                          className="flex items-start text-xs text-gray-600 dark:text-gray-300"
-                        >
-                          <span className="w-1.5 h-1.5 mt-1 mr-1.5 bg-primary-600 dark:bg-primary-400 rounded-full flex-shrink-0"></span>
-                          <span className="line-clamp-2">{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                    <div className="mb-4">
+                      <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+                        Tech Stack:
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {project.techStack.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-2 py-0.5 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded-full text-xs"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
 
-                  <div className="flex space-x-6 mt-auto pt-3 border-t border-gray-100 dark:border-gray-700 justify-between">
-                    <a
-                      href={project.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 text-sm transition-colors duration-200"
-                    >
-                      <Github className="w-4 h-4 mr-2" />
-                      <span>Code</span>
-                    </a>
-                    <a
-                      href={project.links.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 text-sm transition-colors duration-200"
-                    >
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      <span>Live Demo</span>
-                    </a>
+                    <div className="mb-6">
+                      <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+                        Key Achievements:
+                      </h4>
+                      <ul className="space-y-2">
+                        {project.achievements.map((achievement) => (
+                          <li
+                            key={achievement}
+                            className="flex items-start text-xs text-gray-600 dark:text-gray-300"
+                          >
+                            <span className="w-1.5 h-1.5 mt-1 mr-1.5 bg-primary-600 dark:bg-primary-400 rounded-full flex-shrink-0"></span>
+                            <span className="line-clamp-2">{achievement}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="mt-auto flex justify-between items-center">
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors focus-ring rounded"
+                      >
+                        <Github className="w-4 h-4 mr-1" />
+                        <span className="text-xs">Source Code</span>
+                      </a>
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary-600 dark:text-primary-400 text-xs flex items-center hover:underline focus-ring rounded"
+                      >
+                        <span>View Demo</span>
+                        <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </SpotlightCard>
+                </SpotlightCard>
+              </MotionCard>
             </motion.div>
           ))}
         </div>
@@ -193,11 +193,11 @@ const Projects = () => {
             href="https://github.com/darshangaikwad4114?tab=repositories"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 border-2 border-primary-600 dark:border-primary-500 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-all duration-200 font-medium hover:-translate-y-1"
+            className="inline-flex items-center px-6 py-3 border-2 border-primary-600 dark:border-primary-500 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-all duration-200 font-medium animated-button"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            View All Projects
+            <span>View All Projects</span>
             <ArrowRight className="ml-2 w-4 h-4" />
           </motion.a>
         </div>
