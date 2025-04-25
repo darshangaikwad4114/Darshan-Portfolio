@@ -111,7 +111,9 @@ const Contact = () => {
                       Email
                     </h4>
                     <a
-                      href="mailto:darshangaikwad4114@gmail.com"
+                      href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=darshangaikwad4114@gmail.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-primary-600 dark:text-primary-400 hover:underline inline-block truncate max-w-full"
                       style={{ wordBreak: "break-word" }}
                     >
