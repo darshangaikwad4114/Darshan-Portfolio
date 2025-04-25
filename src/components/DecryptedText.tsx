@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 
 interface DecryptedTextProps {
   text: string;
@@ -31,12 +31,24 @@ export default function DecryptedText({
 }: DecryptedTextProps) {
   const [isHovering, setIsHovering] = useState(false);
   const [displayText, setDisplayText] = useState(text);
+  // Fix: Add eslint-disable-next-line to suppress the unused variable warning
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [revealedIndices, setRevealedIndices] = useState<Set<number>>(
     new Set(),
   );
   const [isScrambling, setIsScrambling] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const iterationRef = useRef(0);
+
+  // Memoize the characters array to avoid recreating it on each render
+  const availableChars = useMemo(
+    () =>
+      useOriginalCharsOnly
+        ? text.split("").filter((char) => char !== " ")
+        : characters.split(""),
+    [text, characters, useOriginalCharsOnly],
+  );
 
   // Move getNextIndex into useCallback to fix the exhaustive-deps warning
   const getNextIndex = useCallback(
@@ -73,35 +85,61 @@ export default function DecryptedText({
     [revealDirection, text],
   );
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
-    let currentIteration = 0;
-
-    const shuffleText = (
-      originalText: string,
-      currentRevealed: Set<number>,
-    ): string => {
-      const availableChars = useOriginalCharsOnly
-        ? originalText.split("").filter((char) => char !== " ")
-        : characters;
-
+  // Optimize shuffle function with useMemo
+  const shuffleText = useCallback(
+    (originalText: string, currentRevealed: Set<number>): string => {
       return originalText
         .split("")
         .map((char, i) => {
           if (char === " ") return " ";
           if (currentRevealed.has(i)) return originalText[i];
+
+          // Use cached array for better performance
           return availableChars[
             Math.floor(Math.random() * availableChars.length)
           ];
         })
         .join("");
-    };
+    },
+    [availableChars],
+  );
 
+  // Clean up interval on unmount
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  // Reset animation when text changes
+  useEffect(() => {
+    setDisplayText(text);
+    setRevealedIndices(new Set());
+    iterationRef.current = 0;
+
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, [text]);
+
+  // Main animation effect
+  useEffect(() => {
     if (isHovering || animateOn === "view") {
       setIsScrambling(true);
-      interval = setInterval(() => {
-        setRevealedIndices((prevRevealed) => {
-          if (sequential) {
+      iterationRef.current = 0;
+
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+
+      intervalRef.current = setInterval(() => {
+        iterationRef.current += 1;
+
+        if (sequential) {
+          setRevealedIndices((prevRevealed) => {
             if (prevRevealed.size < text.length) {
               const nextIndex = getNextIndex(prevRevealed);
               if (nextIndex >= 0) {
@@ -112,42 +150,47 @@ export default function DecryptedText({
               }
             }
 
-            clearInterval(interval!);
+            // Finish animation
+            if (intervalRef.current) clearInterval(intervalRef.current);
             setIsScrambling(false);
             return prevRevealed;
-          } else {
+          });
+        } else {
+          setRevealedIndices((prevRevealed) => {
             setDisplayText(shuffleText(text, prevRevealed));
-            currentIteration++;
-            if (currentIteration >= maxIterations) {
-              clearInterval(interval!);
+
+            if (iterationRef.current >= maxIterations) {
+              if (intervalRef.current) clearInterval(intervalRef.current);
               setIsScrambling(false);
               setDisplayText(text);
             }
+
             return prevRevealed;
-          }
-        });
+          });
+        }
       }, speed);
     } else {
-      setDisplayText(text);
-      setRevealedIndices(new Set());
-      setIsScrambling(false);
+      // Reset when not hovering and using hover mode
+      if (animateOn === "hover" && intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+        setDisplayText(text);
+        setRevealedIndices(new Set());
+        setIsScrambling(false);
+      }
     }
-
-    return () => {
-      if (interval) clearInterval(interval);
-    };
   }, [
     isHovering,
     text,
     speed,
     maxIterations,
     sequential,
-    characters,
-    useOriginalCharsOnly,
+    shuffleText,
     animateOn,
-    getNextIndex, // Now this is stable due to useCallback
+    getNextIndex,
   ]);
 
+  // IntersectionObserver for view mode
   useEffect(() => {
     if (animateOn !== "view") return;
 
@@ -158,7 +201,7 @@ export default function DecryptedText({
           observer.disconnect();
         }
       },
-      { threshold: 0.5 },
+      { threshold: 0.5, rootMargin: "0px" },
     );
 
     if (containerRef.current) {
@@ -168,6 +211,7 @@ export default function DecryptedText({
     return () => observer.disconnect();
   }, [animateOn]);
 
+  // Use CSS transitions for smoother character changes
   return (
     <div
       ref={containerRef}
@@ -181,7 +225,12 @@ export default function DecryptedText({
       {...props}
     >
       <span
-        className={`${className} ${isScrambling ? encryptedClassName : ""}`}
+        className={`${className} ${isScrambling ? encryptedClassName : ""} transition-colors duration-150`}
+        style={{
+          willChange: "contents",
+          display: "inline-block",
+          transform: "translateZ(0)", // Hardware acceleration
+        }}
       >
         {displayText}
       </span>
