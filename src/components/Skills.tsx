@@ -176,7 +176,7 @@ const Skills = React.memo(() => {
               className="mb-12"
             >
               <div className="mb-4">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {category.title}
                 </h3>
               </div>
@@ -192,9 +192,9 @@ const Skills = React.memo(() => {
                       delay: categoryIndex * 0.1 + skillIndex * 0.05,
                     }}
                     viewport={{ once: true }}
-                    className="flex items-center gap-2 bg-white dark:bg-gray-800 
+                    className="flex items-center gap-2.5 bg-white dark:bg-gray-800 
                             px-4 py-2 rounded-lg border border-gray-100 dark:border-gray-700 
-                            shadow-sm"
+                            shadow-sm hover:shadow-md transition-shadow"
                   >
                     <div className="w-5 h-5 flex-shrink-0">
                       <img
