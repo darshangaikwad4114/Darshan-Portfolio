@@ -30,8 +30,8 @@ const skillCategories = [
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg",
       },
       {
-        name: "PostCSS",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postcss/postcss-original.svg",
+        name: "SQL",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg",
       },
       {
         name: "Markdown",
@@ -47,8 +47,16 @@ const skillCategories = [
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
       },
       {
+        name: "React Router",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactrouter/reactrouter-original.svg",
+      },
+      {
         name: "Redux",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redux/redux-original.svg",
+      },
+      {
+        name: "Material UI",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materialui/materialui-original.svg",
       },
       {
         name: "TailwindCSS",
@@ -122,10 +130,6 @@ const skillCategories = [
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg",
       },
       {
-        name: "Babel",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/babel/babel-original.svg",
-      },
-      {
         name: "VS Code",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
       },
@@ -136,10 +140,6 @@ const skillCategories = [
       {
         name: "Vercel",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg",
-      },
-      {
-        name: "Netlify",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/netlify/netlify-original.svg",
       },
     ],
   },
