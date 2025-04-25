@@ -11,6 +11,8 @@ const SizeDebugger: React.FC<SizeDebuggerProps> = ({ enabled = false }) => {
   });
   
   const [fontSize, setFontSize] = useState('');
+  const [devicePixelRatio, setDevicePixelRatio] = useState(1);
+  const [deviceOrientation, setDeviceOrientation] = useState('');
   
   useEffect(() => {
     if (!enabled) return;
@@ -24,6 +26,8 @@ const SizeDebugger: React.FC<SizeDebuggerProps> = ({ enabled = false }) => {
       // Get computed font size of the root element
       const computedStyle = window.getComputedStyle(document.documentElement);
       setFontSize(computedStyle.fontSize);
+      setDevicePixelRatio(window.devicePixelRatio);
+      setDeviceOrientation(window.innerWidth > window.innerHeight ? 'landscape' : 'portrait');
     };
     
     window.addEventListener('resize', updateSize);
@@ -45,11 +49,14 @@ const SizeDebugger: React.FC<SizeDebuggerProps> = ({ enabled = false }) => {
         padding: '8px',
         borderRadius: '4px',
         fontSize: '12px',
-        zIndex: 9999
+        zIndex: 9999,
+        maxWidth: '200px'
       }}
     >
       <div>Window: {windowSize.width}px × {windowSize.height}px</div>
       <div>Root font: {fontSize}</div>
+      <div>Pixel ratio: {devicePixelRatio}x</div>
+      <div>Orientation: {deviceOrientation}</div>
       <div>Environment: {import.meta.env.DEV ? 'Development' : 'Production'}</div>
     </div>
   );

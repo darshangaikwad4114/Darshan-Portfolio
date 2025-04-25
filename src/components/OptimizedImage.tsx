@@ -11,6 +11,7 @@ interface OptimizedImageProps {
   placeholder?: string;
   onLoad?: () => void;
   onError?: () => void;
+  sizes?: string;
 }
 
 export default function OptimizedImage({
@@ -23,6 +24,7 @@ export default function OptimizedImage({
   placeholder = "https://via.placeholder.com/400x300?text=Loading...",
   onLoad,
   onError,
+  sizes = "100vw",
 }: OptimizedImageProps) {
   const [loading, setLoading] = useState(!priority);
   const [error, setError] = useState(false);
@@ -36,25 +38,36 @@ export default function OptimizedImage({
     const img = new Image();
     img.src = src;
 
+    // Set longer timeout for slower connections
+    const timeoutId = setTimeout(() => {
+      if (isMounted && loading) {
+        console.warn(`Image load timeout for: ${src}`);
+      }
+    }, 8000);
+
     img.onload = () => {
       if (isMounted) {
         setImgSrc(src);
         setLoading(false);
         if (onLoad) onLoad();
+        clearTimeout(timeoutId);
       }
     };
 
     img.onerror = () => {
       if (isMounted) {
+        console.error(`Failed to load image: ${src}`);
         setError(true);
         if (onError) onError();
+        clearTimeout(timeoutId);
       }
     };
 
     return () => {
       isMounted = false;
+      clearTimeout(timeoutId);
     };
-  }, [src, priority, error, onLoad, onError]);
+  }, [src, priority, error, onLoad, onError, loading]);
 
   if (error) {
     return (
@@ -82,6 +95,13 @@ export default function OptimizedImage({
         onError={() => {
           setError(true);
           if (onError) onError();
+        }}
+        sizes={sizes}
+        decoding={priority ? "sync" : "async"}
+        style={{
+          objectFit: "cover",
+          width: width ? `${width}px` : "100%",
+          height: height ? `${height}px` : "100%", 
         }}
       />
     </motion.div>

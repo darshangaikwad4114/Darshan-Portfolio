@@ -43,11 +43,13 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       {/* If noIndex is true, tell search engines not to index this page */}
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
-      {/* Add strong viewport control to prevent inconsistent scaling */}
+      {/* Add viewport control optimized for all devices */}
       <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
       />
+      
+      {/* Theme colors for different modes */}
       <meta
         name="theme-color"
         content="#0090f5"

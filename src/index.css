@@ -187,6 +187,18 @@
 /* Consistent sizing between development and production */
 :root {
   font-size: 16px; /* Base font size that will be consistent */
+  --viewport-width: 100vw;
+  --viewport-height: 100vh;
+  
+  /* Define RGB values for colors to use in rgba() */
+  --primary-rgb: 0, 144, 245;
+  --secondary-rgb: 100, 121, 167;
+}
+
+@media screen and (max-width: 1024px) {
+  :root {
+    font-size: 15px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -196,8 +208,29 @@
 }
 
 /* Fix for mobile and deployment size inconsistencies */
-body, html {
+html, body {
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Fix iOS tap highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Consistent focus styles */
+:focus {
+  outline: none;
+}
+
+/* Consistent spacing for touch targets */
+button, a, input, select, textarea {
+  touch-action: manipulation;
+}
+
+/* Fix for iOS momentum scrolling */
+.scrollable-content {
+  -webkit-overflow-scrolling: touch;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Skills from "./components/Skills";
@@ -15,8 +15,13 @@ import { HelmetProvider } from "react-helmet-async";
 import SEOHead from "./components/SEOHead";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import { motion, AnimatePresence } from "framer-motion";
+import SizeDebugger from "./components/SizeDebugger";
+import PerformanceDebugger from "./components/PerformanceDebugger";
 
 function App() {
+  // Flag to enable/disable debugging tools
+  const [isDebugging] = useState(false);
+  
   // Add page load animation
   useEffect(() => {
     // Trigger initial animations
@@ -41,6 +46,14 @@ function App() {
     setResponsiveFontSize();
 
     return () => window.removeEventListener("resize", setResponsiveFontSize);
+  }, []);
+  
+  // Add touch detection for better mobile styling
+  useEffect(() => {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) {
+      document.body.classList.add('touch-device');
+    }
   }, []);
 
   return (
@@ -67,6 +80,14 @@ function App() {
                 <Contact />
               </main>
               <Footer />
+
+              {/* Debugging tools - only visible in development */}
+              {isDebugging && (
+                <>
+                  <SizeDebugger enabled={true} />
+                  <PerformanceDebugger enabled={true} />
+                </>
+              )}
 
               {/* Add Vercel Speed Insights */}
               <SpeedInsights />
