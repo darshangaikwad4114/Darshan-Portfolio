@@ -12,13 +12,15 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   particleCount = 20,
   colors = ["#0090F5", "#6A98F0", "#8167F0", "#FF8B4C"],
 }) => {
-  const [particles, setParticles] = useState<Array<{
-    id: number;
-    x: number;
-    y: number;
-    size: number;
-    color: string;
-  }>>([]);
+  const [particles, setParticles] = useState<
+    Array<{
+      id: number;
+      x: number;
+      y: number;
+      size: number;
+      color: string;
+    }>
+  >([]);
 
   useEffect(() => {
     const newParticles = Array.from({ length: particleCount }).map((_, i) => ({

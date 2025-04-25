@@ -5,8 +5,8 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  const isProduction = mode === 'production';
-  
+  const isProduction = mode === "production";
+
   return {
     plugins: [
       react(),
@@ -67,12 +67,12 @@ export default defineConfig(({ mode }) => {
       // Generate sourcemaps in development
       sourcemap: !isProduction,
     },
-    
+
     // Add consistent CSS configuration for development
     css: {
       devSourcemap: true,
     },
-    
+
     // Add path aliases for cleaner imports
     resolve: {
       alias: {
@@ -92,7 +92,7 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
-    
+
     // Enable consistent preview mode
     preview: {
       port: 5173,

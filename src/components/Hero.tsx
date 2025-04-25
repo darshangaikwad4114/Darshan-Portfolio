@@ -79,7 +79,7 @@ const Hero = () => {
     >
       {/* Add the animated background */}
       <AnimatedBackground particleCount={15} />
-      
+
       {/* Keep the existing shapes */}
       <motion.div
         className="absolute top-20 right-0 w-72 h-72 bg-primary-100/30 dark:bg-primary-900/10 rounded-full filter blur-3xl"
@@ -252,7 +252,7 @@ const Hero = () => {
               transition={{ duration: 0.7, delay: 0.3 }}
               className="lg:w-1/2 flex justify-center"
             >
-              <motion.div 
+              <motion.div
                 className="relative w-64 h-64 md:w-80 md:h-80"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300, damping: 10 }}
@@ -263,16 +263,16 @@ const Hero = () => {
                   className="rounded-full w-full h-full object-cover shadow-2xl"
                 />
                 <div className="absolute inset-0 rounded-full bg-gradient-to-b from-primary-500/10 to-transparent shine"></div>
-                
+
                 {/* Add an orbital circle around the profile image */}
-                <motion.div 
-                  className="absolute inset-0 rounded-full border-2 border-primary-400/30 dark:border-primary-500/20" 
+                <motion.div
+                  className="absolute inset-0 rounded-full border-2 border-primary-400/30 dark:border-primary-500/20"
                   style={{ margin: "-10px" }}
                   animate={{ rotate: 360 }}
-                  transition={{ 
+                  transition={{
                     duration: 20,
                     repeat: Infinity,
-                    ease: "linear" 
+                    ease: "linear",
                   }}
                 />
               </motion.div>

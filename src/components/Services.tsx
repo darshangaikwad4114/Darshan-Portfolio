@@ -67,7 +67,11 @@ const Services = () => {
             Services I Offer
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Specialized web development services to create beautiful, high-performing, and user-friendly digital experiences. Whether it's a complex web application, e-commerce store, or landing page, I ensure top-notch performance and smooth functionality with SEO-friendly optimizations.
+            Specialized web development services to create beautiful,
+            high-performing, and user-friendly digital experiences. Whether it's
+            a complex web application, e-commerce store, or landing page, I
+            ensure top-notch performance and smooth functionality with
+            SEO-friendly optimizations.
           </p>
         </motion.div>
 

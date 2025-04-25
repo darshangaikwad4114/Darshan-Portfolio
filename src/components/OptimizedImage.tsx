@@ -91,7 +91,7 @@ export default function OptimizedImage({
         style={{
           objectFit: "cover",
           width: width ? `${width}px` : "100%",
-          height: height ? `${height}px` : "100%", 
+          height: height ? `${height}px` : "100%",
         }}
       />
     </motion.div>

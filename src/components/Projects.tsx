@@ -95,7 +95,9 @@ const Projects = () => {
               <MotionCard className="h-full w-full">
                 <SpotlightCard
                   className="h-full w-full bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-700 flex flex-col hover:shadow-xl transition-shadow duration-300"
-                  spotlightColor={project.spotlightColor || "rgba(26, 171, 255, 0.15)"}
+                  spotlightColor={
+                    project.spotlightColor || "rgba(26, 171, 255, 0.15)"
+                  }
                 >
                   <div className="relative aspect-video overflow-hidden rounded-lg mb-4">
                     <OptimizedImage

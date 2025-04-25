@@ -18,20 +18,20 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!divRef.current) return;
-    
+
     const div = divRef.current;
     const rect = div.getBoundingClientRect();
-    
+
     setPosition({
       x: e.clientX - rect.left,
       y: e.clientY - rect.top,
     });
   };
-  
+
   const handleMouseEnter = () => {
     setOpacity(1);
   };
-  
+
   const handleMouseLeave = () => {
     setOpacity(0);
   };
@@ -46,7 +46,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
     >
-      <div 
+      <div
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
         style={{
           opacity,

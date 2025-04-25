@@ -47,14 +47,14 @@
   .section-container {
     @apply container mx-auto px-4 sm:px-6;
   }
-  
+
   /* New skill tag styles - without hover effects */
   .skill-tag {
     @apply flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium
            bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700
            shadow-sm;
   }
-  
+
   .skill-category-title {
     @apply flex items-center text-xl font-bold text-gray-800 dark:text-white mb-4
            pb-2 border-b border-gray-100 dark:border-gray-700;
@@ -110,8 +110,8 @@
     rgba(var(--primary-rgb), 0.5),
     rgba(var(--secondary-rgb), 0.5)
   );
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -189,7 +189,7 @@
   font-size: 16px; /* Base font size that will be consistent */
   --viewport-width: 100vw;
   --viewport-height: 100vh;
-  
+
   /* Define RGB values for colors to use in rgba() */
   --primary-rgb: 0, 144, 245;
   --secondary-rgb: 100, 121, 167;
@@ -208,7 +208,8 @@
 }
 
 /* Fix for mobile and deployment size inconsistencies */
-html, body {
+html,
+body {
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
@@ -226,7 +227,11 @@ html, body {
 }
 
 /* Consistent spacing for touch targets */
-button, a, input, select, textarea {
+button,
+a,
+input,
+select,
+textarea {
   touch-action: manipulation;
 }
 

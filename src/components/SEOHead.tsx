@@ -48,7 +48,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
         name="viewport"
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
       />
-      
+
       {/* Theme colors for different modes */}
       <meta
         name="theme-color"

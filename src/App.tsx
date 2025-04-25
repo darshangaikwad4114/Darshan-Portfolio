@@ -21,7 +21,7 @@ import PerformanceDebugger from "./components/PerformanceDebugger";
 function App() {
   // Flag to enable/disable debugging tools
   const [isDebugging] = useState(false);
-  
+
   // Add page load animation
   useEffect(() => {
     // Trigger initial animations
@@ -37,9 +37,12 @@ function App() {
       // Use more conservative font size changes to prevent large differences
       const baseFontSize = width < 768 ? 14 : width < 1024 ? 15 : 16;
       document.documentElement.style.fontSize = `${baseFontSize}px`;
-      
+
       // Add a data attribute to help debug size issues
-      document.documentElement.setAttribute('data-viewport-width', width.toString());
+      document.documentElement.setAttribute(
+        "data-viewport-width",
+        width.toString(),
+      );
     };
 
     window.addEventListener("resize", setResponsiveFontSize);
@@ -47,12 +50,13 @@ function App() {
 
     return () => window.removeEventListener("resize", setResponsiveFontSize);
   }, []);
-  
+
   // Add touch detection for better mobile styling
   useEffect(() => {
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isTouchDevice =
+      "ontouchstart" in window || navigator.maxTouchPoints > 0;
     if (isTouchDevice) {
-      document.body.classList.add('touch-device');
+      document.body.classList.add("touch-device");
     }
   }, []);
 
