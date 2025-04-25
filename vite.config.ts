@@ -52,8 +52,8 @@ export default defineConfig(({ mode }) => {
           drop_debugger: true,
         },
       },
-      // Add CSS size controls
-      cssMinify: 'lightningcss',
+      // Change CSS minification from lightningcss to default
+      cssMinify: true, // Changed from 'lightningcss' to true
       cssCodeSplit: false, // Use a single CSS file
       rollupOptions: {
         output: {
