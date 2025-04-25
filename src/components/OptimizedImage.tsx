@@ -38,19 +38,11 @@ export default function OptimizedImage({
     const img = new Image();
     img.src = src;
 
-    // Set longer timeout for slower connections
-    const timeoutId = setTimeout(() => {
-      if (isMounted && loading) {
-        console.warn(`Image load timeout for: ${src}`);
-      }
-    }, 8000);
-
     img.onload = () => {
       if (isMounted) {
         setImgSrc(src);
         setLoading(false);
         if (onLoad) onLoad();
-        clearTimeout(timeoutId);
       }
     };
 
@@ -59,15 +51,13 @@ export default function OptimizedImage({
         console.error(`Failed to load image: ${src}`);
         setError(true);
         if (onError) onError();
-        clearTimeout(timeoutId);
       }
     };
 
     return () => {
       isMounted = false;
-      clearTimeout(timeoutId);
     };
-  }, [src, priority, error, onLoad, onError, loading]);
+  }, [src, priority, error, onLoad, onError]);
 
   if (error) {
     return (

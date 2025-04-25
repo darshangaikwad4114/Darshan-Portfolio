@@ -1,8 +1,8 @@
-import React, { ReactNode, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { track } from "@vercel/analytics";
 
 interface SpeedInsightsProviderProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 /**
@@ -44,16 +44,13 @@ export function SpeedInsightsProvider({
         )[0] as PerformanceNavigationTiming;
 
         if (navEntry) {
-          const metrics = {
-            "dom-content-loaded": navEntry.domContentLoadedEventEnd,
-            "load-complete": navEntry.loadEventEnd,
-            ttfb: navEntry.responseStart - navEntry.requestStart,
-          };
-
           // Send all metrics in a single batch to reduce network requests
           track("performance_metrics_batch", {
-            metrics,
-            navigationEntry: true,
+            metrics: {
+              "dom-content-loaded": navEntry.domContentLoadedEventEnd,
+              "load-complete": navEntry.loadEventEnd,
+              ttfb: navEntry.responseStart - navEntry.requestStart,
+            },
             viewport: {
               width: window.innerWidth,
               height: window.innerHeight,
@@ -63,12 +60,11 @@ export function SpeedInsightsProvider({
       }
     });
 
-    // Setup efficient section visibility tracking with fewer observers
-    const setupEfficientVisibilityTracking = () => {
+    // Setup section visibility tracking with a single observer
+    const setupVisibilityTracking = () => {
       const sections = document.querySelectorAll("section[id]");
       if (!sections.length) return;
 
-      // Create a single observer instead of many
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -85,45 +81,17 @@ export function SpeedInsightsProvider({
       );
 
       sections.forEach((section) => observer.observe(section));
-
-      return () => observer.disconnect();
+      return observer;
     };
 
     // Delay visibility tracking setup until after critical render
-    const timer = setTimeout(setupEfficientVisibilityTracking, 2000);
+    const timer = setTimeout(() => {
+      const observer = setupVisibilityTracking();
+      return () => observer?.disconnect();
+    }, 2000);
 
-    // Add lazy loading for non-critical sections
-    const lazyLoadSection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const section = entry.target as HTMLElement;
-          const lazyImages = section.querySelectorAll('img[loading="lazy"]');
-          lazyImages.forEach((img) => {
-            const image = img as HTMLImageElement;
-            if (image.dataset.src) {
-              image.src = image.dataset.src;
-            }
-          });
-        }
-      });
-    };
-
-    // Add to useEffect
-    const lazyObserver = new IntersectionObserver(lazyLoadSection, {
-      rootMargin: "50px",
-    });
-
-    document.querySelectorAll("section").forEach((section) => {
-      lazyObserver.observe(section);
-    });
-
-    return () => {
-      clearTimeout(timer);
-      lazyObserver.disconnect();
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   return <>{children}</>;
 }
-
-// Moved measurePerformance to a separate file (performanceUtils.ts)

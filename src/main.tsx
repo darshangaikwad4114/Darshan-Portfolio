@@ -5,13 +5,7 @@ import "./index.css";
 import { inject } from "@vercel/analytics";
 import { SpeedInsightsProvider } from "./components/SpeedInsightsProvider";
 
-// Add this for debugging image paths in production
-if (import.meta.env.PROD) {
-  console.log("Running in production mode");
-  console.log("Public URL:", import.meta.env.BASE_URL);
-}
-
-// Register service worker
+// Register service worker only in production
 if ("serviceWorker" in navigator && import.meta.env.PROD) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
@@ -25,6 +19,11 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
   });
 }
 
+// Initialize analytics in production only
+if (import.meta.env.PROD) {
+  inject();
+}
+
 // Wrap the app with the SpeedInsightsProvider for enhanced metrics tracking
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -33,6 +32,3 @@ createRoot(document.getElementById("root")!).render(
     </SpeedInsightsProvider>
   </StrictMode>,
 );
-
-// Initialize analytics
-inject();

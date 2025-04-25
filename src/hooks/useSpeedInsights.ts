@@ -35,58 +35,5 @@ export function useSpeedInsights() {
     [],
   );
 
-  /**
-   * Start measuring a custom duration metric
-   *
-   * @param actionName - Name of the action being measured (e.g., 'image-load')
-   * @returns A function to stop timing and record the measurement
-   */
-  const startMeasurement = useCallback(
-    (actionName: string) => {
-      const startTime = performance.now();
-
-      // Return a function that, when called, will record the elapsed time
-      return (additionalData?: Record<string, unknown>) => {
-        const endTime = performance.now();
-        const duration = endTime - startTime;
-
-        trackCustomMetric(`custom-${actionName}-duration`, duration, {
-          action: actionName,
-          ...additionalData,
-        });
-
-        return duration;
-      };
-    },
-    [trackCustomMetric],
-  );
-
-  /**
-   * Track user interaction performance
-   *
-   * @param interactionType - Type of interaction (e.g., 'click', 'submit')
-   * @param componentName - Name of the component where interaction occurred
-   */
-  const trackInteraction = useCallback(
-    (interactionType: string, componentName: string, fn?: () => void) => {
-      const startTime = performance.now();
-
-      // Execute the provided function if it exists
-      if (fn) fn();
-
-      // Record the measurement
-      track("interaction_performance", {
-        interaction_type: interactionType,
-        component: componentName,
-        duration: fn ? performance.now() - startTime : 0,
-      });
-    },
-    [],
-  );
-
-  return {
-    trackCustomMetric,
-    startMeasurement,
-    trackInteraction,
-  };
+  return { trackCustomMetric };
 }

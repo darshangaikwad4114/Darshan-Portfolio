@@ -23,7 +23,6 @@ const SizeDebugger: React.FC<SizeDebuggerProps> = ({ enabled = false }) => {
         height: window.innerHeight
       });
       
-      // Get computed font size of the root element
       const computedStyle = window.getComputedStyle(document.documentElement);
       setFontSize(computedStyle.fontSize);
       setDevicePixelRatio(window.devicePixelRatio);
