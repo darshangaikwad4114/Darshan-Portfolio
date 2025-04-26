@@ -165,7 +165,7 @@ const Skills = React.memo(() => {
           </p>
         </motion.div>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
@@ -173,46 +173,52 @@ const Skills = React.memo(() => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
               viewport={{ once: true }}
-              className="mb-12"
+              className="relative group"
             >
-              <div className="mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {category.title}
-                </h3>
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{
-                      duration: 0.3,
-                      delay: categoryIndex * 0.1 + skillIndex * 0.05,
-                    }}
-                    viewport={{ once: true }}
-                    className="flex items-center gap-2.5 bg-white dark:bg-gray-800 
-                            px-4 py-2 rounded-lg border border-gray-100 dark:border-gray-700 
-                            shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <div className="w-5 h-5 flex-shrink-0">
-                      <img
-                        src={skill.icon}
-                        alt={`${skill.name} icon`}
-                        className="w-full h-full object-contain"
-                        loading="lazy"
-                        onError={(e) => {
-                          e.currentTarget.src =
-                            "https://via.placeholder.com/20?text=Icon";
+              {/* Glassy card for each category */}
+              <div className="relative rounded-2xl border border-primary-100 dark:border-primary-900/40 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl shadow-xl overflow-hidden p-8">
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 pointer-events-none rounded-2xl bg-gradient-to-br from-white/60 via-primary-50/40 to-secondary-100/40 dark:from-gray-900/70 dark:via-gray-900/60 dark:to-gray-800/60" />
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white tracking-tight">
+                    {category.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-3">
+                    {category.skills.map((skill, skillIndex) => (
+                      <motion.div
+                        key={skill.name}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{
+                          duration: 0.3,
+                          delay: categoryIndex * 0.1 + skillIndex * 0.05,
                         }}
-                      />
-                    </div>
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      {skill.name}
-                    </span>
-                  </motion.div>
-                ))}
+                        viewport={{ once: true }}
+                        className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-primary-100 dark:border-primary-800 bg-white/80 dark:bg-gray-800/80 shadow-sm hover:shadow-md transition-shadow duration-200 cursor-default"
+                        style={{
+                          backdropFilter: "blur(2px)",
+                          WebkitBackdropFilter: "blur(2px)",
+                        }}
+                      >
+                        <div className="w-5 h-5 flex-shrink-0">
+                          <img
+                            src={skill.icon}
+                            alt={`${skill.name} icon`}
+                            className="w-full h-full object-contain"
+                            loading="lazy"
+                            onError={(e) => {
+                              e.currentTarget.src =
+                                "https://via.placeholder.com/20?text=Icon";
+                            }}
+                          />
+                        </div>
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                          {skill.name}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
