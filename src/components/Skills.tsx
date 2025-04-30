@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const skillCategories = [
   {
-    title: "Languages",
+    title: "Programming Languages",
     skills: [
       {
         name: "Java",
@@ -40,7 +40,7 @@ const skillCategories = [
     ],
   },
   {
-    title: "Libraries and Frameworks",
+    title: "Frontend Libraries and Frameworks",
     skills: [
       {
         name: "React",
@@ -77,7 +77,7 @@ const skillCategories = [
     ],
   },
   {
-    title: "Backend",
+    title: "Backend Databases and ORMs",
     skills: [
       {
         name: "Node.js",
@@ -91,11 +91,6 @@ const skillCategories = [
         name: "Firebase",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
       },
-    ],
-  },
-  {
-    title: "Databases and ORMs",
-    skills: [
       {
         name: "MySQL",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
