@@ -18,7 +18,6 @@ const Header = () => {
       { name: "Skills", to: "skills" },
       { name: "Experience", to: "experience" },
       { name: "Projects", to: "projects" },
-      { name: "GitHub", to: "github-activity" },
       { name: "Services", to: "services" },
       { name: "Contact", to: "contact" },
     ],
