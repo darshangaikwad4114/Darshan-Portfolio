@@ -46,15 +46,11 @@ export function SpeedInsightsProvider({
         if (navEntry) {
           // Send all metrics in a single batch to reduce network requests
           track("performance_metrics_batch", {
-            metrics: {
-              "dom-content-loaded": navEntry.domContentLoadedEventEnd,
-              "load-complete": navEntry.loadEventEnd,
-              ttfb: navEntry.responseStart - navEntry.requestStart,
-            },
-            viewport: {
-              width: window.innerWidth,
-              height: window.innerHeight,
-            },
+            dom_content_loaded: navEntry.domContentLoadedEventEnd,
+            load_complete: navEntry.loadEventEnd,
+            ttfb: navEntry.responseStart - navEntry.requestStart,
+            viewport_width: window.innerWidth,
+            viewport_height: window.innerHeight,
           });
         }
       }

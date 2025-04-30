@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Skills from "./components/Skills";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
-import GitHubActivity from "./components/GitHubActivity";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -79,7 +78,6 @@ function App() {
                 <Skills />
                 <Experience />
                 <Projects />
-                <GitHubActivity username="darshangaikwad4114" />
                 <Services />
                 <Contact />
               </main>

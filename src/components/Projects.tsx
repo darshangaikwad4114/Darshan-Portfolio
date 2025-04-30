@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import SpotlightCard from "./SpotlightCard";
@@ -105,7 +104,6 @@ const Projects = () => {
                       alt={`${project.title} screenshot`}
                       className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700 ease-in-out"
                       priority={index === 0}
-                      loading="lazy"
                       onError={() => {
                         // fallback image logic if needed
                       }}
