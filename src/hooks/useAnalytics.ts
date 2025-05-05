@@ -14,7 +14,10 @@ export function useAnalytics() {
    * @param properties - Optional properties to include with the event
    */
   const trackEvent = useCallback(
-    (eventName: string, properties?: Record<string, unknown>) => {
+    (
+      eventName: string,
+      properties?: Record<string, string | number | boolean | null>,
+    ) => {
       if (!eventName) return;
 
       try {
@@ -69,7 +72,10 @@ export function useAnalytics() {
    * (Moved from performanceUtils.ts to consolidate analytics functions)
    */
   const measurePerformance = useCallback(
-    (metricName: string, properties?: Record<string, unknown>) => {
+    (
+      metricName: string,
+      properties?: Record<string, string | number | boolean | null>,
+    ) => {
       const startTime = performance.now();
 
       return () => {

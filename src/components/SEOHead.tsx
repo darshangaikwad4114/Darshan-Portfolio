@@ -27,29 +27,29 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta name="description" content={description} />
       <link rel="canonical" href={canonicalUrl} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      
+
       {/* Open Graph Tags (works for both Facebook and Twitter) */}
       <meta property="og:type" content="website" />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
-      
+
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
-      
+
       {/* Indexing Control */}
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
-      
+
       {/* Structured Data */}
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Person",
-          "name": "Darshan Gaikwad",
-          "url": canonicalUrl,
-          "jobTitle": "Frontend Developer",
-          "image": ogImage
+          name: "Darshan Gaikwad",
+          url: canonicalUrl,
+          jobTitle: "Frontend Developer",
+          image: ogImage,
         })}
       </script>
     </Helmet>
