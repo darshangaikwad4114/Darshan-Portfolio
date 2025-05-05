@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 interface OptimizedImageProps {
@@ -21,7 +21,7 @@ export default function OptimizedImage({
   height,
   className = "",
   priority = false,
-  placeholder = "https://via.placeholder.com/400x300?text=Loading...",
+  placeholder = "/images/placeholder.svg", // Use local fallback image
   onLoad,
   onError,
   sizes = "100vw",
@@ -66,7 +66,7 @@ export default function OptimizedImage({
         style={{ width, height }}
       >
         <span className="text-gray-500 dark:text-gray-400 text-sm">
-          Failed to load image
+          {alt || "Image not available"}
         </span>
       </div>
     );

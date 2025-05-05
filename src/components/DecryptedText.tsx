@@ -31,8 +31,6 @@ export default function DecryptedText({
 }: DecryptedTextProps) {
   const [isHovering, setIsHovering] = useState(false);
   const [displayText, setDisplayText] = useState(text);
-  // Fix: Add eslint-disable-next-line to suppress the unused variable warning
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [revealedIndices, setRevealedIndices] = useState<Set<number>>(
     new Set(),
   );
@@ -125,7 +123,7 @@ export default function DecryptedText({
     }
   }, [text]);
 
-  // Main animation effect
+  // Main animation effect with revealedIndices added to dependencies
   useEffect(() => {
     if (isHovering || animateOn === "view") {
       setIsScrambling(true);
@@ -135,7 +133,8 @@ export default function DecryptedText({
         clearInterval(intervalRef.current);
       }
 
-      intervalRef.current = setInterval(() => {
+      // Store the interval ID in the ref
+      const intervalId = setInterval(() => {
         iterationRef.current += 1;
 
         if (sequential) {
@@ -151,24 +150,28 @@ export default function DecryptedText({
             }
 
             // Finish animation
-            if (intervalRef.current) clearInterval(intervalRef.current);
+            clearInterval(intervalId);
             setIsScrambling(false);
             return prevRevealed;
           });
         } else {
-          setRevealedIndices((prevRevealed) => {
-            setDisplayText(shuffleText(text, prevRevealed));
+          // For non-sequential animation
+          setDisplayText(shuffleText(text, revealedIndices));
 
-            if (iterationRef.current >= maxIterations) {
-              if (intervalRef.current) clearInterval(intervalRef.current);
-              setIsScrambling(false);
-              setDisplayText(text);
-            }
-
-            return prevRevealed;
-          });
+          if (iterationRef.current >= maxIterations) {
+            clearInterval(intervalId);
+            setIsScrambling(false);
+            setDisplayText(text);
+          }
         }
       }, speed);
+
+      // Save the ID to the ref
+      intervalRef.current = intervalId;
+
+      return () => {
+        if (intervalId) clearInterval(intervalId);
+      };
     } else {
       // Reset when not hovering and using hover mode
       if (animateOn === "hover" && intervalRef.current) {
@@ -188,6 +191,7 @@ export default function DecryptedText({
     shuffleText,
     animateOn,
     getNextIndex,
+    revealedIndices, // Add missing dependency
   ]);
 
   // IntersectionObserver for view mode

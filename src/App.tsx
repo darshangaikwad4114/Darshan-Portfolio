@@ -14,13 +14,8 @@ import { HelmetProvider } from "react-helmet-async";
 import SEOHead from "./components/SEOHead";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import { motion, AnimatePresence } from "framer-motion";
-import SizeDebugger from "./components/SizeDebugger";
-import PerformanceDebugger from "./components/PerformanceDebugger";
 
 function App() {
-  // Flag to enable/disable debugging tools
-  const [isDebugging] = useState(false);
-
   // Add page load animation
   useEffect(() => {
     // Trigger initial animations
@@ -82,16 +77,6 @@ function App() {
                 <Contact />
               </main>
               <Footer />
-
-              {/* Debugging tools - only visible in development */}
-              {isDebugging && (
-                <>
-                  <SizeDebugger enabled={true} />
-                  <PerformanceDebugger enabled={true} />
-                </>
-              )}
-
-              {/* Add Vercel Speed Insights */}
               <SpeedInsights />
             </motion.div>
           </AnimatePresence>

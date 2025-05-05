@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 
 interface AnimatedBackgroundProps {
@@ -19,20 +19,52 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
       y: number;
       size: number;
       color: string;
+      xOffsets: number[];
+      yOffsets: number[];
+      duration: number;
     }>
   >([]);
 
+  const hasInitialized = useRef(false);
+
+  const particleCountRef = useRef(particleCount);
+  const colorsRef = useRef(colors);
+
   useEffect(() => {
-    const newParticles = Array.from({ length: particleCount }).map((_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 30 + 10,
-      color: colors[Math.floor(Math.random() * colors.length)],
-    }));
+    particleCountRef.current = particleCount;
+    colorsRef.current = colors;
+  }, [particleCount, colors]);
+
+  useEffect(() => {
+    if (hasInitialized.current) return;
+    hasInitialized.current = true;
+
+    const newParticles = Array.from({ length: particleCountRef.current }).map(
+      (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 30 + 10,
+        color:
+          colorsRef.current[
+            Math.floor(Math.random() * colorsRef.current.length)
+          ],
+        xOffsets: [
+          Math.random() * 100 - 50,
+          Math.random() * 100 - 50,
+          Math.random() * 100 - 50,
+        ],
+        yOffsets: [
+          Math.random() * 100 - 50,
+          Math.random() * 100 - 50,
+          Math.random() * 100 - 50,
+        ],
+        duration: Math.random() * 30 + 20,
+      }),
+    );
 
     setParticles(newParticles);
-  }, [particleCount, colors]);
+  }, []);
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
@@ -48,19 +80,11 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
             height: particle.size,
           }}
           animate={{
-            x: [
-              Math.random() * 100 - 50,
-              Math.random() * 100 - 50,
-              Math.random() * 100 - 50,
-            ],
-            y: [
-              Math.random() * 100 - 50,
-              Math.random() * 100 - 50,
-              Math.random() * 100 - 50,
-            ],
+            x: particle.xOffsets,
+            y: particle.yOffsets,
           }}
           transition={{
-            duration: Math.random() * 30 + 20,
+            duration: particle.duration,
             repeat: Infinity,
             repeatType: "reverse",
           }}

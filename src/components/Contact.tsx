@@ -275,7 +275,7 @@ const Contact = () => {
                       </p>
                     </div>
 
-                    {state.errors && state.errors.length > 0 && (
+                    {state.errors && Object.keys(state.errors).length > 0 && (
                       <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
