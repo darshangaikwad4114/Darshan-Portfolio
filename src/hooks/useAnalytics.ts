@@ -64,9 +64,37 @@ export function useAnalytics() {
     [trackEvent],
   );
 
+  /**
+   * Optimized utility to measure and track a performance duration
+   * (Moved from performanceUtils.ts to consolidate analytics functions)
+   */
+  const measurePerformance = useCallback(
+    (metricName: string, properties?: Record<string, unknown>) => {
+      const startTime = performance.now();
+
+      return () => {
+        const duration = performance.now() - startTime;
+
+        // Only track if duration is meaningful (avoid noise from very short operations)
+        if (duration > 5) {
+          trackEvent("performance_metric", {
+            metric_name: metricName,
+            value: Math.round(duration), // Round to avoid excessive precision
+            ...properties,
+            timestamp: new Date().toISOString(),
+          });
+        }
+
+        return duration;
+      };
+    },
+    [trackEvent],
+  );
+
   return {
     trackEvent,
     trackPageView,
     trackInteraction,
+    measurePerformance,
   };
 }

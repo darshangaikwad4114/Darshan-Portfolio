@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Skills from "./components/Skills";
@@ -7,7 +7,6 @@ import Projects from "./components/Projects";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import { AnalyticsProvider } from "./components/AnalyticsProvider";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { HelmetProvider } from "react-helmet-async";
@@ -57,30 +56,28 @@ function App() {
   return (
     <HelmetProvider>
       <ThemeProvider>
-        <AnalyticsProvider>
-          <SEOHead />
-          <ScrollProgressBar />
-          <AnimatePresence mode="wait">
-            <motion.div
-              className="min-h-screen bg-white dark:bg-gray-900"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Header />
-              <main>
-                <Hero />
-                <Skills />
-                <Experience />
-                <Projects />
-                <Services />
-                <Contact />
-              </main>
-              <Footer />
-              <SpeedInsights />
-            </motion.div>
-          </AnimatePresence>
-        </AnalyticsProvider>
+        <SEOHead />
+        <ScrollProgressBar />
+        <AnimatePresence mode="wait">
+          <motion.div
+            className="min-h-screen bg-white dark:bg-gray-900"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Header />
+            <main>
+              <Hero />
+              <Skills />
+              <Experience />
+              <Projects />
+              <Services />
+              <Contact />
+            </main>
+            <Footer />
+            <SpeedInsights />
+          </motion.div>
+        </AnimatePresence>
       </ThemeProvider>
     </HelmetProvider>
   );

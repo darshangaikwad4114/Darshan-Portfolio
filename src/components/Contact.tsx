@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import SpotlightCard from "./SpotlightCard";
-import { trackEvent } from "../utils/analyticsUtils";
+// Use the consolidated hook instead of utility
+import { useAnalytics } from "../hooks/useAnalytics";
 import { useForm, ValidationError } from "@formspree/react";
 
 // Use the form ID provided by Formspree
@@ -17,6 +18,7 @@ const Contact = () => {
   });
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const { trackEvent } = useAnalytics();
 
   // Use Formspree's useForm hook
   const [state, handleSubmit] = useForm(FORMSPREE_FORM_ID);
@@ -63,7 +65,7 @@ const Contact = () => {
       // Clean up timer on component unmount
       return () => clearTimeout(timer);
     }
-  }, [submitSuccess, formData]);
+  }, [submitSuccess, formData, trackEvent]);
 
   return (
     <section id="contact" className="py-20 bg-white dark:bg-gray-900">

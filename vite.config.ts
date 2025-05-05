@@ -52,13 +52,7 @@ export default defineConfig(({ mode }) => {
       hmr: {
         overlay: true,
       },
-      proxy: {
-        "/api": {
-          target: "https://darshan-gaikwad-portfolio.vercel.app",
-          changeOrigin: true,
-          secure: false,
-        },
-      },
+      // Proxy configuration removed as it's not needed
     },
 
     // Enable consistent preview mode
