@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { Code2, Smartphone, Search, Bug, Zap, Shield } from "lucide-react";
 import SpotlightCard from "./SpotlightCard";

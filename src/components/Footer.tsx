@@ -1,4 +1,3 @@
-import React from "react";
 import { Github, Linkedin, ArrowUp } from "lucide-react";
 import { Link as ScrollLink } from "react-scroll";
 import Logo from "./Logo";
