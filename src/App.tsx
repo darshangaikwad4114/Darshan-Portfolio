@@ -7,7 +7,6 @@ import Projects from "./components/Projects";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { HelmetProvider } from "react-helmet-async";
 import SEOHead from "./components/SEOHead";
@@ -75,7 +74,6 @@ function App() {
               <Contact />
             </main>
             <Footer />
-            <SpeedInsights />
           </motion.div>
         </AnimatePresence>
       </ThemeProvider>
