@@ -10,7 +10,7 @@ interface MotionCardProps {
 const MotionCard: React.FC<MotionCardProps> = ({
   children,
   className = "",
-  hoverRotationDegrees = 5,
+  hoverRotationDegrees = 3,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotateX, setRotateX] = useState(0);
@@ -45,7 +45,7 @@ const MotionCard: React.FC<MotionCardProps> = ({
   return (
     <motion.div
       ref={cardRef}
-      className={`${className} perspective`}
+      className={`${className} perspective will-change-transform`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
@@ -54,11 +54,13 @@ const MotionCard: React.FC<MotionCardProps> = ({
       animate={{
         rotateX,
         rotateY,
+        z: 0,
       }}
       transition={{
         type: "spring",
         stiffness: 300,
-        damping: 20,
+        damping: 15,
+        mass: 0.8,
       }}
     >
       {children}

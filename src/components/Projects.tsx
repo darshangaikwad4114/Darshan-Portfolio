@@ -4,13 +4,61 @@ import SpotlightCard from "./SpotlightCard";
 import OptimizedImage from "./OptimizedImage";
 import MotionCard from "./MotionCard";
 
+// Function to generate consistent colors based on tech name
+const getTechColor = (techName: string) => {
+  // Simple hash function to generate a number from string
+  const hash = techName.split("").reduce((acc, char) => {
+    return char.charCodeAt(0) + ((acc << 5) - acc);
+  }, 0);
+
+  // Use predefined color palette based on hash
+  const colorPalette = [
+    {
+      bg: "bg-blue-100 dark:bg-blue-900/30",
+      text: "text-blue-600 dark:text-blue-400",
+      border: "border-blue-300 dark:border-blue-700",
+    },
+    {
+      bg: "bg-green-100 dark:bg-green-900/30",
+      text: "text-green-600 dark:text-green-400",
+      border: "border-green-300 dark:border-green-700",
+    },
+    {
+      bg: "bg-purple-100 dark:bg-purple-900/30",
+      text: "text-purple-600 dark:text-purple-400",
+      border: "border-purple-300 dark:border-purple-700",
+    },
+    {
+      bg: "bg-amber-100 dark:bg-amber-900/30",
+      text: "text-amber-600 dark:text-amber-400",
+      border: "border-amber-300 dark:border-amber-700",
+    },
+    {
+      bg: "bg-pink-100 dark:bg-pink-900/30",
+      text: "text-pink-600 dark:text-pink-400",
+      border: "border-pink-300 dark:border-pink-700",
+    },
+    {
+      bg: "bg-indigo-100 dark:bg-indigo-900/30",
+      text: "text-indigo-600 dark:text-indigo-400",
+      border: "border-indigo-300 dark:border-indigo-700",
+    },
+    {
+      bg: "bg-cyan-100 dark:bg-cyan-900/30",
+      text: "text-cyan-600 dark:text-cyan-400",
+      border: "border-cyan-300 dark:border-cyan-700",
+    },
+  ];
+
+  return colorPalette[Math.abs(hash) % colorPalette.length];
+};
+
 const projects = [
   {
     title: "QuickCart E-Commerce App",
     description:
       "Full-stack e-commerce solution with real-time product data, advanced filtering, and a feature-rich shopping cart.",
-    image:
-      "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800",
+    image: "/images/QuickCart.png",
     techStack: ["React.js", "Node.js", "Tailwind CSS", "FakeStoreAPI"],
     achievements: [
       "Improved page load efficiency by 40%",
@@ -27,8 +75,7 @@ const projects = [
     title: "FlimFinder Movie App",
     description:
       "Movie discovery platform with real-time search, local storage for favorites, and a refined UI.",
-    image:
-      "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=800",
+    image: "/images/FlimFinder.png",
     techStack: ["React", "Node.js", "Bootstrap", "OMDB API"],
     achievements: [
       "Enhanced performance by 40% using lazy loading",
@@ -45,8 +92,7 @@ const projects = [
     title: "Crypto Price Tracker App",
     description:
       "Real-time cryptocurrency tracking tool with advanced filtering and automated data refresh.",
-    image:
-      "https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&q=80&w=800",
+    image: "/images/CryptoTracker.png",
     techStack: ["React.js", "Axios", "CSS3", "Coin Gecko API"],
     achievements: [
       "Ensured 100% cross-device compatibility",
@@ -93,27 +139,27 @@ const Projects = () => {
             >
               <MotionCard className="h-full w-full">
                 <SpotlightCard
-                  className="h-full w-full bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-700 flex flex-col hover:shadow-xl transition-shadow duration-300"
+                  className="h-full w-full bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 flex flex-col hover:shadow-xl transition-shadow duration-300"
                   spotlightColor={
                     project.spotlightColor || "rgba(26, 171, 255, 0.15)"
                   }
                 >
-                  <div className="relative aspect-video overflow-hidden rounded-lg mb-4">
+                  <div className="relative aspect-video overflow-hidden rounded-lg mb-4 group">
                     <OptimizedImage
                       src={project.image}
                       alt={`${project.title} screenshot`}
-                      className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700 ease-in-out"
+                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
                       priority={index === 0}
                       onError={() => {
                         // fallback image logic if needed
                       }}
                     />
-                    <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                       <a
                         href={project.links.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-white dark:bg-gray-800 p-2 rounded-full transform scale-75 hover:scale-100 transition-all duration-200"
+                        className="bg-white dark:bg-gray-800 p-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary-50 dark:hover:bg-primary-900/50"
                         aria-label={`View ${project.title} demo`}
                       >
                         <ExternalLink className="w-5 h-5 text-primary-600 dark:text-primary-400" />
@@ -121,10 +167,10 @@ const Projects = () => {
                     </div>
                   </div>
                   <div className="flex-1 flex flex-col p-4">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 border-b border-gray-100 dark:border-gray-800 pb-2">
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 text-sm">
                       {project.description}
                     </p>
 
@@ -133,14 +179,17 @@ const Projects = () => {
                         Tech Stack:
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {project.techStack.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2 py-0.5 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded-full text-xs"
-                          >
-                            {tech}
-                          </span>
-                        ))}
+                        {project.techStack.map((tech) => {
+                          const colors = getTechColor(tech);
+                          return (
+                            <span
+                              key={tech}
+                              className={`px-2.5 py-1 ${colors.bg} ${colors.text} rounded-full text-xs border ${colors.border} font-medium`}
+                            >
+                              {tech}
+                            </span>
+                          );
+                        })}
                       </div>
                     </div>
 
@@ -154,31 +203,31 @@ const Projects = () => {
                             key={achievement}
                             className="flex items-start text-xs text-gray-600 dark:text-gray-300"
                           >
-                            <span className="w-1.5 h-1.5 mt-1 mr-1.5 bg-primary-600 dark:bg-primary-400 rounded-full flex-shrink-0"></span>
+                            <span className="w-2 h-2 mt-1 mr-2 bg-primary-600 dark:bg-primary-400 rounded-full flex-shrink-0"></span>
                             <span className="line-clamp-2">{achievement}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="mt-auto flex justify-between items-center">
+                    <div className="mt-auto flex justify-between items-center pt-3 border-t border-gray-100 dark:border-gray-800">
                       <a
                         href={project.links.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors focus-ring rounded"
+                        className="flex items-center text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors focus-ring rounded px-3 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-800"
                       >
-                        <Github className="w-4 h-4 mr-1" />
-                        <span className="text-xs">Source Code</span>
+                        <Github className="w-4 h-4 mr-1.5" />
+                        <span className="text-xs font-medium">Source Code</span>
                       </a>
                       <a
                         href={project.links.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary-600 dark:text-primary-400 text-xs flex items-center hover:underline focus-ring rounded"
+                        className="text-primary-600 dark:text-primary-400 text-xs flex items-center hover:underline focus-ring rounded font-medium px-3 py-1.5 hover:bg-primary-50 dark:hover:bg-primary-900/20"
                       >
                         <span>View Demo</span>
-                        <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                        <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
                       </a>
                     </div>
                   </div>
@@ -193,8 +242,11 @@ const Projects = () => {
             href="https://github.com/darshangaikwad4114?tab=repositories"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 border-2 border-primary-600 dark:border-primary-500 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-all duration-200 font-medium animated-button"
-            whileHover={{ scale: 1.02 }}
+            className="inline-flex items-center px-8 py-3 border-2 border-primary-600 dark:border-primary-500 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-all duration-200 font-medium animated-button"
+            whileHover={{
+              scale: 1.02,
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
             whileTap={{ scale: 0.98 }}
           >
             <span>View All Projects</span>
