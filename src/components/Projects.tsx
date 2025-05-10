@@ -57,24 +57,24 @@ const projects = [
   {
     title: "QuickCart E-Commerce App",
     description:
-      "Developed a responsive e-commerce web app with real-time product listings from FakeStoreAPI. Built filtering by category, price, and availability; implemented persistent cart with price calculation. Managed state using Context API and custom hooks. Created reusable React components including ProductList, FilterPanel, and Cart. Used React Router for routing between product, cart, and checkout pages. Applied Tailwind CSS for responsive UI and centralized API layer for data handling.",
+      "Created an online shopping platform that displays real-time product listings through FakeStoreAPI. Implemented advanced filters for category, price, and availability along with cart management functionality. Managed global state using Context API and hooks for consistent user data across components. Structured app using reusable components for product listing, filtering, and checkout. Integrated client-side routing with React Router and styled the interface with Tailwind CSS for cross-device support.",
     image: "/images/QuickCart.png",
     techStack: [
       "React",
       "Node.js",
       "Tailwind CSS",
       "FakeStoreAPI",
-      "Context API",
       "React Router",
+      "Context API",
     ],
     achievements: [
-      "Developed real-time product listings with FakeStoreAPI",
-      "Built filtering by category, price, and availability",
-      "Implemented persistent cart with price calculation",
-      "Managed state using Context API and custom hooks",
-      "Created reusable components: ProductList, FilterPanel, Cart",
-      "Used React Router for multi-page navigation",
-      "Applied Tailwind CSS for responsive UI",
+      "Real-time product listings via FakeStoreAPI",
+      "Advanced filters for category, price, and availability",
+      "Cart management with persistent state",
+      "Global state with Context API and hooks",
+      "Reusable components for listing, filtering, checkout",
+      "Client-side routing with React Router",
+      "Responsive UI with Tailwind CSS",
     ],
     links: {
       github: "https://github.com/darshangaikwad4114/ecommerce-app",
@@ -85,23 +85,24 @@ const projects = [
   {
     title: "FilmFinder Movie App",
     description:
-      "Developed a movie search and discovery app using TMDb API for trending, top-rated, and genre-based listings. Enabled favorites management via global state with Context API and useReducer. Applied lazy loading, code splitting, and React.memo for performance. Built reusable UI components with Material UI and Styled Components. Ensured accessibility using semantic HTML, ARIA attributes, and keyboard navigation support.",
+      "Developed a movie search tool that retrieves and displays real-time data from OMDB API. Enabled categorized browsing and a local favorites list with state handled via useState and useEffect. Applied lazy loading, virtualization, and memoization techniques to improve render performance. Ensured accessibility through ARIA roles, keyboard navigation, and semantic HTML structure. Used custom hooks for API logic and error handling, and implemented client-side focus management.",
     image: "/images/FlimFinder.png",
     techStack: [
-      "React",
+      "React.js",
       "Axios",
-      "React Router",
-      "Context API",
-      "Styled Components",
-      "TMDb API",
-      "Material UI",
+      "OMDB API",
+      "Bootstrap 5",
+      "CSS Modules",
+      "React Hooks",
     ],
     achievements: [
-      "Movie search and discovery via TMDb API",
-      "Favorites management with Context API and useReducer",
-      "Lazy loading, code splitting, and React.memo for performance",
-      "Reusable UI with Material UI and Styled Components",
-      "Accessibility: semantic HTML, ARIA, keyboard navigation",
+      "Real-time movie search via OMDB API",
+      "Categorized browsing and local favorites list",
+      "State management with useState and useEffect",
+      "Performance: lazy loading, virtualization, memoization",
+      "Accessibility: ARIA roles, keyboard navigation, semantic HTML",
+      "Custom hooks for API logic and error handling",
+      "Client-side focus management",
     ],
     links: {
       github: "https://github.com/darshangaikwad4114/Movie-app",
@@ -112,7 +113,7 @@ const projects = [
   {
     title: "Cryptocurrency Price Tracker",
     description:
-      "Built a real-time cryptocurrency dashboard with automatic 60-second price updates using CoinGecko API. Implemented filtering and sorting by market cap, volume, and price. Integrated interactive historical charts using Chart.js with multiple timeframes (24h–1y). Aggregated crypto news via CryptoCompare API with category filtering. Applied caching, code splitting, and virtualization to optimize performance. Ensured accessibility and mobile responsiveness using semantic HTML and ARIA roles.",
+      "Built a dashboard that fetches live cryptocurrency data with auto-refresh every 60 seconds using CoinGecko API. Integrated filters for market cap, price range, and volume; sortable in both ascending and descending order. Implemented interactive historical price charts with multiple timeframes using Chart.js. Added a categorized news feed using CryptoCompare API with dynamic data handling and fallback logic. Applied caching, code splitting, and virtualization to reduce load time and support large data sets.",
     image: "/images/CryptoTracker.png",
     techStack: [
       "React.js",
@@ -124,12 +125,12 @@ const projects = [
       "CSS3",
     ],
     achievements: [
-      "Real-time dashboard with 60s price updates (CoinGecko API)",
-      "Filtering/sorting by market cap, volume, and price",
-      "Historical charts (24h–1y) with Chart.js",
-      "Crypto news aggregation (CryptoCompare API) with category filtering",
+      "Live crypto data with 60s auto-refresh (CoinGecko API)",
+      "Filters for market cap, price, volume; sortable ascending/descending",
+      "Interactive historical charts (multiple timeframes, Chart.js)",
+      "Categorized news feed (CryptoCompare API) with fallback logic",
       "Performance: caching, code splitting, virtualization",
-      "Accessibility and mobile responsiveness (semantic HTML, ARIA)",
+      "Supports large data sets with optimized load time",
     ],
     links: {
       github:
