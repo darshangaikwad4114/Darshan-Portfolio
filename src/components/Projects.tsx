@@ -57,13 +57,24 @@ const projects = [
   {
     title: "QuickCart E-Commerce App",
     description:
-      "Full-stack e-commerce solution with real-time product data, advanced filtering, and a feature-rich shopping cart.",
+      "Developed a responsive e-commerce web app with real-time product listings from FakeStoreAPI. Built filtering by category, price, and availability; implemented persistent cart with price calculation. Managed state using Context API and custom hooks. Created reusable React components including ProductList, FilterPanel, and Cart. Used React Router for routing between product, cart, and checkout pages. Applied Tailwind CSS for responsive UI and centralized API layer for data handling.",
     image: "/images/QuickCart.png",
-    techStack: ["React.js", "Node.js", "Tailwind CSS", "FakeStoreAPI"],
+    techStack: [
+      "React",
+      "Node.js",
+      "Tailwind CSS",
+      "FakeStoreAPI",
+      "Context API",
+      "React Router",
+    ],
     achievements: [
-      "Improved page load efficiency by 40%",
-      "Reduced server requests by 60%",
-      "Increased checkout completion rates by 20%",
+      "Developed real-time product listings with FakeStoreAPI",
+      "Built filtering by category, price, and availability",
+      "Implemented persistent cart with price calculation",
+      "Managed state using Context API and custom hooks",
+      "Created reusable components: ProductList, FilterPanel, Cart",
+      "Used React Router for multi-page navigation",
+      "Applied Tailwind CSS for responsive UI",
     ],
     links: {
       github: "https://github.com/darshangaikwad4114/ecommerce-app",
@@ -72,15 +83,25 @@ const projects = [
     spotlightColor: "rgba(26, 171, 255, 0.2)",
   },
   {
-    title: "FlimFinder Movie App",
+    title: "FilmFinder Movie App",
     description:
-      "Movie discovery platform with real-time search, local storage for favorites, and a refined UI.",
+      "Developed a movie search and discovery app using TMDb API for trending, top-rated, and genre-based listings. Enabled favorites management via global state with Context API and useReducer. Applied lazy loading, code splitting, and React.memo for performance. Built reusable UI components with Material UI and Styled Components. Ensured accessibility using semantic HTML, ARIA attributes, and keyboard navigation support.",
     image: "/images/FlimFinder.png",
-    techStack: ["React", "Node.js", "Bootstrap", "OMDB API"],
+    techStack: [
+      "React",
+      "Axios",
+      "React Router",
+      "Context API",
+      "Styled Components",
+      "TMDb API",
+      "Material UI",
+    ],
     achievements: [
-      "Enhanced performance by 40% using lazy loading",
-      "Implemented code splitting for optimal loading",
-      "Ensured WCAG-compliant accessibility",
+      "Movie search and discovery via TMDb API",
+      "Favorites management with Context API and useReducer",
+      "Lazy loading, code splitting, and React.memo for performance",
+      "Reusable UI with Material UI and Styled Components",
+      "Accessibility: semantic HTML, ARIA, keyboard navigation",
     ],
     links: {
       github: "https://github.com/darshangaikwad4114/Movie-app",
@@ -89,15 +110,26 @@ const projects = [
     spotlightColor: "rgba(100, 121, 167, 0.2)",
   },
   {
-    title: "Crypto Price Tracker App",
+    title: "Cryptocurrency Price Tracker",
     description:
-      "Real-time cryptocurrency tracking tool with advanced filtering and automated data refresh.",
+      "Built a real-time cryptocurrency dashboard with automatic 60-second price updates using CoinGecko API. Implemented filtering and sorting by market cap, volume, and price. Integrated interactive historical charts using Chart.js with multiple timeframes (24h–1y). Aggregated crypto news via CryptoCompare API with category filtering. Applied caching, code splitting, and virtualization to optimize performance. Ensured accessibility and mobile responsiveness using semantic HTML and ARIA roles.",
     image: "/images/CryptoTracker.png",
-    techStack: ["React.js", "Axios", "CSS3", "Coin Gecko API"],
+    techStack: [
+      "React.js",
+      "Axios",
+      "Chart.js",
+      "CoinGecko API",
+      "CryptoCompare API",
+      "Vite",
+      "CSS3",
+    ],
     achievements: [
-      "Ensured 100% cross-device compatibility",
-      "Introduced color-coded market indicators",
-      "Implemented real-time price updates",
+      "Real-time dashboard with 60s price updates (CoinGecko API)",
+      "Filtering/sorting by market cap, volume, and price",
+      "Historical charts (24h–1y) with Chart.js",
+      "Crypto news aggregation (CryptoCompare API) with category filtering",
+      "Performance: caching, code splitting, virtualization",
+      "Accessibility and mobile responsiveness (semantic HTML, ARIA)",
     ],
     links: {
       github:
