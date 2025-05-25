@@ -42,14 +42,21 @@ const Experience = () => {
               spotlightColor="rgba(26, 171, 255, 0.15)"
             >
               <div className="flex-1">
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                  Front End Developer Intern
-                </h4>
+                <div className="flex items-center mb-2">
+                  <img
+                    src="/images/skyi.png"
+                    alt="SKYi Technology logo"
+                    className="h-10 w-auto mr-4"
+                  />
+                  <h4 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    Full Stack Developer
+                  </h4>
+                </div>
                 <p className="text-primary-600 dark:text-primary-400 mb-1">
-                  Idle Solutions Pvt Ltd, Pune, India
+                  SKYi Technology, Pune, India
                 </p>
                 <p className="text-gray-500 dark:text-gray-400 mb-4">
-                  Remote • Nov - Dec 2022
+                  May 2024 - May 2025
                 </p>
                 <ul className="space-y-3 text-gray-600 dark:text-gray-300">
                   <li className="flex items-start">
@@ -58,8 +65,9 @@ const Experience = () => {
                       aria-hidden="true"
                     ></span>
                     <span>
-                      Enhanced website structure by refactoring HTML and
-                      compressing images, improving load speed by 25%.
+                      Engineered a scalable e-commerce module using MERN stack and
+                      Next.js, improving product listing efficiency and real-time
+                      inventory tracking, supporting 1,000+ users.
                     </span>
                   </li>
                   <li className="flex items-start">
@@ -68,9 +76,9 @@ const Experience = () => {
                       aria-hidden="true"
                     ></span>
                     <span>
-                      Developed and tested responsive UI using CSS media queries
-                      and Chrome DevTools, improving cross-device experience and
-                      increasing user satisfaction by 15%.
+                      Developed a secure, role-based admin panel with advanced
+                      analytics, enabling efficient CRUD operations and live KPI
+                      monitoring; reduced manual reporting by 70%.
                     </span>
                   </li>
                   <li className="flex items-start">
@@ -79,10 +87,9 @@ const Experience = () => {
                       aria-hidden="true"
                     ></span>
                     <span>
-                      Improved site performance by minifying JavaScript (30%
-                      reduction) and optimizing CSS rules, increasing search
-                      visibility by 20%. Used Google Lighthouse for performance
-                      analysis.
+                      Conducted regular performance audits, implemented version
+                      control (Git), and applied security patches on AWS hosted
+                      applications to ensure high availability and code integrity.
                     </span>
                   </li>
                   <li className="flex items-start">
@@ -91,9 +98,9 @@ const Experience = () => {
                       aria-hidden="true"
                     ></span>
                     <span>
-                      Implemented interactive JavaScript features such as
-                      real-time content loading and tooltips, enhancing website
-                      interactivity and user experience.
+                      Collaborated cross-functionally to deliver a high-performing
+                      solar energy and e-commerce platform, ensuring security
+                      compliance and seamless payment gateway.
                     </span>
                   </li>
                 </ul>
