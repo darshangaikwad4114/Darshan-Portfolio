@@ -65,9 +65,9 @@ const Experience = () => {
                       aria-hidden="true"
                     ></span>
                     <span>
-                      Engineered a scalable e-commerce module using MERN stack and
-                      Next.js, improving product listing efficiency and real-time
-                      inventory tracking, supporting 1,000+ users.
+                      Engineered a scalable e-commerce module using MERN stack
+                      and Next.js, improving product listing efficiency and
+                      real-time inventory tracking, supporting 1,000+ users.
                     </span>
                   </li>
                   <li className="flex items-start">
@@ -89,7 +89,8 @@ const Experience = () => {
                     <span>
                       Conducted regular performance audits, implemented version
                       control (Git), and applied security patches on AWS hosted
-                      applications to ensure high availability and code integrity.
+                      applications to ensure high availability and code
+                      integrity.
                     </span>
                   </li>
                   <li className="flex items-start">
@@ -98,9 +99,9 @@ const Experience = () => {
                       aria-hidden="true"
                     ></span>
                     <span>
-                      Collaborated cross-functionally to deliver a high-performing
-                      solar energy and e-commerce platform, ensuring security
-                      compliance and seamless payment gateway.
+                      Collaborated cross-functionally to deliver a
+                      high-performing solar energy and e-commerce platform,
+                      ensuring security compliance and seamless payment gateway.
                     </span>
                   </li>
                 </ul>
