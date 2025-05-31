@@ -20,10 +20,9 @@ const Hero = () => {
 
   const titles = [
     "Full Stack Developer",
-    "Freelance Web Developer",
-    "Technology Enthusiast",
-    "Mountain Explorer",
+    "Freelancer",
     "Open Source Contributor",
+    "Trekking Mountains",
   ];
 
   // Track when hero section is fully loaded

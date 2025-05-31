@@ -15,7 +15,6 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "clean": "rm -rf dist",
     "deploy": "npm run build && vercel --prod"
   },
   "keywords": [
