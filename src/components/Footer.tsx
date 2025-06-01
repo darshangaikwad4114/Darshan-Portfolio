@@ -1,57 +1,92 @@
-import { Github, Linkedin, ArrowUp } from "lucide-react";
-import { Link as ScrollLink } from "react-scroll";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Instagram, Heart } from "lucide-react";
 import Logo from "./Logo";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const socialLinks = [
+    {
+      name: "GitHub",
+      href: "https://github.com/darshangaikwad4114",
+      icon: <Github className="w-5 h-5" />,
+      color: "hover:text-gray-900 dark:hover:text-white",
+    },
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/in/darshan-gaikwad/",
+      icon: <Linkedin className="w-5 h-5" />,
+      color: "hover:text-blue-600",
+    },
+    {
+      name: "Instagram",
+      href: "https://www.instagram.com/darshan_4114_/",
+      icon: <Instagram className="w-5 h-5" />,
+      color: "hover:text-pink-600",
+    },
+  ];
+
   return (
-    <footer className="bg-gray-50 dark:bg-gray-800 py-12 relative">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-6 md:mb-0">
+    <footer className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50 dark:from-gray-900 dark:via-blue-950/20 dark:to-indigo-950/30 overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800 opacity-20" />
+      <div className="absolute top-0 left-0 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+
+      <div className="container mx-auto px-6 py-12 relative z-10">
+        {/* Main footer content */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
+        >
+          {/* Left side - Logo */}
+          <div className="flex items-center">
             <Logo />
           </div>
 
-          <div className="flex space-x-6">
-            <a
-              href="https://github.com/darshangaikwad4114"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 focus-ring"
-              aria-label="GitHub Profile"
-            >
-              <Github className="w-5 h-5" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/darshan-gaikwad/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 focus-ring"
-              aria-label="LinkedIn Profile"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
+          {/* Right side - Social Links */}
+          <div className="flex space-x-4">
+            {socialLinks.map((social, index) => (
+              <motion.a
+                key={social.name}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`p-3 rounded-xl bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 ${social.color} transition-all duration-300 shadow-sm hover:shadow-lg backdrop-blur-sm group`}
+                whileHover={{ y: -3, scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 + 0.3 }}
+                viewport={{ once: true }}
+                aria-label={social.name}
+              >
+                <div className="group-hover:scale-110 transition-transform duration-300">
+                  {social.icon}
+                </div>
+              </motion.a>
+            ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 flex justify-center">
-          <p className="text-center text-gray-600 dark:text-gray-300">
-            © {currentYear} Darshan Gaikwad. All rights reserved.
+        {/* Bottom Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="border-t border-gray-200/50 dark:border-gray-700/50 pt-6 mt-8 flex justify-center"
+        >
+          <p className="text-gray-600 dark:text-gray-400 text-sm flex items-center">
+            © {currentYear} Darshan Gaikwad. Made with{" "}
+            <Heart className="w-4 h-4 text-red-500 mx-1" fill="currentColor" />{" "}
+            in India
           </p>
-        </div>
+        </motion.div>
       </div>
-
-      <ScrollLink
-        to="about"
-        spy={true}
-        smooth={true}
-        duration={500}
-        className="absolute right-6 bottom-6 p-2 bg-primary-500 text-white rounded-full shadow-lg hover:bg-primary-600 focus-ring cursor-pointer"
-        aria-label="Scroll to top"
-      >
-        <ArrowUp className="w-5 h-5" />
-      </ScrollLink>
     </footer>
   );
 };

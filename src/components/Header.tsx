@@ -1,192 +1,168 @@
-import { useState, useEffect, useMemo } from "react";
-import { Link } from "react-scroll";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { Link } from "react-scroll";
+import { useTheme } from "../hooks/useTheme";
 import Logo from "./Logo";
-import { useTheme } from "../contexts/ThemeContextDefinition";
 
 const Header = () => {
-  const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("about");
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
-  // Use useMemo to avoid recreating navItems on each render
-  const navItems = useMemo(
-    () => [
-      { name: "About", to: "about" },
-      { name: "Skills", to: "skills" },
-      { name: "Experience", to: "experience" },
-      { name: "Projects", to: "projects" },
-      { name: "Services", to: "services" },
-      { name: "Contact", to: "contact" },
-    ],
-    [],
-  ); // Empty dependency array means this will only be created once
+  const navigation = [
+    { name: "About", to: "about", offset: -80 },
+    { name: "Skills", to: "skills", offset: -80 },
+    { name: "Experience", to: "experience", offset: -80 },
+    { name: "Projects", to: "projects", offset: -80 },
+    { name: "Services", to: "services", offset: -80 },
+    { name: "Contact", to: "contact", offset: -80 },
+  ];
 
   useEffect(() => {
-    // Add scroll event listener to detect active section and header scroll state
     const handleScroll = () => {
-      // Update header shadow based on scroll position
-      setIsScrolled(window.scrollY > 10);
-
-      const sections = navItems.map((item) => item.to);
-      const current = sections.find((section) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom > 100;
-        }
-        return false;
-      });
-
-      if (current) {
-        setActiveSection(current);
-      }
+      setIsScrolled(window.scrollY > 20);
     };
-
-    // Initial check to set active section on page load
-    setTimeout(handleScroll, 300);
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [navItems]); // Now navItems won't change between renders
+  }, []);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md transition-all duration-300 ${
-        isScrolled ? "shadow-md" : "shadow-none"
+    <motion.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-700/50 shadow-lg"
+          : "bg-transparent"
       }`}
-      role="banner"
     >
-      <nav className="container mx-auto px-6 py-4" aria-label="Main navigation">
-        <div className="flex items-center justify-between">
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Logo />
-
-          {/* Mobile menu button */}
-          <motion.button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus-ring"
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-menu"
-            whileTap={{ scale: 0.95 }}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
+            <Logo />
+          </motion.div>
 
-          {/* Desktop navigation */}
-          <div
-            className="hidden md:flex items-center space-x-2"
-            role="navigation"
-          >
-            {navItems.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                spy={true}
-                smooth={true}
-                offset={-80}
-                duration={500}
-                className={`relative px-3 py-2 rounded-lg transition-all duration-300 ${
-                  activeSection === item.to
-                    ? "text-primary-600 dark:text-primary-400 font-medium"
-                    : "text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800/50"
-                } cursor-pointer focus-ring`}
-                aria-current={activeSection === item.to ? "page" : undefined}
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-1">
+            {navigation.map((item, index) => (
+              <motion.div
+                key={item.name}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 + 0.3 }}
               >
-                {item.name}
-                {activeSection === item.to && (
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-500 dark:bg-primary-400 mx-3"
-                    layoutId="navIndicator"
-                  />
-                )}
-              </Link>
+                <Link
+                  to={item.to}
+                  spy={true}
+                  smooth={true}
+                  offset={item.offset}
+                  duration={800}
+                  className="px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition-all duration-200 cursor-pointer font-medium"
+                  activeClass="text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-900/20"
+                >
+                  {item.name}
+                </Link>
+              </motion.div>
             ))}
+          </nav>
+
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center space-x-3">
+            {/* Theme Toggle */}
             <motion.button
               onClick={toggleTheme}
-              className="p-2 ml-2 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 focus-ring"
-              aria-label="Toggle dark mode"
+              className="p-2 rounded-lg bg-gray-100/50 dark:bg-gray-800/50 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors duration-200"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              whileHover={{ rotate: 15 }}
+              aria-label="Toggle theme"
             >
               {theme === "dark" ? (
-                <Sun className="text-yellow-500" size={20} />
+                <Sun className="w-5 h-5 text-yellow-500" />
               ) : (
-                <Moon className="text-gray-700" size={20} />
+                <Moon className="w-5 h-5 text-gray-600" />
               )}
             </motion.button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <motion.button
+            onClick={toggleMenu}
+            className="md:hidden p-2 rounded-lg bg-gray-100/50 dark:bg-gray-800/50 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors duration-200"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? (
+              <X className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+            ) : (
+              <Menu className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+            )}
+          </motion.button>
         </div>
 
-        {/* Mobile navigation */}
+        {/* Mobile Navigation */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              id="mobile-menu"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden bg-white dark:bg-gray-900 rounded-lg mt-4 shadow-lg"
-              role="menu"
+              className="md:hidden overflow-hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl rounded-2xl border border-gray-200/50 dark:border-gray-700/50 mt-4 mb-4"
             >
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, staggerChildren: 0.1 }}
-                className="pt-2 pb-3 space-y-1 px-2"
-              >
-                {navItems.map((item) => (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    spy={true}
-                    smooth={true}
-                    offset={-80}
-                    duration={500}
-                    className={`block px-3 py-2 rounded-lg transition-colors ${
-                      activeSection === item.to
-                        ? "bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 font-medium"
-                        : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
-                    } focus-ring`}
-                    onClick={() => setIsMenuOpen(false)}
-                    aria-current={
-                      activeSection === item.to ? "page" : undefined
-                    }
+              <div className="p-6 space-y-4">
+                {navigation.map((item, index) => (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
                   >
-                    {item.name}
-                  </Link>
+                    <Link
+                      to={item.to}
+                      spy={true}
+                      smooth={true}
+                      offset={item.offset}
+                      duration={800}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition-all duration-200 cursor-pointer font-medium"
+                      activeClass="text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-900/20"
+                    >
+                      {item.name}
+                    </Link>
+                  </motion.div>
                 ))}
-                <div className="border-t border-gray-100 dark:border-gray-800 my-2 pt-2">
-                  <button
-                    onClick={() => {
-                      toggleTheme();
-                      setIsMenuOpen(false);
-                    }}
-                    className="flex items-center w-full px-3 py-2 space-x-3 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 focus-ring"
+
+                {/* Mobile Actions */}
+                <div className="pt-4 border-t border-gray-200/50 dark:border-gray-700/50 flex items-center justify-center">
+                  <motion.button
+                    onClick={toggleTheme}
+                    className="p-3 rounded-lg bg-gray-100/50 dark:bg-gray-800/50 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors duration-200"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     {theme === "dark" ? (
-                      <>
-                        <Sun className="text-yellow-500" size={20} />
-                        <span className="text-sm">Light Mode</span>
-                      </>
+                      <Sun className="w-5 h-5 text-yellow-500" />
                     ) : (
-                      <>
-                        <Moon className="text-gray-700" size={20} />
-                        <span className="text-sm">Dark Mode</span>
-                      </>
+                      <Moon className="w-5 h-5 text-gray-600" />
                     )}
-                  </button>
+                  </motion.button>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </nav>
-    </header>
+      </div>
+    </motion.header>
   );
 };
 

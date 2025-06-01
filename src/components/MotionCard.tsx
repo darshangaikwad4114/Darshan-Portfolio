@@ -5,16 +5,19 @@ interface MotionCardProps {
   children: React.ReactNode;
   className?: string;
   hoverRotationDegrees?: number;
+  hoverScale?: number;
 }
 
 const MotionCard: React.FC<MotionCardProps> = ({
   children,
   className = "",
   hoverRotationDegrees = 3,
+  hoverScale = 1.0,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
+  const [scale, setScale] = useState(1);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -34,12 +37,14 @@ const MotionCard: React.FC<MotionCardProps> = ({
 
     setRotateX(rotateXValue);
     setRotateY(rotateYValue);
+    setScale(hoverScale);
   };
 
   const handleMouseLeave = () => {
-    // Reset rotation when mouse leaves the card
+    // Reset rotation and scale when mouse leaves the card
     setRotateX(0);
     setRotateY(0);
+    setScale(1);
   };
 
   return (
@@ -54,6 +59,7 @@ const MotionCard: React.FC<MotionCardProps> = ({
       animate={{
         rotateX,
         rotateY,
+        scale,
         z: 0,
       }}
       transition={{
