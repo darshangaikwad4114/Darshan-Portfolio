@@ -290,8 +290,7 @@ const Skills = () => {
                   </div>
 
                   <div className="w-20 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 mb-6 group-hover:w-32 transition-all duration-500" />
-
-                  {/* Skills Grid - Improved pill layout */}
+                  {/* Skills List */}
                   <div className="flex flex-wrap gap-2">
                     {category.skills.map((skill, skillIndex) => (
                       <motion.div
@@ -328,8 +327,6 @@ const Skills = () => {
                       </motion.div>
                     ))}
                   </div>
-
-                  {/* Hover effect overlay - REMOVED */}
                 </div>
               </MotionCard>
             </motion.div>

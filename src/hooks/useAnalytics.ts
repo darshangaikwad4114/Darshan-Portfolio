@@ -1,18 +1,8 @@
 import { useCallback } from "react";
 import { track } from "@vercel/analytics";
 
-/**
- * Custom hook for tracking analytics events with type safety
- *
- * @returns Object containing tracking functions
- */
 export function useAnalytics() {
-  /**
-   * Track a custom event
-   *
-   * @param eventName - Name of the event to track
-   * @param properties - Optional properties to include with the event
-   */
+
   const trackEvent = useCallback(
     (
       eventName: string,
@@ -23,7 +13,6 @@ export function useAnalytics() {
       try {
         track(eventName, properties);
       } catch (error) {
-        // Silent fail in production, log in development
         if (import.meta.env.DEV) {
           console.error("Analytics tracking error:", error);
         }
@@ -32,11 +21,6 @@ export function useAnalytics() {
     [],
   );
 
-  /**
-   * Track a page view
-   *
-   * @param path - Optional path override (defaults to current path)
-   */
   const trackPageView = useCallback(
     (path?: string) => {
       trackEvent("page_view", {
@@ -49,12 +33,6 @@ export function useAnalytics() {
     [trackEvent],
   );
 
-  /**
-   * Track user interactions with elements
-   *
-   * @param elementName - Name/identifier of the element
-   * @param action - Action performed (e.g., 'click', 'hover')
-   */
   const trackInteraction = useCallback(
     (elementName: string, action: string) => {
       trackEvent("user_interaction", {
@@ -67,10 +45,6 @@ export function useAnalytics() {
     [trackEvent],
   );
 
-  /**
-   * Optimized utility to measure and track a performance duration
-   * (Moved from performanceUtils.ts to consolidate analytics functions)
-   */
   const measurePerformance = useCallback(
     (
       metricName: string,
@@ -81,7 +55,6 @@ export function useAnalytics() {
       return () => {
         const duration = performance.now() - startTime;
 
-        // Only track if duration is meaningful (avoid noise from very short operations)
         if (duration > 5) {
           trackEvent("performance_metric", {
             metric_name: metricName,

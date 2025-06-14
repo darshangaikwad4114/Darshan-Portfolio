@@ -4,7 +4,6 @@ import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { MdEmail, MdSend } from "react-icons/md";
 import SpotlightCard from "./SpotlightCard";
 import MotionCard from "./MotionCard";
-// Use the consolidated hook instead of utility
 import { useAnalytics } from "../hooks/useAnalytics";
 import { useForm, ValidationError } from "@formspree/react";
 
