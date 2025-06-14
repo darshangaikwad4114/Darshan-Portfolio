@@ -14,8 +14,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "format": "prettier --write .",
-    "deploy": "npm run build && vercel --prod"
+    "format": "prettier --write ."
   },
   "keywords": [
     "portfolio",
