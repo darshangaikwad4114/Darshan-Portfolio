@@ -35,8 +35,9 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
 
-      {/* Twitter Card */}
+      {/* Twitter/X Card */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@Darshan4811421" />
 
       {/* Indexing Control */}
       {noIndex && <meta name="robots" content="noindex, nofollow" />}

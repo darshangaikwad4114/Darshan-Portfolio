@@ -7,6 +7,7 @@ import {
   FileText,
   ChevronDown,
   Briefcase,
+  Twitter,
 } from "lucide-react";
 import { Link } from "react-scroll";
 import DecryptedText from "./DecryptedText";
@@ -210,6 +211,11 @@ const Hero = () => {
                     href: "https://www.linkedin.com/in/darshan-gaikwad/",
                     icon: <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />,
                     label: "LinkedIn",
+                  },
+                  {
+                    href: "https://x.com/Darshan4811421",
+                    icon: <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />,
+                    label: "X",
                   },
                   {
                     href: "https://www.instagram.com/darshan_4114_/",

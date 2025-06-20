@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Instagram, Heart } from "lucide-react";
+import { Github, Linkedin, Instagram, Heart, Twitter } from "lucide-react";
 import Logo from "./Logo";
 
 const Footer = () => {
@@ -17,6 +17,12 @@ const Footer = () => {
       href: "https://www.linkedin.com/in/darshan-gaikwad/",
       icon: <Linkedin className="w-5 h-5" />,
       color: "hover:text-blue-600",
+    },
+    {
+      name: "X",
+      href: "https://x.com/Darshan4811421",
+      icon: <Twitter className="w-5 h-5" />,
+      color: "hover:text-blue-400",
     },
     {
       name: "Instagram",

@@ -262,33 +262,29 @@ const Projects = () => {
                     {/* Category badge */}
                     <div className="absolute top-4 left-4 px-3 py-1 bg-white/95 dark:bg-black/95 rounded-full text-xs font-semibold text-gray-700 dark:text-gray-300 shadow-lg">
                       {project.category}
-                    </div>
-
-                    {/* Hover overlay with actions */}
+                    </div>                    {/* Hover overlay with actions */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                       <div className="flex gap-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <motion.a
+                        <a
                           href={project.links.live}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors duration-200 group/btn"
+                          className="bg-white/30 p-3 rounded-full hover:bg-white/50 transition-colors duration-200 z-10"
                           aria-label={`View ${project.title} demo`}
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
+                          onClick={(e) => e.stopPropagation()}
                         >
-                          <ExternalLink className="w-5 h-5 text-white group-hover/btn:scale-110 transition-transform duration-200" />
-                        </motion.a>
-                        <motion.a
+                          <ExternalLink className="w-5 h-5 text-white" />
+                        </a>
+                        <a
                           href={project.links.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors duration-200 group/btn"
+                          className="bg-white/30 p-3 rounded-full hover:bg-white/50 transition-colors duration-200 z-10"
                           aria-label={`View ${project.title} source code`}
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
+                          onClick={(e) => e.stopPropagation()}
                         >
-                          <Github className="w-5 h-5 text-white group-hover/btn:scale-110 transition-transform duration-200" />
-                        </motion.a>
+                          <Github className="w-5 h-5 text-white" />
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -355,26 +351,21 @@ const Projects = () => {
                             </li>
                           ))}
                       </ul>
-                    </div>
-
-                    {/* CTA */}
+                    </div>                    {/* CTA */}
                     <div className="mt-auto pt-6 border-t border-gray-100/50 dark:border-gray-800/50">
                       <div className="flex items-center justify-end">
-                        <motion.a
+                        <a
                           href={project.links.live}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 text-sm font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200 group/link"
-                          whileHover={{ x: 3 }}
+                          onClick={(e) => e.stopPropagation()}
                         >
                           <span>View Project</span>
                           <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200" />
-                        </motion.a>
+                        </a>
                       </div>
-                    </div>
-
-                    {/* Hover effect overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/3 to-purple-500/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl" />
+                    </div>{/* Removed spotlight effect overlay */}
                   </div>
                 </div>
               </MotionCard>
