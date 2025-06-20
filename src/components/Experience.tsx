@@ -264,21 +264,21 @@ const Experience = () => {
                       provider: "Udemy",
                       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
                       link: "https://www.udemy.com/certificate/UC-f10aa1a2-50f5-4aa9-85d3-cd3a9fe635b7/",
-                      color: "from-blue-400 to-cyan-400",
+                      color: "from-blue-700 to-cyan-700",
                     },
                     {
                       name: "JavaScript Mastery Course",
                       provider: "Udemy",
                       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
                       link: "https://www.udemy.com/certificate/UC-3e05e730-c46e-47a8-b6aa-907487249c32/",
-                      color: "from-yellow-400 to-orange-400",
+                      color: "from-yellow-700 to-orange-700",
                     },
                     {
                       name: "NodeJS Masterclass",
                       provider: "Udemy",
                       icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
                       link: "https://www.udemy.com/certificate/UC-e2d3d266-89d8-41d8-ad89-865e6f733422/",
-                      color: "from-green-400 to-emerald-400",
+                      color: "from-green-700 to-emerald-700",
                     },
                   ].map((cert, idx) => (
                     <motion.div
