@@ -60,7 +60,7 @@ const projects = [
       "A comprehensive online shopping platform featuring real-time product listings, advanced filtering, and seamless cart management. Built with modern React patterns and optimized for performance across all devices.",
     shortDescription:
       "Modern e-commerce platform with real-time product listings and advanced filtering capabilities.",
-    image: "/images/QuickCart.png",
+    image: "/images/QuickCart.webp",
     techStack: [
       "React",
       "Node.js",
@@ -92,7 +92,7 @@ const projects = [
       "An intuitive movie discovery platform that leverages OMDB API for real-time movie data. Features advanced search capabilities, categorized browsing, and a personalized favorites system with optimized performance.",
     shortDescription:
       "Movie discovery platform with real-time search and personalized favorites system.",
-    image: "/images/FlimFinder.png",
+    image: "/images/FlimFinder.webp",
     techStack: [
       "React.js",
       "Axios",
@@ -124,7 +124,7 @@ const projects = [
       "A sophisticated dashboard for tracking cryptocurrency prices with live data updates, interactive charts, and comprehensive market analysis. Features real-time news integration and advanced data visualization.",
     shortDescription:
       "Real-time crypto tracking dashboard with interactive charts and market analysis.",
-    image: "/images/CryptoTracker.png",
+    image: "/images/CryptoTracker.webp",
     techStack: [
       "React.js",
       "Axios",

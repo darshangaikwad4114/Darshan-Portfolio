@@ -112,7 +112,7 @@ const Experience = () => {
                   <div className="flex items-center">
                     <div className="w-16 h-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg flex items-center justify-center mr-4 border border-gray-200/50 dark:border-gray-700/50">
                       <img
-                        src="/images/skyi.png"
+                        src="/images/skyi.webp"
                         alt="SKYi Technology logo"
                         className="h-10 w-auto"
                       />
