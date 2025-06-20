@@ -257,7 +257,8 @@ const Hero = () => {
                 transition={{ type: "spring", stiffness: 300, damping: 10 }}
               >
                 <img
-                  src="/images/profile.jpg"
+                  src="/images/profile.webp"
+                  loading="lazy"
                   alt="Darshan Gaikwad"
                   className="rounded-full w-full h-full object-cover shadow-2xl"
                 />
