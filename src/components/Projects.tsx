@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import SpotlightCard from "./SpotlightCard";
 import OptimizedImage from "./OptimizedImage";
 import MotionCard from "./MotionCard";
 
@@ -13,39 +14,39 @@ const getTechColor = (techName: string) => {
   // Use predefined color palette based on hash
   const colorPalette = [
     {
-      bg: "bg-gradient-to-r from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30",
-      text: "text-blue-700 dark:text-blue-300",
-      border: "border-blue-300/50 dark:border-blue-600/50",
+      bg: "bg-blue-100 dark:bg-blue-900/30",
+      text: "text-blue-600 dark:text-blue-400",
+      border: "border-blue-300 dark:border-blue-700",
     },
     {
-      bg: "bg-gradient-to-r from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/30",
-      text: "text-green-700 dark:text-green-300",
-      border: "border-green-300/50 dark:border-green-600/50",
+      bg: "bg-green-100 dark:bg-green-900/30",
+      text: "text-green-600 dark:text-green-400",
+      border: "border-green-300 dark:border-green-700",
     },
     {
-      bg: "bg-gradient-to-r from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/30",
-      text: "text-purple-700 dark:text-purple-300",
-      border: "border-purple-300/50 dark:border-purple-600/50",
+      bg: "bg-purple-100 dark:bg-purple-900/30",
+      text: "text-purple-600 dark:text-purple-400",
+      border: "border-purple-300 dark:border-purple-700",
     },
     {
-      bg: "bg-gradient-to-r from-amber-100 to-amber-200 dark:from-amber-900/30 dark:to-amber-800/30",
-      text: "text-amber-700 dark:text-amber-300",
-      border: "border-amber-300/50 dark:border-amber-600/50",
+      bg: "bg-amber-100 dark:bg-amber-900/30",
+      text: "text-amber-600 dark:text-amber-400",
+      border: "border-amber-300 dark:border-amber-700",
     },
     {
-      bg: "bg-gradient-to-r from-pink-100 to-pink-200 dark:from-pink-900/30 dark:to-pink-800/30",
-      text: "text-pink-700 dark:text-pink-300",
-      border: "border-pink-300/50 dark:border-pink-600/50",
+      bg: "bg-pink-100 dark:bg-pink-900/30",
+      text: "text-pink-600 dark:text-pink-400",
+      border: "border-pink-300 dark:border-pink-700",
     },
     {
-      bg: "bg-gradient-to-r from-indigo-100 to-indigo-200 dark:from-indigo-900/30 dark:to-indigo-800/30",
-      text: "text-indigo-700 dark:text-indigo-300",
-      border: "border-indigo-300/50 dark:border-indigo-600/50",
+      bg: "bg-indigo-100 dark:bg-indigo-900/30",
+      text: "text-indigo-600 dark:text-indigo-400",
+      border: "border-indigo-300 dark:border-indigo-700",
     },
     {
-      bg: "bg-gradient-to-r from-cyan-100 to-cyan-200 dark:from-cyan-900/30 dark:to-cyan-800/30",
-      text: "text-cyan-700 dark:text-cyan-300",
-      border: "border-cyan-300/50 dark:border-cyan-600/50",
+      bg: "bg-cyan-100 dark:bg-cyan-900/30",
+      text: "text-cyan-600 dark:text-cyan-400",
+      border: "border-cyan-300 dark:border-cyan-700",
     },
   ];
 
@@ -55,11 +56,8 @@ const getTechColor = (techName: string) => {
 const projects = [
   {
     title: "QuickCart E-Commerce App",
-    category: "E-Commerce",
     description:
-      "A comprehensive online shopping platform featuring real-time product listings, advanced filtering, and seamless cart management. Built with modern React patterns and optimized for performance across all devices.",
-    shortDescription:
-      "Modern e-commerce platform with real-time product listings and advanced filtering capabilities.",
+      "Created an online shopping platform that displays real-time product listings through FakeStoreAPI. Implemented advanced filters for category, price, and availability along with cart management functionality. Managed global state using Context API and hooks for consistent user data across components. Structured app using reusable components for product listing, filtering, and checkout. Integrated client-side routing with React Router and styled the interface with Tailwind CSS for cross-device support.",
     image: "/images/QuickCart.webp",
     techStack: [
       "React",
@@ -82,16 +80,12 @@ const projects = [
       github: "https://github.com/darshangaikwad4114/ecommerce-app",
       live: "https://quick-cart-ecommerce-shop.netlify.app/",
     },
-    spotlightColor: "rgba(59, 130, 246, 0.15)",
-    gradient: "from-blue-500/10 to-cyan-500/10",
+    spotlightColor: "rgba(26, 171, 255, 0.2)",
   },
   {
     title: "FilmFinder Movie App",
-    category: "Entertainment",
     description:
-      "An intuitive movie discovery platform that leverages OMDB API for real-time movie data. Features advanced search capabilities, categorized browsing, and a personalized favorites system with optimized performance.",
-    shortDescription:
-      "Movie discovery platform with real-time search and personalized favorites system.",
+      "Developed a movie search tool that retrieves and displays real-time data from OMDB API. Enabled categorized browsing and a local favorites list with state handled via useState and useEffect. Applied lazy loading, virtualization, and memoization techniques to improve render performance. Ensured accessibility through ARIA roles, keyboard navigation, and semantic HTML structure. Used custom hooks for API logic and error handling, and implemented client-side focus management.",
     image: "/images/FlimFinder.webp",
     techStack: [
       "React.js",
@@ -114,16 +108,12 @@ const projects = [
       github: "https://github.com/darshangaikwad4114/Movie-app",
       live: "https://darshan-movie-app.netlify.app/",
     },
-    spotlightColor: "rgba(139, 92, 246, 0.15)",
-    gradient: "from-purple-500/10 to-pink-500/10",
+    spotlightColor: "rgba(100, 121, 167, 0.2)",
   },
   {
     title: "Cryptocurrency Price Tracker",
-    category: "Finance",
     description:
-      "A sophisticated dashboard for tracking cryptocurrency prices with live data updates, interactive charts, and comprehensive market analysis. Features real-time news integration and advanced data visualization.",
-    shortDescription:
-      "Real-time crypto tracking dashboard with interactive charts and market analysis.",
+      "Built a dashboard that fetches live cryptocurrency data with auto-refresh every 60 seconds using CoinGecko API. Integrated filters for market cap, price range, and volume; sortable in both ascending and descending order. Implemented interactive historical price charts with multiple timeframes using Chart.js. Added a categorized news feed using CryptoCompare API with dynamic data handling and fallback logic. Applied caching, code splitting, and virtualization to reduce load time and support large data sets.",
     image: "/images/CryptoTracker.webp",
     techStack: [
       "React.js",
@@ -147,231 +137,152 @@ const projects = [
         "https://github.com/darshangaikwad4114/Cryptocurrency-Price-Tracker",
       live: "https://darshan-cryptocurrency-price-tracker.netlify.app/",
     },
-    spotlightColor: "rgba(34, 197, 94, 0.15)",
-    gradient: "from-green-500/10 to-emerald-500/10",
+    spotlightColor: "rgba(70, 199, 255, 0.2)",
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 50,
-    scale: 0.9,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15,
-      duration: 0.6,
-    },
-  },
-};
-
 const Projects = () => {
   return (
-    <section
-      id="projects"
-      className="py-24 bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50 dark:from-gray-900 dark:via-blue-950/20 dark:to-indigo-950/30 relative overflow-hidden"
-      role="region"
-      aria-labelledby="projects-heading"
-    >
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800 opacity-20" />
-      <div className="absolute top-0 left-0 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="projects" className="py-20 bg-white dark:bg-gray-900">
+      <div className="container mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-20"
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
         >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold rounded-full mb-4 backdrop-blur-sm"
-          >
-            Portfolio Showcase
-          </motion.span>
-          <h2
-            id="projects-heading"
-            className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 dark:from-white dark:via-blue-100 dark:to-purple-100 bg-clip-text text-transparent mb-6"
-          >
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Featured Projects
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Showcasing my expertise through innovative web applications built
-            with modern technologies. Each project demonstrates{" "}
-            <span className="font-semibold text-blue-600 dark:text-blue-400">
-              problem-solving skills
-            </span>{" "}
-            and attention to detail.
+          <p className="text-lg text-gray-600 dark:text-gray-300">
+            Showcasing my best work and technical expertise
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8"
-          role="list"
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              variants={cardVariants}
-              className="group"
-              role="listitem"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="flex"
             >
-              <MotionCard
-                className="h-full w-full"
-                hoverRotationDegrees={2}
-                hoverScale={1.02}
-              >
-                <div
-                  className={`h-full w-full bg-white/90 dark:bg-gray-900/90 border border-gray-200/50 dark:border-gray-700/50 flex flex-col hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-blue-500/20 transition-all duration-500 ${project.gradient} relative overflow-hidden rounded-2xl`}
+              <MotionCard className="h-full w-full">
+                <SpotlightCard
+                  className="h-full w-full bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 flex flex-col hover:shadow-xl transition-shadow duration-300"
+                  spotlightColor={
+                    project.spotlightColor || "rgba(26, 171, 255, 0.15)"
+                  }
                 >
-                  {/* Project Image */}
-                  <div className="relative aspect-video overflow-hidden rounded-t-2xl group">
+                  <div className="relative aspect-video overflow-hidden rounded-lg mb-4 group">
                     <OptimizedImage
                       src={project.image}
                       alt={`${project.title} screenshot`}
                       className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
                       priority={index === 0}
                     />
-
-                    {/* Category badge */}
-                    <div className="absolute top-4 left-4 px-3 py-1 bg-white/95 dark:bg-black/95 rounded-full text-xs font-semibold text-gray-700 dark:text-gray-300 shadow-lg">
-                      {project.category}
-                    </div>                    {/* Hover overlay with actions */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                      <div className="flex gap-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <a
-                          href={project.links.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-white/30 p-3 rounded-full hover:bg-white/50 transition-colors duration-200 z-10"
-                          aria-label={`View ${project.title} demo`}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <ExternalLink className="w-5 h-5 text-white" />
-                        </a>
-                        <a
-                          href={project.links.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-white/30 p-3 rounded-full hover:bg-white/50 transition-colors duration-200 z-10"
-                          aria-label={`View ${project.title} source code`}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Github className="w-5 h-5 text-white" />
-                        </a>
-                      </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-white dark:bg-gray-800 p-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary-50 dark:hover:bg-primary-900/50"
+                        aria-label={`View ${project.title} demo`}
+                      >
+                        <ExternalLink className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                      </a>
                     </div>
                   </div>
+                  <div className="flex-1 flex flex-col p-4">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 border-b border-gray-100 dark:border-gray-800 pb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 text-sm">
+                      {project.description}
+                    </p>
 
-                  {/* Project Content */}
-                  <div className="flex-1 flex flex-col p-8">
-                    {/* Header */}
-                    <div className="mb-6">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 mb-3">
-                        {project.title}
-                      </h3>
-
-                      <div className="w-16 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 mb-4 group-hover:w-24 transition-all duration-500" />
-
-                      <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                        {project.shortDescription}
-                      </p>
-                    </div>
-
-                    {/* Tech Stack */}
-                    <div className="mb-6">
-                      <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3 flex items-center">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full mr-2" />
-                        Technologies
+                    <div className="mb-4">
+                      <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+                        Tech Stack:
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {project.techStack.slice(0, 4).map((tech) => {
+                        {project.techStack.map((tech) => {
                           const colors = getTechColor(tech);
                           return (
                             <span
                               key={tech}
-                              className={`px-3 py-1.5 ${colors.bg} ${colors.text} rounded-full text-xs border ${colors.border} font-medium transition-transform duration-200 hover:scale-105`}
+                              className={`px-2.5 py-1 ${colors.bg} ${colors.text} rounded-full text-xs border ${colors.border} font-medium`}
                             >
                               {tech}
                             </span>
                           );
                         })}
-                        {project.techStack.length > 4 && (
-                          <span className="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full text-xs font-medium">
-                            +{project.techStack.length - 4} more
-                          </span>
-                        )}
                       </div>
                     </div>
 
-                    {/* Key Features */}
-                    <div className="mb-6 flex-1">
-                      <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3 flex items-center">
-                        <span className="w-4 h-4 mr-2 bg-yellow-500 rounded-full flex items-center justify-center">
-                          <span className="w-2 h-2 bg-white rounded-full" />
-                        </span>
-                        Key Features
+                    <div className="mb-6">
+                      <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+                        Key Achievements:
                       </h4>
                       <ul className="space-y-2">
-                        {project.achievements
-                          .slice(0, 3)
-                          .map((achievement, idx) => (
-                            <li
-                              key={idx}
-                              className="flex items-start text-xs text-gray-600 dark:text-gray-300 leading-relaxed"
-                            >
-                              <span className="w-1.5 h-1.5 mt-2 mr-3 bg-blue-500 rounded-full flex-shrink-0" />
-                              <span>{achievement}</span>
-                            </li>
-                          ))}
+                        {project.achievements.map((achievement) => (
+                          <li
+                            key={achievement}
+                            className="flex items-start text-xs text-gray-600 dark:text-gray-300"
+                          >
+                            <span className="w-2 h-2 mt-1 mr-2 bg-primary-600 dark:bg-primary-400 rounded-full flex-shrink-0"></span>
+                            <span className="line-clamp-2">{achievement}</span>
+                          </li>
+                        ))}
                       </ul>
-                    </div>                    {/* CTA */}
-                    <div className="mt-auto pt-6 border-t border-gray-100/50 dark:border-gray-800/50">
-                      <div className="flex items-center justify-end">
-                        <a
-                          href={project.links.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 text-sm font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200 group/link"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <span>View Project</span>
-                          <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200" />
-                        </a>
-                      </div>
-                    </div>{/* Removed spotlight effect overlay */}
+                    </div>
+
+                    <div className="mt-auto flex justify-between items-center pt-3 border-t border-gray-100 dark:border-gray-800">
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors focus-ring rounded px-3 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-800"
+                      >
+                        <Github className="w-4 h-4 mr-1.5" />
+                        <span className="text-xs font-medium">Source Code</span>
+                      </a>
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary-600 dark:text-primary-400 text-xs flex items-center hover:underline focus-ring rounded font-medium px-3 py-1.5 hover:bg-primary-50 dark:hover:bg-primary-900/20"
+                      >
+                        <span>View Demo</span>
+                        <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                      </a>
+                    </div>
                   </div>
-                </div>
+                </SpotlightCard>
               </MotionCard>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
+
+        <div className="mt-16 text-center">
+          <motion.a
+            href="https://github.com/darshangaikwad4114?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-8 py-3 border-2 border-primary-600 dark:border-primary-500 text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded-lg transition-all duration-200 font-medium animated-button"
+            whileHover={{
+              scale: 1.02,
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <span>View All Projects</span>
+            <ArrowRight className="ml-2 w-4 h-4" />
+          </motion.a>
+        </div>
       </div>
     </section>
   );
