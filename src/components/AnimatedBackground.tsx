@@ -1,12 +1,8 @@
-import React from "react";
-
 interface AnimatedBackgroundProps {
   className?: string;
 }
 
-const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
-  className = "",
-}) => {
+const AnimatedBackground = ({ className = "" }: AnimatedBackgroundProps) => {
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
       {/* Simple clean gradient background for both themes */}

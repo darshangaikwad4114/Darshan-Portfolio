@@ -155,11 +155,7 @@ const Services = () => {
               className="group"
               role="listitem"
             >
-              <MotionCard
-                className="h-full w-full"
-                hoverRotationDegrees={1}
-                hoverScale={1.02}
-              >
+              <MotionCard className="h-full w-full">
                 <div className="h-full w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col">
                   {/* Category badge */}
                   <div className="flex justify-end mb-4">

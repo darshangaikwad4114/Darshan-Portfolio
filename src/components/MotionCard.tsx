@@ -3,8 +3,6 @@ import React from "react";
 interface MotionCardProps {
   children: React.ReactNode;
   className?: string;
-  hoverRotationDegrees?: number;
-  hoverScale?: number;
 }
 
 const MotionCard: React.FC<MotionCardProps> = ({

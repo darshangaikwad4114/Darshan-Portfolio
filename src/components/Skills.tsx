@@ -243,11 +243,7 @@ const Skills = () => {
               className="group"
               role="listitem"
             >
-              <MotionCard
-                className="h-full w-full"
-                hoverRotationDegrees={0.5}
-                hoverScale={1.01}
-              >
+              <MotionCard className="h-full w-full">
                 <div className="h-full w-full bg-white/90 dark:bg-gray-900/90 border border-gray-200/50 dark:border-gray-700/50 flex flex-col hover:shadow-lg transition-all duration-300 relative overflow-hidden rounded-2xl p-6">
                   {/* Category Header */}
                   <div className="flex items-center mb-6">
