@@ -1,0 +1,144 @@
+/* 🚀 OPTIMIZATION: Utility classes for common patterns */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply antialiased text-gray-800 dark:text-gray-200 leading-relaxed;
+    font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  /* 🚀 OPTIMIZED: Consolidated section styles */
+  .section-base {
+    @apply py-16 md:py-24;
+  }
+
+  .section-container {
+    @apply container mx-auto px-4 sm:px-6;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white;
+  }
+
+  .section-subtitle {
+    @apply text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto;
+  }
+
+  /* 🚀 OPTIMIZED: Focus states with better performance */
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900;
+  }
+
+  /* 🚀 OPTIMIZED: Card styles with GPU acceleration */
+  .card-base {
+    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm;
+    will-change: transform;
+    transform: translateZ(0); /* Force GPU layer */
+  }
+
+  .card-hover {
+    @apply hover:shadow-lg transition-shadow duration-200;
+  }
+
+  /* 🚀 OPTIMIZED: Button variants */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold rounded-xl border border-gray-200 dark:border-gray-700 transition-all duration-300;
+  }
+
+  /* 🚀 OPTIMIZED: Skill tag with performance optimizations */
+  .skill-tag {
+    @apply flex items-center px-3 py-1.5 bg-white/80 dark:bg-gray-800/90 rounded-full border border-gray-300/50 dark:border-gray-600/30 hover:bg-white dark:hover:bg-gray-700 transition-all duration-200 shadow-sm backdrop-blur-sm;
+    contain: layout style; /* CSS containment for better performance */
+  }
+}
+
+@layer utilities {
+  /* 🚀 OPTIMIZED: Performance utilities */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* 🚀 OPTIMIZED: Animation utilities with reduced motion support */
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .animate-slide-up {
+      animation: slideUp 0.4s ease-out;
+    }
+
+    .animate-scale-in {
+      animation: scaleIn 0.3s ease-out;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-slide-up,
+    .animate-scale-in {
+      animation: none;
+    }
+  }
+}
+
+/* 🚀 OPTIMIZED: Minimal keyframes - only what's used */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 🚀 OPTIMIZED: Remove unused animations and effects */
