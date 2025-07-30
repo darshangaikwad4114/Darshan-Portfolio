@@ -2,7 +2,6 @@ import { useCallback } from "react";
 import { track } from "@vercel/analytics";
 
 export function useAnalytics() {
-
   const trackEvent = useCallback(
     (
       eventName: string,

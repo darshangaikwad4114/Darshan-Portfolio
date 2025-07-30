@@ -214,202 +214,202 @@ const Contact = () => {
         >
           <SimpleCard className="bg-white dark:bg-gray-800 shadow-xl">
             <div className="p-8 md:p-12">
-                <div className="text-center mb-8">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white shadow-lg">
-                    <MdSend className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                    Send Me a Message
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    I'll get back to you within 24 hours
-                  </p>
+              <div className="text-center mb-8">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white shadow-lg">
+                  <MdSend className="w-8 h-8" />
                 </div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                  Send Me a Message
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  I'll get back to you within 24 hours
+                </p>
+              </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 gap-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      <div>
-                        <label
-                          htmlFor="name"
-                          className="block mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300"
-                        >
-                          Full Name *
-                        </label>
-                        <div
-                          className={`relative ${focusedField === "name" ? "ring-2 ring-blue-300 dark:ring-blue-700 rounded-xl" : ""}`}
-                        >
-                          <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            onFocus={() => setFocusedField("name")}
-                            onBlur={() => setFocusedField(null)}
-                            className="w-full px-4 py-4 rounded-xl border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 placeholder:text-gray-400"
-                            placeholder="Your full name"
-                            required
-                          />
-                          <ValidationError
-                            prefix="Name"
-                            field="name"
-                            errors={state.errors}
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label
-                          htmlFor="email"
-                          className="block mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300"
-                        >
-                          Email Address *
-                        </label>
-                        <div
-                          className={`relative ${focusedField === "email" ? "ring-2 ring-blue-300 dark:ring-blue-700 rounded-xl" : ""}`}
-                        >
-                          <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            onFocus={() => setFocusedField("email")}
-                            onBlur={() => setFocusedField(null)}
-                            className="w-full px-4 py-4 rounded-xl border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 placeholder:text-gray-400"
-                            placeholder="your.email@example.com"
-                            required
-                          />
-                          <ValidationError
-                            prefix="Email"
-                            field="email"
-                            errors={state.errors}
-                          />
-                        </div>
-                      </div>
-                    </div>
-
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                       <label
-                        htmlFor="message"
+                        htmlFor="name"
                         className="block mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300"
                       >
-                        Your Message *
+                        Full Name *
                       </label>
                       <div
-                        className={`relative ${focusedField === "message" ? "ring-2 ring-blue-300 dark:ring-blue-700 rounded-xl" : ""}`}
+                        className={`relative ${focusedField === "name" ? "ring-2 ring-blue-300 dark:ring-blue-700 rounded-xl" : ""}`}
                       >
-                        <textarea
-                          id="message"
-                          name="message"
-                          value={formData.message}
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={formData.name}
                           onChange={handleChange}
-                          onFocus={() => setFocusedField("message")}
+                          onFocus={() => setFocusedField("name")}
                           onBlur={() => setFocusedField(null)}
-                          rows={6}
-                          className="w-full px-4 py-4 rounded-xl border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white resize-none transition-all duration-300 placeholder:text-gray-400"
-                          placeholder="Tell me about your project or how I can help you..."
+                          className="w-full px-4 py-4 rounded-xl border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 placeholder:text-gray-400"
+                          placeholder="Your full name"
                           required
                         />
                         <ValidationError
-                          prefix="Message"
-                          field="message"
+                          prefix="Name"
+                          field="name"
                           errors={state.errors}
                         />
                       </div>
                     </div>
 
-                    {state.errors && Object.keys(state.errors).length > 0 && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="text-red-600 dark:text-red-400 text-sm bg-red-50/80 dark:bg-red-900/20 backdrop-blur-sm p-4 rounded-xl border border-red-200/50 dark:border-red-800/20 text-center"
-                      >
-                        There was an error submitting the form. Please check
-                        your inputs and try again.
-                      </motion.div>
-                    )}
-
-                    <AnimatePresence>
-                      {showSuccessMessage && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                          className="text-green-600 dark:text-green-400 text-sm bg-green-50/80 dark:bg-green-900/20 backdrop-blur-sm p-4 rounded-xl border border-green-200/50 dark:border-green-800/20 text-center"
-                        >
-                          <div className="flex items-center justify-center">
-                            <svg
-                              className="w-5 h-5 mr-2"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clipRule="evenodd"
-                              ></path>
-                            </svg>
-                            <span className="font-medium">
-                              Message sent successfully! I'll get back to you
-                              within 24 hours.
-                            </span>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-
                     <div>
-                      <motion.button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className={`w-full px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 text-white font-semibold transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed`}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        aria-label="Send message"
+                      <label
+                        htmlFor="email"
+                        className="block mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300"
                       >
-                        {isSubmitting ? (
-                          <span className="flex items-center justify-center">
-                            <svg
-                              className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                            >
-                              <circle
-                                className="opacity-25"
-                                cx="12"
-                                cy="12"
-                                r="10"
-                                stroke="currentColor"
-                                strokeWidth="4"
-                              ></circle>
-                              <path
-                                className="opacity-75"
-                                fill="currentColor"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                              ></path>
-                            </svg>
-                            Sending Message...
-                          </span>
-                        ) : (
-                          <span className="flex items-center justify-center">
-                            <MdSend className="mr-2 h-5 w-5" />
-                            Send Message
-                          </span>
-                        )}
-                      </motion.button>
+                        Email Address *
+                      </label>
+                      <div
+                        className={`relative ${focusedField === "email" ? "ring-2 ring-blue-300 dark:ring-blue-700 rounded-xl" : ""}`}
+                      >
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          onFocus={() => setFocusedField("email")}
+                          onBlur={() => setFocusedField(null)}
+                          className="w-full px-4 py-4 rounded-xl border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 placeholder:text-gray-400"
+                          placeholder="your.email@example.com"
+                          required
+                        />
+                        <ValidationError
+                          prefix="Email"
+                          field="email"
+                          errors={state.errors}
+                        />
+                      </div>
                     </div>
                   </div>
-                </form>
 
-                {/* Decorative elements */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-50 pointer-events-none rounded-2xl" />
-              </div>
-            </SimpleCard>
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="block mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300"
+                    >
+                      Your Message *
+                    </label>
+                    <div
+                      className={`relative ${focusedField === "message" ? "ring-2 ring-blue-300 dark:ring-blue-700 rounded-xl" : ""}`}
+                    >
+                      <textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        onFocus={() => setFocusedField("message")}
+                        onBlur={() => setFocusedField(null)}
+                        rows={6}
+                        className="w-full px-4 py-4 rounded-xl border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white resize-none transition-all duration-300 placeholder:text-gray-400"
+                        placeholder="Tell me about your project or how I can help you..."
+                        required
+                      />
+                      <ValidationError
+                        prefix="Message"
+                        field="message"
+                        errors={state.errors}
+                      />
+                    </div>
+                  </div>
+
+                  {state.errors && Object.keys(state.errors).length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="text-red-600 dark:text-red-400 text-sm bg-red-50/80 dark:bg-red-900/20 backdrop-blur-sm p-4 rounded-xl border border-red-200/50 dark:border-red-800/20 text-center"
+                    >
+                      There was an error submitting the form. Please check your
+                      inputs and try again.
+                    </motion.div>
+                  )}
+
+                  <AnimatePresence>
+                    {showSuccessMessage && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                        className="text-green-600 dark:text-green-400 text-sm bg-green-50/80 dark:bg-green-900/20 backdrop-blur-sm p-4 rounded-xl border border-green-200/50 dark:border-green-800/20 text-center"
+                      >
+                        <div className="flex items-center justify-center">
+                          <svg
+                            className="w-5 h-5 mr-2"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                              clipRule="evenodd"
+                            ></path>
+                          </svg>
+                          <span className="font-medium">
+                            Message sent successfully! I'll get back to you
+                            within 24 hours.
+                          </span>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <div>
+                    <motion.button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className={`w-full px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 text-white font-semibold transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed`}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      aria-label="Send message"
+                    >
+                      {isSubmitting ? (
+                        <span className="flex items-center justify-center">
+                          <svg
+                            className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                          </svg>
+                          Sending Message...
+                        </span>
+                      ) : (
+                        <span className="flex items-center justify-center">
+                          <MdSend className="mr-2 h-5 w-5" />
+                          Send Message
+                        </span>
+                      )}
+                    </motion.button>
+                  </div>
+                </div>
+              </form>
+
+              {/* Decorative elements */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-50 pointer-events-none rounded-2xl" />
+            </div>
+          </SimpleCard>
         </motion.div>
       </div>
     </section>

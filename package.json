@@ -11,6 +11,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
+    "final": "npm run lint && npm run format",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",

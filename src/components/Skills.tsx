@@ -278,7 +278,6 @@ const Skills = () => {
                         className="group/skill"
                       >
                         <div className="flex items-center px-3 py-1.5 bg-white/80 dark:bg-gray-800/90 rounded-full border border-gray-300/50 dark:border-gray-600/30 hover:bg-white dark:hover:bg-gray-700 hover:scale-102 transition-all duration-200 shadow-sm backdrop-blur-sm">
-                          
                           <div className="w-4 h-4 flex items-center justify-center mr-2 transition-transform duration-200">
                             <img
                               src={skill.icon}

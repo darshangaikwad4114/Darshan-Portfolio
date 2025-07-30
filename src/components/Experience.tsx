@@ -1,8 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  MapPin,
-  Calendar,
-} from "lucide-react";
+import { MapPin, Calendar } from "lucide-react";
 import MotionCard from "./MotionCard";
 
 const containerVariants = {
@@ -144,19 +141,33 @@ const Experience = () => {
           <motion.div variants={cardVariants}>
             <MotionCard className="h-full w-full">
               <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg transition-shadow duration-200">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Certifications</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                  Certifications
+                </h3>
                 <div className="space-y-3">
                   <div className="border-l-4 border-blue-500 pl-4">
-                    <h4 className="font-semibold text-gray-900 dark:text-white">React.js Specialization</h4>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">Coursera</p>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">
+                      React.js Specialization
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                      Coursera
+                    </p>
                   </div>
                   <div className="border-l-4 border-blue-500 pl-4">
-                    <h4 className="font-semibold text-gray-900 dark:text-white">JavaScript Algorithms & Data Structures</h4>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">freeCodeCamp</p>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">
+                      JavaScript Algorithms & Data Structures
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                      freeCodeCamp
+                    </p>
                   </div>
                   <div className="border-l-4 border-blue-500 pl-4">
-                    <h4 className="font-semibold text-gray-900 dark:text-white">Frontend Development Libraries</h4>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">freeCodeCamp</p>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">
+                      Frontend Development Libraries
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                      freeCodeCamp
+                    </p>
                   </div>
                 </div>
               </div>

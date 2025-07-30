@@ -109,7 +109,6 @@ const projects = [
       live: "https://darshan-movie-app.netlify.app/",
     },
   },
-  
 ];
 
 const Projects = () => {

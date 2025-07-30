@@ -130,13 +130,14 @@ const Services = () => {
           >
             Freelance Services
           </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Specialized web development services for impactful digital experiences. I deliver{" "}
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Specialized web development services for impactful digital
+            experiences. I deliver{" "}
             <span className="font-semibold text-blue-600 dark:text-blue-400">
               exceptional results
             </span>{" "}
             using modern technologies and SEO best practices.
-            </p>
+          </p>
         </motion.div>
 
         <motion.div
@@ -168,7 +169,9 @@ const Services = () => {
                   </div>
 
                   <div className="flex-1 flex flex-col">
-                    <div className={`w-12 h-12 ${service.iconBg} rounded-xl flex items-center justify-center mb-4 text-white`}>
+                    <div
+                      className={`w-12 h-12 ${service.iconBg} rounded-xl flex items-center justify-center mb-4 text-white`}
+                    >
                       {service.icon}
                     </div>
 
