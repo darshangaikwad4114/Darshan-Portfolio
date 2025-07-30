@@ -12,7 +12,6 @@ import {
 import { Link } from "react-scroll";
 import DecryptedText from "./DecryptedText";
 import { useAnalytics } from "../hooks/useAnalytics";
-import AnimatedBackground from "./AnimatedBackground";
 
 const Hero = () => {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
@@ -75,18 +74,9 @@ const Hero = () => {
   return (
     <section
       id="about"
-      className="min-h-screen flex flex-col justify-center relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50 dark:from-gray-900 dark:via-blue-950/20 dark:to-indigo-950/30 pt-16 sm:pt-20 overflow-hidden"
+      className="min-h-screen flex flex-col justify-center relative bg-gray-50 dark:bg-gray-900 pt-16 sm:pt-20"
     >
-      {/* Background decorative elements - optimized for mobile */}
-      <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800 opacity-20" />
-      <div className="absolute top-0 left-0 w-60 h-60 sm:w-80 sm:h-80 bg-blue-400/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-72 h-72 sm:w-96 sm:h-96 bg-purple-400/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-      <div className="absolute top-1/2 left-1/2 w-48 h-48 sm:w-64 sm:h-64 bg-cyan-400/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-
-      {/* Add the animated background */}
-      <AnimatedBackground particleCount={15} />
-
-      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-24 z-10 relative">
+      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-24 relative">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Content column */}

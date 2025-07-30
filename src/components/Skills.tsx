@@ -7,8 +7,8 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
+      staggerChildren: 0.05,
+      delayChildren: 0.1,
     },
   },
 };
@@ -16,18 +16,14 @@ const containerVariants = {
 const cardVariants = {
   hidden: {
     opacity: 0,
-    y: 30,
-    scale: 0.95,
+    y: 20,
   },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      type: "spring",
-      stiffness: 120,
-      damping: 15,
-      duration: 0.5,
+      duration: 0.3,
+      ease: "easeOut",
     },
   },
 };
@@ -36,9 +32,6 @@ const skillCategories = [
   {
     title: "Programming Languages",
     icon: <Code2 className="w-6 h-6" />,
-    description: "Core programming languages and markup technologies",
-    gradient: "from-blue-500/10 to-cyan-500/10",
-    spotlightColor: "rgba(59, 130, 246, 0.15)",
     iconBg: "bg-gradient-to-br from-blue-500 to-cyan-500",
     skills: [
       {
@@ -76,11 +69,8 @@ const skillCategories = [
     ],
   },
   {
-    title: "Frontend Libraries and Frameworks",
+    title: "Frontend Frameworks",
     icon: <Globe className="w-6 h-6" />,
-    description: "Modern frontend frameworks and UI libraries",
-    gradient: "from-green-500/10 to-emerald-500/10",
-    spotlightColor: "rgba(34, 197, 94, 0.15)",
     iconBg: "bg-gradient-to-br from-green-500 to-emerald-500",
     skills: [
       {
@@ -118,11 +108,8 @@ const skillCategories = [
     ],
   },
   {
-    title: "Backend Databases and ORMs",
+    title: "Backend & Databases",
     icon: <Database className="w-6 h-6" />,
-    description: "Server-side technologies and database management",
-    gradient: "from-purple-500/10 to-pink-500/10",
-    spotlightColor: "rgba(139, 92, 246, 0.15)",
     iconBg: "bg-gradient-to-br from-purple-500 to-pink-500",
     skills: [
       {
@@ -156,11 +143,8 @@ const skillCategories = [
     ],
   },
   {
-    title: "Dev Tools and Deployment",
+    title: "Dev Tools & Deployment",
     icon: <Server className="w-6 h-6" />,
-    description: "Development tools and deployment platforms",
-    gradient: "from-orange-500/10 to-red-500/10",
-    spotlightColor: "rgba(251, 146, 60, 0.15)",
     iconBg: "bg-gradient-to-br from-orange-500 to-red-500",
     skills: [
       {
@@ -231,21 +215,16 @@ const Skills = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold rounded-full mb-4 backdrop-blur-sm"
           >
-            Technical Arsenal
+            ⚡ Technical Arsenal
           </motion.span>
           <h2
             id="skills-heading"
-            className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 dark:from-white dark:via-blue-100 dark:to-purple-100 bg-clip-text text-transparent mb-6"
+            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
           >
-            Skills & Expertise
+            Skills & Technologies
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            A comprehensive toolkit of modern technologies and frameworks to
-            build{" "}
-            <span className="font-semibold text-blue-600 dark:text-blue-400">
-              exceptional digital experiences
-            </span>{" "}
-            from concept to deployment.
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Modern technologies and frameworks I use to build digital solutions.
           </p>
         </motion.div>
 
@@ -257,7 +236,7 @@ const Skills = () => {
           className="grid grid-cols-1 lg:grid-cols-2 gap-8"
           role="list"
         >
-          {skillCategories.map((category, categoryIndex) => (
+          {skillCategories.map((category) => (
             <motion.div
               key={category.title}
               variants={cardVariants}
@@ -266,61 +245,49 @@ const Skills = () => {
             >
               <MotionCard
                 className="h-full w-full"
-                hoverRotationDegrees={1}
-                hoverScale={1.02}
+                hoverRotationDegrees={0.5}
+                hoverScale={1.01}
               >
-                <div
-                  className={`h-full w-full bg-white/90 dark:bg-gray-900/90 border border-gray-200/50 dark:border-gray-700/50 flex flex-col hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-blue-500/20 transition-all duration-500 ${category.gradient} relative overflow-hidden rounded-2xl p-8`}
-                >
+                <div className="h-full w-full bg-white/90 dark:bg-gray-900/90 border border-gray-200/50 dark:border-gray-700/50 flex flex-col hover:shadow-lg transition-all duration-300 relative overflow-hidden rounded-2xl p-6">
                   {/* Category Header */}
                   <div className="flex items-center mb-6">
                     <div
-                      className={`w-14 h-14 ${category.iconBg} rounded-2xl flex items-center justify-center mr-4 text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                      className={`w-12 h-12 ${category.iconBg} rounded-xl flex items-center justify-center mr-3 text-white shadow-md transition-transform duration-200`}
                     >
                       {category.icon}
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white transition-colors duration-200">
                         {category.title}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm">
-                        {category.description}
-                      </p>
                     </div>
                   </div>
 
-                  <div className="w-20 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 mb-6 group-hover:w-32 transition-all duration-500" />
                   {/* Skills List */}
                   <div className="flex flex-wrap gap-2">
                     {category.skills.map((skill, skillIndex) => (
                       <motion.div
                         key={skill.name}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
                         transition={{
-                          duration: 0.4,
-                          delay: categoryIndex * 0.1 + skillIndex * 0.05,
+                          duration: 0.2,
+                          delay: skillIndex * 0.02,
                         }}
                         viewport={{ once: true }}
                         className="group/skill"
                       >
-                        <div className="flex items-center px-4 py-2 bg-white/80 dark:bg-gray-800/90 rounded-full border border-gray-300/50 dark:border-gray-600/30 hover:bg-white dark:hover:bg-gray-700 hover:scale-105 hover:shadow-lg transition-all duration-300 shadow-sm backdrop-blur-sm relative overflow-hidden group-hover/skill:border-transparent">
-                          {/* Animated border shine effect */}
-                          <div className="absolute inset-0 rounded-full opacity-0 group-hover/skill:opacity-100 transition-opacity duration-300">
-                            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-spin-slow p-[1px]">
-                              <div className="w-full h-full rounded-full bg-white dark:bg-gray-800"></div>
-                            </div>
-                          </div>
+                        <div className="flex items-center px-3 py-1.5 bg-white/80 dark:bg-gray-800/90 rounded-full border border-gray-300/50 dark:border-gray-600/30 hover:bg-white dark:hover:bg-gray-700 hover:scale-102 transition-all duration-200 shadow-sm backdrop-blur-sm">
                           
-                          <div className="w-5 h-5 flex items-center justify-center mr-2 group-hover/skill:scale-110 transition-transform duration-300 relative z-10">
+                          <div className="w-4 h-4 flex items-center justify-center mr-2 transition-transform duration-200">
                             <img
                               src={skill.icon}
                               alt={`${skill.name} icon`}
-                              className="w-5 h-5 object-contain"
+                              className="w-4 h-4 object-contain"
                               loading="lazy"
                             />
                           </div>
-                          <span className="font-medium text-gray-800 dark:text-gray-200 text-sm whitespace-nowrap relative z-10">
+                          <span className="font-medium text-gray-800 dark:text-gray-200 text-sm whitespace-nowrap">
                             {skill.name}
                           </span>
                         </div>

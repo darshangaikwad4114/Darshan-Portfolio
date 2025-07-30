@@ -7,6 +7,7 @@ import Projects from "./components/Projects";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import AnimatedBackground from "./components/AnimatedBackground";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { HelmetProvider } from "react-helmet-async";
 import SEOHead from "./components/SEOHead";
@@ -59,13 +60,14 @@ function App() {
         <ScrollProgressBar />
         <AnimatePresence mode="wait">
           <motion.div
-            className="min-h-screen bg-white dark:bg-gray-900"
+            className="min-h-screen bg-white dark:bg-gray-900 relative"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
+            <AnimatedBackground />
             <Header />
-            <main>
+            <main className="relative z-10">
               <Hero />
               <Skills />
               <Experience />

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Code2, Smartphone, Search, Bug, Zap, Shield } from "lucide-react";
-import SpotlightCard from "./SpotlightCard";
 import MotionCard from "./MotionCard";
 
 const services = [
@@ -123,23 +122,21 @@ const Services = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold rounded-full mb-4 backdrop-blur-sm"
           >
-            What I Offer
+            💼 What I Offer
           </motion.span>
           <h2
             id="services-heading"
             className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 dark:from-white dark:via-blue-100 dark:to-purple-100 bg-clip-text text-transparent mb-6"
           >
-            Premium Services
+            Freelance Services
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Specialized web development services designed to create stunning,
-            high-performing digital experiences. From complex applications to
-            elegant landing pages, I deliver{" "}
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Specialized web development services for impactful digital experiences. I deliver{" "}
             <span className="font-semibold text-blue-600 dark:text-blue-400">
               exceptional results
             </span>{" "}
-            with modern technologies and SEO optimization.
-          </p>
+            using modern technologies and SEO best practices.
+            </p>
         </motion.div>
 
         <motion.div
@@ -159,39 +156,33 @@ const Services = () => {
             >
               <MotionCard
                 className="h-full w-full"
-                hoverRotationDegrees={2}
+                hoverRotationDegrees={1}
                 hoverScale={1.02}
               >
-                <SpotlightCard
-                  className={`h-full w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 flex flex-col hover:shadow-2xl hover:shadow-blue-500/10 dark:hover:shadow-blue-500/20 transition-all duration-500 ${service.gradient} relative overflow-hidden`}
-                  spotlightColor={service.spotlightColor}
-                >
+                <div className="h-full w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg transition-shadow duration-200 flex flex-col">
                   {/* Category badge */}
-                  <div className="absolute top-4 right-4 px-2 py-1 bg-white/20 dark:bg-black/20 backdrop-blur-sm rounded-full text-xs font-medium text-gray-600 dark:text-gray-300">
-                    {service.category}
+                  <div className="flex justify-end mb-4">
+                    <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-xs font-medium text-gray-600 dark:text-gray-300">
+                      {service.category}
+                    </span>
                   </div>
 
-                  <div className="flex-1 flex flex-col p-8">
-                    <div
-                      className={`w-14 h-14 ${service.iconBg} rounded-2xl flex items-center justify-center mb-6 text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                    >
+                  <div className="flex-1 flex flex-col">
+                    <div className={`w-12 h-12 ${service.iconBg} rounded-xl flex items-center justify-center mb-4 text-white`}>
                       {service.icon}
                     </div>
 
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
                       {service.title}
                     </h3>
 
-                    <div className="w-12 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 mb-4 group-hover:w-20 transition-all duration-500" />
+                    <div className="w-8 h-0.5 bg-blue-500 mb-3" />
 
-                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm flex-1">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed flex-1">
                       {service.description}
                     </p>
-
-                    {/* Hover effect overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   </div>
-                </SpotlightCard>
+                </div>
               </MotionCard>
             </motion.div>
           ))}

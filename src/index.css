@@ -10,6 +10,7 @@
 
   body {
     @apply antialiased text-gray-800 dark:text-gray-200 leading-relaxed;
+    font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
   }
 
   h1,
@@ -87,9 +88,18 @@
   }
 }
 
-/* Perspective for 3D cards */
+/* Simple hover effects */
+.hover-scale-102:hover {
+  transform: scale(1.02);
+}
+
+.hover-scale-105:hover {
+  transform: scale(1.05);
+}
+
+/* Perspective for 3D cards - reduced */
 .perspective {
-  perspective: 1000px;
+  perspective: 800px;
 }
 
 /* Gradient borders */
@@ -118,7 +128,7 @@
   pointer-events: none;
 }
 
-/* Shine effect */
+/* Shine effect - reduced */
 .shine {
   position: relative;
   overflow: hidden;
@@ -127,18 +137,18 @@
 .shine::after {
   content: "";
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
+  top: -25%;
+  left: -25%;
+  width: 150%;
+  height: 150%;
   background: linear-gradient(
     to right,
     transparent,
-    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.02),
     transparent
   );
   transform: rotate(45deg);
-  animation: shine 6s linear infinite;
+  animation: shine 8s linear infinite;
   pointer-events: none;
 }
 
