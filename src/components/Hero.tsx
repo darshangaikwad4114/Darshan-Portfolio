@@ -5,7 +5,6 @@ import {
   Linkedin,
   Instagram,
   FileText,
-  ChevronDown,
   Briefcase,
   Twitter,
 } from "lucide-react";
@@ -229,15 +228,7 @@ const Hero = () => {
           offset={-80}
           duration={800}
           className="cursor-pointer"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="p-2 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
-          >
-            <ChevronDown className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-          </motion.div>
-        </Link>
+        ></Link>
       </motion.div>
     </section>
   );

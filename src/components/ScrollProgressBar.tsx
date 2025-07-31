@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 
 interface ScrollProgressBarProps {
-  color?: string;
+  className?: string;
   height?: number;
 }
 
 const ScrollProgressBar: React.FC<ScrollProgressBarProps> = ({
-  color = "bg-primary-500 dark:bg-primary-400",
-  height = 3,
+  className = "bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg",
+  height = 4,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -27,9 +27,9 @@ const ScrollProgressBar: React.FC<ScrollProgressBarProps> = ({
 
   return (
     <motion.div
-      className={`fixed top-0 left-0 right-0 ${color} z-50`}
+      className={`fixed top-0 left-0 right-0 ${className} z-[100]`}
       style={{
-        height,
+        height: `${height}px`,
         scaleX: scrollYProgress,
         transformOrigin: "0%",
       }}

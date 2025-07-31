@@ -78,6 +78,18 @@ const skillCategories = [
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
       },
       {
+        name: "Next.js",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
+      },
+      {
+        name: "TailwindCSS",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+      },
+      {
+        name: "Framer Motion",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg",
+      },
+      {
         name: "React Router",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactrouter/reactrouter-original.svg",
       },
@@ -86,24 +98,16 @@ const skillCategories = [
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redux/redux-original.svg",
       },
       {
+        name: "Styled Components",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/styledcomponents/styledcomponents-original.svg",
+      },
+      {
         name: "Material UI",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/materialui/materialui-original.svg",
       },
       {
-        name: "TailwindCSS",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
-      },
-      {
         name: "Bootstrap",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg",
-      },
-      {
-        name: "Framer Motion",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg",
-      },
-      {
-        name: "Vite",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg",
       },
     ],
   },
@@ -119,6 +123,10 @@ const skillCategories = [
       {
         name: "Express",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
+      },
+      {
+        name: "Axios",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/axios/axios-plain.svg",
       },
       {
         name: "Socket.io",
@@ -148,8 +156,20 @@ const skillCategories = [
     iconBg: "bg-gradient-to-br from-orange-500 to-red-500",
     skills: [
       {
+        name: "Vite",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg",
+      },
+      {
+        name: "Babel",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/babel/babel-original.svg",
+      },
+      {
         name: "Git",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+      },
+      {
+        name: "Docker",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-plain.svg",
       },
       {
         name: "GitHub",
@@ -191,15 +211,14 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="py-24 bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50 dark:from-gray-900 dark:via-blue-950/20 dark:to-indigo-950/30 relative overflow-hidden"
+      className="py-16 bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50 dark:from-gray-900 dark:via-blue-950/20 dark:to-indigo-950/30 relative overflow-hidden"
       role="region"
       aria-labelledby="skills-heading"
     >
       {/* Background decorative elements */}
-      <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800 opacity-20" />
-      <div className="absolute top-0 left-0 w-80 h-80 bg-cyan-400/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-      <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-400/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800 opacity-10" />
+      <div className="absolute top-0 left-0 w-60 h-60 bg-cyan-400/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-60 h-60 bg-purple-400/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
@@ -207,7 +226,7 @@ const Skills = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-20"
+          className="text-center mb-12"
         >
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
@@ -219,7 +238,7 @@ const Skills = () => {
           </motion.span>
           <h2
             id="skills-heading"
-            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
           >
             Skills & Technologies
           </h2>
@@ -233,7 +252,7 @@ const Skills = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6"
           role="list"
         >
           {skillCategories.map((category) => (
@@ -244,16 +263,16 @@ const Skills = () => {
               role="listitem"
             >
               <MotionCard className="h-full w-full">
-                <div className="h-full w-full bg-white/90 dark:bg-gray-900/90 border border-gray-200/50 dark:border-gray-700/50 flex flex-col hover:shadow-lg transition-all duration-300 relative overflow-hidden rounded-2xl p-6">
+                <div className="h-full w-full bg-white/90 dark:bg-gray-900/90 border border-gray-200/50 dark:border-gray-700/50 flex flex-col hover:shadow-lg transition-all duration-300 relative overflow-hidden rounded-xl p-5">
                   {/* Category Header */}
-                  <div className="flex items-center mb-6">
+                  <div className="flex items-center mb-4">
                     <div
-                      className={`w-12 h-12 ${category.iconBg} rounded-xl flex items-center justify-center mr-3 text-white shadow-md transition-transform duration-200`}
+                      className={`w-10 h-10 ${category.iconBg} rounded-lg flex items-center justify-center mr-3 text-white shadow-md transition-transform duration-200`}
                     >
                       {category.icon}
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white transition-colors duration-200">
+                      <h3 className="text-lg font-bold text-gray-900 dark:text-white transition-colors duration-200">
                         {category.title}
                       </h3>
                     </div>

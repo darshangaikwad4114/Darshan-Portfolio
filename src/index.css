@@ -6,6 +6,10 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
+    ::selection {
+      background-color: #00d9ff;
+      color: black;
+    }
   }
 
   body {

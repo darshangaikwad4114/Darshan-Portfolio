@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 import SimpleCard from "./SimpleCard";
 import OptimizedImage from "./OptimizedImage";
 
@@ -156,16 +156,27 @@ const Projects = () => {
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     priority={index === 0}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <a
-                      href={project.links.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-white dark:bg-gray-800 p-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-blue-50 dark:hover:bg-blue-900/50"
-                      aria-label={`View ${project.title} demo`}
-                    >
-                      <ExternalLink className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                    </a>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="flex gap-4">
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-white dark:bg-gray-800 p-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-lg"
+                        aria-label={`View ${project.title} source code`}
+                      >
+                        <Github className="w-5 h-5 text-gray-800 dark:text-gray-200" />
+                      </a>
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-white dark:bg-gray-800 p-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-blue-50 dark:hover:bg-blue-900/50 shadow-lg"
+                        aria-label={`View ${project.title} live demo`}
+                      >
+                        <ExternalLink className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                      </a>
+                    </div>
                   </div>
                 </div>
                 <div className="flex-1 flex flex-col">
@@ -194,47 +205,10 @@ const Projects = () => {
                       })}
                     </div>
                   </div>
-
-                  <div className="mt-auto flex justify-between items-center pt-3 border-t border-gray-100 dark:border-gray-700">
-                    <a
-                      href={project.links.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus-ring rounded px-3 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-800"
-                    >
-                      <Github className="w-4 h-4 mr-1.5" />
-                      <span className="text-xs font-medium">Source Code</span>
-                    </a>
-                    <a
-                      href={project.links.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 dark:text-blue-400 text-xs flex items-center hover:underline focus-ring rounded font-medium px-3 py-1.5 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-                    >
-                      <span>View Demo</span>
-                      <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                    </a>
-                  </div>
                 </div>
               </SimpleCard>
             </motion.div>
           ))}
-        </div>
-
-        <div className="mt-16 text-center">
-          <motion.a
-            href="https://github.com/darshangaikwad4114?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-8 py-3 border-2 border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all duration-200 font-medium"
-            whileHover={{
-              scale: 1.02,
-            }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <span>View All Projects</span>
-            <ArrowRight className="ml-2 w-4 h-4" />
-          </motion.a>
         </div>
       </div>
     </section>

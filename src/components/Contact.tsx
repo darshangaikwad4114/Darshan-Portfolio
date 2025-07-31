@@ -11,7 +11,7 @@ const FORMSPREE_FORM_ID = "moveowzg";
 
 const contactMethods = [
   {
-    icon: <MdEmail className="w-6 h-6" />,
+    icon: <MdEmail className="w-5 h-5" />,
     title: "Email Me",
     description: "Send me an email anytime",
     value: "darshangaikwad4114@gmail.com",
@@ -19,7 +19,7 @@ const contactMethods = [
     iconBg: "bg-gradient-to-br from-blue-500 to-cyan-500",
   },
   {
-    icon: <FaGithub className="w-6 h-6" />,
+    icon: <FaGithub className="w-5 h-5" />,
     title: "GitHub",
     description: "Check out my projects",
     value: "darshangaikwad4114",
@@ -27,7 +27,7 @@ const contactMethods = [
     iconBg: "bg-gradient-to-br from-purple-500 to-pink-500",
   },
   {
-    icon: <FaLinkedinIn className="w-6 h-6" />,
+    icon: <FaLinkedinIn className="w-5 h-5" />,
     title: "LinkedIn",
     description: "Let's connect professionally",
     value: "darshan-gaikwad",
@@ -126,7 +126,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-24 bg-gray-50 dark:bg-gray-900"
+      className="py-16 bg-gray-50 dark:bg-gray-900"
       role="region"
       aria-labelledby="contact-heading"
     >
@@ -136,7 +136,7 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-20"
+          className="text-center mb-12"
         >
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
@@ -148,13 +148,12 @@ const Contact = () => {
           </motion.span>
           <h2
             id="contact-heading"
-            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
           >
             Get In Touch
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Have a project in mind or want to discuss opportunities? I'm just a
-            message away. Let's create something amazing together!
+          <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            Have a project in mind? Let's create something amazing together!
           </p>
         </motion.div>
 
@@ -164,7 +163,7 @@ const Contact = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 max-w-4xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 max-w-3xl mx-auto"
           role="list"
         >
           {contactMethods.map((method) => (
@@ -174,7 +173,7 @@ const Contact = () => {
               className="group"
               role="listitem"
             >
-              <SimpleCard className="h-full w-full p-6 flex flex-col hover:shadow-lg transition-all duration-300 text-center">
+              <SimpleCard className="h-full w-full p-4 flex flex-col hover:shadow-lg transition-all duration-300 text-center">
                 <a
                   href={method.href}
                   target="_blank"
@@ -182,20 +181,20 @@ const Contact = () => {
                   className="flex-1 flex flex-col group-hover:scale-[1.02] transition-transform duration-300"
                 >
                   <div
-                    className={`w-12 h-12 ${method.iconBg} rounded-xl flex items-center justify-center mb-4 text-white shadow-lg group-hover:scale-105 transition-transform duration-300 mx-auto`}
+                    className={`w-10 h-10 ${method.iconBg} rounded-lg flex items-center justify-center mb-3 text-white shadow-lg group-hover:scale-105 transition-transform duration-300 mx-auto`}
                   >
                     {method.icon}
                   </div>
 
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                  <h3 className="text-base font-bold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
                     {method.title}
                   </h3>
 
-                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                  <p className="text-gray-600 dark:text-gray-300 text-xs mb-2">
                     {method.description}
                   </p>
 
-                  <p className="text-blue-600 dark:text-blue-400 text-sm font-medium">
+                  <p className="text-blue-600 dark:text-blue-400 text-xs font-medium">
                     {method.value}
                   </p>
                 </a>
@@ -210,34 +209,34 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
+          className="max-w-3xl mx-auto"
         >
           <SimpleCard className="bg-white dark:bg-gray-800 shadow-xl">
-            <div className="p-8 md:p-12">
-              <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white shadow-lg">
-                  <MdSend className="w-8 h-8" />
+            <div className="p-6 md:p-8">
+              <div className="text-center mb-6">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mx-auto mb-3 text-white shadow-lg">
+                  <MdSend className="w-6 h-6" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   Send Me a Message
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   I'll get back to you within 24 hours
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 gap-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label
                         htmlFor="name"
-                        className="block mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300"
+                        className="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300"
                       >
                         Full Name *
                       </label>
                       <div
-                        className={`relative ${focusedField === "name" ? "ring-2 ring-blue-300 dark:ring-blue-700 rounded-xl" : ""}`}
+                        className={`relative ${focusedField === "name" ? "ring-2 ring-blue-300 dark:ring-blue-700 rounded-lg" : ""}`}
                       >
                         <input
                           type="text"
@@ -247,7 +246,7 @@ const Contact = () => {
                           onChange={handleChange}
                           onFocus={() => setFocusedField("name")}
                           onBlur={() => setFocusedField(null)}
-                          className="w-full px-4 py-4 rounded-xl border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 placeholder:text-gray-400"
+                          className="w-full px-3 py-3 rounded-lg border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 placeholder:text-gray-400"
                           placeholder="Your full name"
                           required
                         />
@@ -262,12 +261,12 @@ const Contact = () => {
                     <div>
                       <label
                         htmlFor="email"
-                        className="block mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300"
+                        className="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300"
                       >
                         Email Address *
                       </label>
                       <div
-                        className={`relative ${focusedField === "email" ? "ring-2 ring-blue-300 dark:ring-blue-700 rounded-xl" : ""}`}
+                        className={`relative ${focusedField === "email" ? "ring-2 ring-blue-300 dark:ring-blue-700 rounded-lg" : ""}`}
                       >
                         <input
                           type="email"
@@ -277,7 +276,7 @@ const Contact = () => {
                           onChange={handleChange}
                           onFocus={() => setFocusedField("email")}
                           onBlur={() => setFocusedField(null)}
-                          className="w-full px-4 py-4 rounded-xl border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 placeholder:text-gray-400"
+                          className="w-full px-3 py-3 rounded-lg border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 placeholder:text-gray-400"
                           placeholder="your.email@example.com"
                           required
                         />
@@ -293,12 +292,12 @@ const Contact = () => {
                   <div>
                     <label
                       htmlFor="message"
-                      className="block mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300"
+                      className="block mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300"
                     >
                       Your Message *
                     </label>
                     <div
-                      className={`relative ${focusedField === "message" ? "ring-2 ring-blue-300 dark:ring-blue-700 rounded-xl" : ""}`}
+                      className={`relative ${focusedField === "message" ? "ring-2 ring-blue-300 dark:ring-blue-700 rounded-lg" : ""}`}
                     >
                       <textarea
                         id="message"
@@ -307,9 +306,9 @@ const Contact = () => {
                         onChange={handleChange}
                         onFocus={() => setFocusedField("message")}
                         onBlur={() => setFocusedField(null)}
-                        rows={6}
-                        className="w-full px-4 py-4 rounded-xl border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white resize-none transition-all duration-300 placeholder:text-gray-400"
-                        placeholder="Tell me about your project or how I can help you..."
+                        rows={4}
+                        className="w-full px-3 py-3 rounded-lg border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white resize-none transition-all duration-300 placeholder:text-gray-400"
+                        placeholder="Tell me about your project..."
                         required
                       />
                       <ValidationError
@@ -366,7 +365,7 @@ const Contact = () => {
                     <motion.button
                       type="submit"
                       disabled={isSubmitting}
-                      className={`w-full px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 text-white font-semibold transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed`}
+                      className={`w-full px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 text-white font-semibold transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       aria-label="Send message"
@@ -407,7 +406,7 @@ const Contact = () => {
               </form>
 
               {/* Decorative elements */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-50 pointer-events-none rounded-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/3 to-purple-500/3 opacity-30 pointer-events-none rounded-xl" />
             </div>
           </SimpleCard>
         </motion.div>

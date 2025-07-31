@@ -1,5 +1,3 @@
-import React from "react";
-
 interface MotionCardProps {
   children: React.ReactNode;
   className?: string;

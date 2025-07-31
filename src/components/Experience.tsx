@@ -48,6 +48,14 @@ const Experience = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
+          <motion.span
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold rounded-full mb-4 backdrop-blur-sm"
+          >
+            ✨ Career Journey
+          </motion.span>
           <h2
             id="experience-heading"
             className="text-4xl font-bold text-gray-900 dark:text-white mb-4"
@@ -94,7 +102,7 @@ const Experience = () => {
                         </div>
                         <div className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
-                          <span>May 2024 - Present</span>
+                          <span>May 2024 - May 2025</span>
                         </div>
                       </div>
                       <div className="text-sm text-gray-600 dark:text-gray-300">
@@ -116,7 +124,7 @@ const Experience = () => {
                     </div>
                   </div>
                   <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium">
-                    Current
+                    1 Year Internship
                   </span>
                 </div>
               </div>
@@ -159,120 +167,6 @@ const Experience = () => {
                   <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium">
                     CGPA: 8.79
                   </div>
-                </div>
-              </div>
-            </MotionCard>
-          </motion.div>
-
-          {/* Certifications */}
-          <motion.div variants={cardVariants}>
-            <MotionCard className="h-full w-full">
-              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-lg transition-shadow duration-200">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 0L24 6.857v10.286L12 24 0 17.143V6.857L12 0zm-2.4 17.143l9.6-9.6-1.8-1.8-7.8 7.8-3.6-3.6-1.8 1.8 5.4 5.4z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                    Certifications
-                  </h3>
-                  <div className="flex items-center gap-2 ml-auto">
-                    <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium">
-                      Completed
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <a
-                    href="https://www.udemy.com/certificate/UC-example-react/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between py-2 px-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600/50 transition-colors duration-200 group"
-                  >
-                    <span className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">
-                      React.js Complete Course
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
-                        From Udemy
-                      </span>
-                      <svg
-                        className="w-3 h-3 text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        />
-                      </svg>
-                    </div>
-                  </a>
-                  <a
-                    href="https://www.udemy.com/certificate/UC-example-javascript/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between py-2 px-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600/50 transition-colors duration-200 group"
-                  >
-                    <span className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">
-                      JavaScript Algorithms & Data Structures
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
-                        From Udemy
-                      </span>
-                      <svg
-                        className="w-3 h-3 text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        />
-                      </svg>
-                    </div>
-                  </a>
-                  <a
-                    href="https://www.udemy.com/certificate/UC-example-frontend/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between py-2 px-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600/50 transition-colors duration-200 group"
-                  >
-                    <span className="text-sm font-medium text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400">
-                      Frontend Development Libraries
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
-                        From Udemy
-                      </span>
-                      <svg
-                        className="w-3 h-3 text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        />
-                      </svg>
-                    </div>
-                  </a>
                 </div>
               </div>
             </MotionCard>

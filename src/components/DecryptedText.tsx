@@ -15,40 +15,23 @@ interface DecryptedTextProps {
   [key: string]: string | number | boolean | undefined;
 }
 
-export default function DecryptedText({
-  text,
-  speed = 30,
-  maxIterations = 6,
-  sequential = false,
-  revealDirection = "start",
-  useOriginalCharsOnly = false,
-  characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  className = "",
-  parentClassName = "",
-  encryptedClassName = "",
-  animateOn = "hover",
-  ...props
-}: DecryptedTextProps) {
-  const [isHovering, setIsHovering] = useState(false);
+// 🚀 OPTIMIZATION 1: Extract animation engine to custom hook
+const useDecryptAnimation = (
+  text: string,
+  speed: number,
+  maxIterations: number,
+  sequential: boolean,
+  revealDirection: DecryptedTextProps["revealDirection"],
+  availableChars: string[],
+) => {
   const [displayText, setDisplayText] = useState(text);
   const [revealedIndices, setRevealedIndices] = useState<Set<number>>(
     new Set(),
   );
   const [isScrambling, setIsScrambling] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const iterationRef = useRef(0);
 
-  // Memoize the characters array to avoid recreating it on each render
-  const availableChars = useMemo(
-    () =>
-      useOriginalCharsOnly
-        ? text.split("").filter((char) => char !== " ")
-        : characters.split(""),
-    [text, characters, useOriginalCharsOnly],
-  );
-
-  // Move getNextIndex into useCallback to fix the exhaustive-deps warning
+  // 🚀 OPTIMIZATION 2: Memoize heavy calculations
   const getNextIndex = useCallback(
     (revealedSet: Set<number>): number => {
       const textLength = text.length;
@@ -65,14 +48,11 @@ export default function DecryptedText({
             ? middle + offset
             : middle - offset - 1;
         }
-        case "random":
         default: {
-          // Find indices that aren't revealed yet
           const availableIndices = Array.from(
             { length: textLength },
             (_, i) => i,
           ).filter((i) => !revealedSet.has(i) && text[i] !== " ");
-
           if (availableIndices.length === 0) return -1;
           return availableIndices[
             Math.floor(Math.random() * availableIndices.length)
@@ -80,127 +60,145 @@ export default function DecryptedText({
         }
       }
     },
-    [revealDirection, text],
+    [text, revealDirection],
   );
 
-  // Optimize shuffle function with useMemo
-  const shuffleText = useCallback(
-    (originalText: string, currentRevealed: Set<number>): string => {
-      return originalText
+  // 🚀 OPTIMIZATION 3: Use RAF for smooth animations instead of setInterval
+  const animateFrame = useCallback(() => {
+    if (!isScrambling) return;
+
+    iterationRef.current += 1;
+
+    if (sequential) {
+      setRevealedIndices((prevRevealed) => {
+        if (prevRevealed.size >= text.length) {
+          setIsScrambling(false);
+          return prevRevealed;
+        }
+
+        const nextIndex = getNextIndex(prevRevealed);
+        if (nextIndex >= 0) {
+          const newRevealed = new Set(prevRevealed);
+          newRevealed.add(nextIndex);
+          return newRevealed;
+        }
+        return prevRevealed;
+      });
+    }
+
+    // Update display text
+    setDisplayText((prevText) => {
+      return prevText
         .split("")
         .map((char, i) => {
-          if (char === " ") return " ";
-          if (currentRevealed.has(i)) return originalText[i];
-
-          // Use cached array for better performance
+          if (char === " " || revealedIndices.has(i)) return text[i];
           return availableChars[
             Math.floor(Math.random() * availableChars.length)
           ];
         })
         .join("");
-    },
-    [availableChars],
-  );
+    });
 
-  // Clean up interval on unmount
+    if (iterationRef.current >= maxIterations && !sequential) {
+      setIsScrambling(false);
+      setDisplayText(text);
+    }
+  }, [
+    isScrambling,
+    sequential,
+    text,
+    maxIterations,
+    getNextIndex,
+    availableChars,
+    revealedIndices,
+  ]);
+
+  // 🚀 OPTIMIZATION 4: Single RAF loop instead of setInterval
   useEffect(() => {
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+    if (!isScrambling) return;
+
+    const animate = () => {
+      animateFrame();
+      if (isScrambling) {
+        setTimeout(() => requestAnimationFrame(animate), speed);
       }
     };
+
+    requestAnimationFrame(animate);
+  }, [isScrambling, animateFrame, speed]);
+
+  const startAnimation = useCallback(() => {
+    setIsScrambling(true);
+    setRevealedIndices(new Set());
+    iterationRef.current = 0;
   }, []);
 
-  // Reset animation when text changes
-  useEffect(() => {
+  const resetAnimation = useCallback(() => {
+    setIsScrambling(false);
     setDisplayText(text);
     setRevealedIndices(new Set());
     iterationRef.current = 0;
-
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
   }, [text]);
 
-  // Main animation effect with revealedIndices added to dependencies
+  return {
+    displayText,
+    isScrambling,
+    startAnimation,
+    resetAnimation,
+  };
+};
+
+export default function OptimizedDecryptedText({
+  text,
+  speed = 30,
+  maxIterations = 6,
+  sequential = false,
+  revealDirection = "start",
+  useOriginalCharsOnly = false,
+  characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  className = "",
+  parentClassName = "",
+  encryptedClassName = "",
+  animateOn = "hover",
+  ...props
+}: DecryptedTextProps) {
+  const [isHovering, setIsHovering] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // 🚀 OPTIMIZATION 5: Move character array to useMemo with proper dependencies
+  const availableChars = useMemo(() => {
+    return useOriginalCharsOnly
+      ? [...new Set(text.split("").filter((char) => char !== " "))]
+      : characters.split("");
+  }, [text, characters, useOriginalCharsOnly]);
+
+  // 🚀 OPTIMIZATION 6: Use the optimized animation hook
+  const { displayText, isScrambling, startAnimation, resetAnimation } =
+    useDecryptAnimation(
+      text,
+      speed,
+      maxIterations,
+      sequential,
+      revealDirection,
+      availableChars,
+    );
+
+  // 🚀 OPTIMIZATION 7: Simplified trigger logic
   useEffect(() => {
-    if (isHovering || animateOn === "view") {
-      setIsScrambling(true);
-      iterationRef.current = 0;
-
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-
-      // Store the interval ID in the ref
-      const intervalId = setInterval(() => {
-        iterationRef.current += 1;
-
-        if (sequential) {
-          setRevealedIndices((prevRevealed) => {
-            if (prevRevealed.size < text.length) {
-              const nextIndex = getNextIndex(prevRevealed);
-              if (nextIndex >= 0) {
-                const newRevealed = new Set(prevRevealed);
-                newRevealed.add(nextIndex);
-                setDisplayText(shuffleText(text, newRevealed));
-                return newRevealed;
-              }
-            }
-
-            // Finish animation
-            clearInterval(intervalId);
-            setIsScrambling(false);
-            return prevRevealed;
-          });
-        } else {
-          // For non-sequential animation
-          setDisplayText(shuffleText(text, revealedIndices));
-
-          if (iterationRef.current >= maxIterations) {
-            clearInterval(intervalId);
-            setIsScrambling(false);
-            setDisplayText(text);
-          }
-        }
-      }, speed);
-
-      // Save the ID to the ref
-      intervalRef.current = intervalId;
-
-      return () => {
-        if (intervalId) clearInterval(intervalId);
-      };
-    } else {
-      // Reset when not hovering and using hover mode
-      if (animateOn === "hover" && intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-        setDisplayText(text);
-        setRevealedIndices(new Set());
-        setIsScrambling(false);
-      }
+    if ((isHovering && animateOn === "hover") || animateOn === "view") {
+      startAnimation();
+    } else if (!isHovering && animateOn === "hover") {
+      resetAnimation();
     }
-  }, [
-    isHovering,
-    text,
-    speed,
-    maxIterations,
-    sequential,
-    shuffleText,
-    animateOn,
-    getNextIndex,
-    revealedIndices, // Add missing dependency
-  ]);
+  }, [isHovering, animateOn, startAnimation, resetAnimation]);
 
-  // IntersectionObserver for view mode
+  // 🚀 OPTIMIZATION 8: Intersection Observer with cleanup
   useEffect(() => {
-    if (animateOn !== "view") return;
+    if (animateOn !== "view" || !containerRef.current) return;
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
+      ([entry]) => {
+        if (entry.isIntersecting) {
           setIsHovering(true);
           observer.disconnect();
         }
@@ -208,14 +206,11 @@ export default function DecryptedText({
       { threshold: 0.5, rootMargin: "0px" },
     );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
+    observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, [animateOn]);
 
-  // Use CSS transitions for smoother character changes
+  // 🚀 OPTIMIZATION 9: Simplified render with CSS optimization
   return (
     <div
       ref={containerRef}
@@ -229,11 +224,10 @@ export default function DecryptedText({
       {...props}
     >
       <span
-        className={`${className} ${isScrambling ? encryptedClassName : ""} transition-colors duration-150`}
+        className={`${className} ${isScrambling ? encryptedClassName : ""} transition-colors duration-150 will-change-contents`}
         style={{
-          willChange: "contents",
-          display: "inline-block",
-          transform: "translateZ(0)", // Hardware acceleration
+          contain: "layout style", // CSS containment for better performance
+          fontKerning: "none", // Prevent text shifting during animation
         }}
       >
         {displayText}
