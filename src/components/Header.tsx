@@ -34,61 +34,50 @@ const Header = () => {
     <motion.header
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      transition={{ duration: 0.5 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled
-          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-700/50 shadow-lg"
+          ? "bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 shadow-sm"
           : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-evenly h-16">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center"
-          >
-            <Logo />
-          </motion.div>
+          <Logo />
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
-            {navigation.map((item, index) => (
-              <motion.div
+            {navigation.map((item) => (
+              <Link
                 key={item.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 + 0.3 }}
+                to={item.to}
+                spy={true}
+                smooth={true}
+                offset={item.offset}
+                duration={800}
+                className="px-4 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer font-medium text-sm"
+                activeClass="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
               >
-                <Link
-                  to={item.to}
-                  spy={true}
-                  smooth={true}
-                  offset={item.offset}
-                  duration={800}
-                  className="px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition-all duration-200 cursor-pointer font-medium"
-                  activeClass="text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-900/20"
-                >
-                  {item.name}
-                </Link>
-              </motion.div>
+                {item.name}
+              </Link>
             ))}
           </nav>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-3">
+          <div className="hidden md:flex items-center space-x-2">
             {/* Theme Toggle */}
             <motion.button
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-100/50 dark:bg-gray-800/50 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors duration-200"
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
-                <Sun className="w-5 h-5 text-yellow-500" />
+                <Sun className="w-4 h-4 text-yellow-500" />
               ) : (
-                <Moon className="w-5 h-5 text-gray-600" />
+                <Moon className="w-4 h-4 text-gray-600" />
               )}
             </motion.button>
           </div>
@@ -96,15 +85,15 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <motion.button
             onClick={toggleMenu}
-            className="md:hidden p-2 rounded-lg bg-gray-100/50 dark:bg-gray-800/50 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors duration-200"
+            className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
-              <X className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+              <X className="w-5 h-5 text-gray-700 dark:text-gray-300" />
             ) : (
-              <Menu className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+              <Menu className="w-5 h-5 text-gray-700 dark:text-gray-300" />
             )}
           </motion.button>
         </div>
@@ -116,44 +105,38 @@ const Header = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl rounded-2xl border border-gray-200/50 dark:border-gray-700/50 mt-4 mb-4"
+              transition={{ duration: 0.2 }}
+              className="md:hidden overflow-hidden bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 mt-2 mb-4 shadow-lg"
             >
-              <div className="p-6 space-y-4">
-                {navigation.map((item, index) => (
-                  <motion.div
+              <div className="p-4 space-y-1">
+                {navigation.map((item) => (
+                  <Link
                     key={item.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    to={item.to}
+                    spy={true}
+                    smooth={true}
+                    offset={item.offset}
+                    duration={800}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="block px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer font-medium text-sm"
+                    activeClass="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
                   >
-                    <Link
-                      to={item.to}
-                      spy={true}
-                      smooth={true}
-                      offset={item.offset}
-                      duration={800}
-                      onClick={() => setIsMenuOpen(false)}
-                      className="block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition-all duration-200 cursor-pointer font-medium"
-                      activeClass="text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-900/20"
-                    >
-                      {item.name}
-                    </Link>
-                  </motion.div>
+                    {item.name}
+                  </Link>
                 ))}
 
-                {/* Mobile Actions */}
-                <div className="pt-4 border-t border-gray-200/50 dark:border-gray-700/50 flex items-center justify-center">
+                {/* Mobile Theme Toggle */}
+                <div className="pt-2 border-t border-gray-200 dark:border-gray-700 flex justify-center">
                   <motion.button
                     onClick={toggleTheme}
-                    className="p-3 rounded-lg bg-gray-100/50 dark:bg-gray-800/50 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 transition-colors duration-200"
+                    className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     {theme === "dark" ? (
-                      <Sun className="w-5 h-5 text-yellow-500" />
+                      <Sun className="w-4 h-4 text-yellow-500" />
                     ) : (
-                      <Moon className="w-5 h-5 text-gray-600" />
+                      <Moon className="w-4 h-4 text-gray-600" />
                     )}
                   </motion.button>
                 </div>
