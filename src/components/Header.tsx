@@ -56,7 +56,7 @@ const Header = () => {
                 smooth={true}
                 offset={item.offset}
                 duration={800}
-                className="px-4 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer font-medium text-sm"
+                className="px-4 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 font-medium text-sm"
                 activeClass="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
               >
                 {item.name}
@@ -118,7 +118,7 @@ const Header = () => {
                     offset={item.offset}
                     duration={800}
                     onClick={() => setIsMenuOpen(false)}
-                    className="block px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 cursor-pointer font-medium text-sm"
+                    className="block px-4 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 font-medium text-sm"
                     activeClass="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
                   >
                     {item.name}

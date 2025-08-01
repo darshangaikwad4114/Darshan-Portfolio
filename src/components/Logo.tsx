@@ -8,7 +8,7 @@ const Logo = () => {
       smooth={true}
       offset={-80}
       duration={500}
-      className="cursor-pointer focus-ring rounded"
+      className="focus-ring rounded"
       aria-label="Logo, go to top"
     >
       <div className="flex items-center">
