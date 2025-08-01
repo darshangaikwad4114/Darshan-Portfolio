@@ -86,17 +86,20 @@ const useDecryptAnimation = (
       });
     }
 
-    // Update display text
-    setDisplayText((prevText) => {
-      return prevText
-        .split("")
-        .map((char, i) => {
-          if (char === " " || revealedIndices.has(i)) return text[i];
-          return availableChars[
-            Math.floor(Math.random() * availableChars.length)
-          ];
-        })
-        .join("");
+    // Update display text with current revealed indices
+    setRevealedIndices((currentRevealed) => {
+      setDisplayText(() => {
+        return text
+          .split("")
+          .map((char, i) => {
+            if (char === " " || currentRevealed.has(i)) return text[i];
+            return availableChars[
+              Math.floor(Math.random() * availableChars.length)
+            ];
+          })
+          .join("");
+      });
+      return currentRevealed;
     });
 
     if (iterationRef.current >= maxIterations && !sequential) {
@@ -110,21 +113,26 @@ const useDecryptAnimation = (
     maxIterations,
     getNextIndex,
     availableChars,
-    revealedIndices,
   ]);
 
   // 🚀 OPTIMIZATION 4: Single RAF loop instead of setInterval
   useEffect(() => {
     if (!isScrambling) return;
 
+    let animationId: number;
+    
     const animate = () => {
       animateFrame();
       if (isScrambling) {
-        setTimeout(() => requestAnimationFrame(animate), speed);
+        animationId = setTimeout(() => requestAnimationFrame(animate), speed);
       }
     };
 
     requestAnimationFrame(animate);
+    
+    return () => {
+      if (animationId) clearTimeout(animationId);
+    };
   }, [isScrambling, animateFrame, speed]);
 
   const startAnimation = useCallback(() => {
@@ -185,10 +193,12 @@ export default function OptimizedDecryptedText({
 
   // 🚀 OPTIMIZATION 7: Simplified trigger logic
   useEffect(() => {
-    if ((isHovering && animateOn === "hover") || animateOn === "view") {
-      startAnimation();
-    } else if (!isHovering && animateOn === "hover") {
-      resetAnimation();
+    if (animateOn === "hover") {
+      if (isHovering) {
+        startAnimation();
+      } else {
+        resetAnimation();
+      }
     }
   }, [isHovering, animateOn, startAnimation, resetAnimation]);
 
@@ -196,19 +206,20 @@ export default function OptimizedDecryptedText({
   useEffect(() => {
     if (animateOn !== "view" || !containerRef.current) return;
 
+    const element = containerRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsHovering(true);
+          startAnimation();
           observer.disconnect();
         }
       },
       { threshold: 0.5, rootMargin: "0px" },
     );
 
-    observer.observe(containerRef.current);
+    observer.observe(element);
     return () => observer.disconnect();
-  }, [animateOn]);
+  }, [animateOn, startAnimation]);
 
   // 🚀 OPTIMIZATION 9: Simplified render with CSS optimization
   return (
