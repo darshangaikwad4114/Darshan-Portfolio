@@ -25,11 +25,9 @@ const useDecryptAnimation = (
   availableChars: string[],
 ) => {
   const [displayText, setDisplayText] = useState(text);
-  const [revealedIndices, setRevealedIndices] = useState<Set<number>>(
-    new Set(),
-  );
   const [isScrambling, setIsScrambling] = useState(false);
   const iterationRef = useRef(0);
+  const revealedIndicesRef = useRef<Set<number>>(new Set());
 
   // 🚀 OPTIMIZATION 2: Memoize heavy calculations
   const getNextIndex = useCallback(
@@ -70,36 +68,30 @@ const useDecryptAnimation = (
     iterationRef.current += 1;
 
     if (sequential) {
-      setRevealedIndices((prevRevealed) => {
-        if (prevRevealed.size >= text.length) {
-          setIsScrambling(false);
-          return prevRevealed;
-        }
+      const currentRevealed = revealedIndicesRef.current;
+      if (currentRevealed.size >= text.length) {
+        setIsScrambling(false);
+        return;
+      }
 
-        const nextIndex = getNextIndex(prevRevealed);
-        if (nextIndex >= 0) {
-          const newRevealed = new Set(prevRevealed);
-          newRevealed.add(nextIndex);
-          return newRevealed;
-        }
-        return prevRevealed;
-      });
+      const nextIndex = getNextIndex(currentRevealed);
+      if (nextIndex >= 0) {
+        revealedIndicesRef.current = new Set([...currentRevealed, nextIndex]);
+      }
     }
 
     // Update display text with current revealed indices
-    setRevealedIndices((currentRevealed) => {
-      setDisplayText(() => {
-        return text
-          .split("")
-          .map((char, i) => {
-            if (char === " " || currentRevealed.has(i)) return text[i];
-            return availableChars[
-              Math.floor(Math.random() * availableChars.length)
-            ];
-          })
-          .join("");
-      });
-      return currentRevealed;
+    setDisplayText(() => {
+      const currentRevealed = revealedIndicesRef.current;
+      return text
+        .split("")
+        .map((char, i) => {
+          if (char === " " || currentRevealed.has(i)) return text[i];
+          return availableChars[
+            Math.floor(Math.random() * availableChars.length)
+          ];
+        })
+        .join("");
     });
 
     if (iterationRef.current >= maxIterations && !sequential) {
@@ -120,7 +112,7 @@ const useDecryptAnimation = (
     if (!isScrambling) return;
 
     let animationId: number;
-    
+
     const animate = () => {
       animateFrame();
       if (isScrambling) {
@@ -129,7 +121,7 @@ const useDecryptAnimation = (
     };
 
     requestAnimationFrame(animate);
-    
+
     return () => {
       if (animationId) clearTimeout(animationId);
     };
@@ -137,14 +129,14 @@ const useDecryptAnimation = (
 
   const startAnimation = useCallback(() => {
     setIsScrambling(true);
-    setRevealedIndices(new Set());
+    revealedIndicesRef.current = new Set();
     iterationRef.current = 0;
   }, []);
 
   const resetAnimation = useCallback(() => {
     setIsScrambling(false);
     setDisplayText(text);
-    setRevealedIndices(new Set());
+    revealedIndicesRef.current = new Set();
     iterationRef.current = 0;
   }, [text]);
 
