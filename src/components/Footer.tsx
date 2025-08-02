@@ -87,9 +87,8 @@ const Footer = () => {
           className="border-t border-gray-200/50 dark:border-gray-700/50 pt-4 mt-6 flex justify-center"
         >
           <p className="text-gray-600 dark:text-gray-400 text-sm flex items-center">
-            © {currentYear} Darshan Gaikwad. Made with{" "}
-            <Heart className="w-4 h-4 text-red-500 mx-1" fill="currentColor" />{" "}
-            in India
+            © {currentYear} Darshan Gaikwad. Developer in India, Pune{" "}
+            <Heart className="w-4 h-4 text-red-500 mx-1" />
           </p>
         </motion.div>
       </div>
