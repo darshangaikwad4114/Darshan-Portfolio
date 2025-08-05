@@ -6,7 +6,7 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
-    cursor: url('/images/cursor.png'), auto;
+    cursor: url("/images/cursor.png"), auto;
     ::selection {
       background-color: #00d9ff;
       color: black;
@@ -16,20 +16,33 @@
   body {
     @apply antialiased text-gray-800 dark:text-gray-200 leading-relaxed;
     font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
-    cursor: url('/images/cursor.png'), auto;
+    cursor: url("/images/cursor.png"), auto;
   }
 
   /* Custom cursor for interactive elements */
-  a, button, [role="button"], input[type="submit"], input[type="button"], 
-  .cursor-pointer, [tabindex], select, input[type="checkbox"], input[type="radio"] {
-    cursor: url('/images/cursor.png'), pointer !important;
+  a,
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  .cursor-pointer,
+  [tabindex],
+  select,
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: url("/images/cursor.png"), pointer !important;
   }
 
   /* Custom cursor for text inputs */
-  input[type="text"], input[type="email"], input[type="password"], 
-  input[type="search"], input[type="tel"], input[type="url"], 
-  textarea, [contenteditable] {
-    cursor: url('/images/cursor.png'), text !important;
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  [contenteditable] {
+    cursor: url("/images/cursor.png"), text !important;
   }
 
   h1,
@@ -255,4 +268,16 @@ textarea {
 /* Fix for iOS momentum scrolling */
 .scrollable-content {
   -webkit-overflow-scrolling: touch;
+}
+
+/* Optimize animations for production - respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -103,8 +103,10 @@ const Contact = () => {
           timestamp: new Date().toISOString(),
         });
       } catch (error) {
-        // Prevent analytics errors from affecting form functionality
-        console.error("Analytics error:", error);
+        // Prevent analytics errors from affecting form functionality - only log in dev
+        if (import.meta.env.DEV) {
+          console.error("Analytics error:", error);
+        }
       }
 
       // Reset form data after successful submission

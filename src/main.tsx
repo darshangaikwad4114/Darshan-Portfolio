@@ -10,10 +10,17 @@ if (import.meta.env.PROD) {
   inject();
 }
 
-// Replace custom provider with direct SpeedInsights component
-createRoot(document.getElementById("root")!).render(
+// Remove React StrictMode in production for better performance
+const AppWrapper = import.meta.env.PROD ? (
+  <>
+    <App />
+    <SpeedInsights />
+  </>
+) : (
   <StrictMode>
     <App />
     <SpeedInsights />
-  </StrictMode>,
+  </StrictMode>
 );
+
+createRoot(document.getElementById("root")!).render(AppWrapper);

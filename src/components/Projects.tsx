@@ -1,56 +1,7 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import SimpleCard from "./SimpleCard";
-import OptimizedImage from "./OptimizedImage";
-
-// Function to generate consistent colors based on tech name
-const getTechColor = (techName: string) => {
-  // Simple hash function to generate a number from string
-  const hash = techName.split("").reduce((acc, char) => {
-    return char.charCodeAt(0) + ((acc << 5) - acc);
-  }, 0);
-
-  // Use predefined color palette based on hash
-  const colorPalette = [
-    {
-      bg: "bg-blue-100 dark:bg-blue-900/30",
-      text: "text-blue-600 dark:text-blue-400",
-      border: "border-blue-300 dark:border-blue-700",
-    },
-    {
-      bg: "bg-green-100 dark:bg-green-900/30",
-      text: "text-green-600 dark:text-green-400",
-      border: "border-green-300 dark:border-green-700",
-    },
-    {
-      bg: "bg-purple-100 dark:bg-purple-900/30",
-      text: "text-purple-600 dark:text-purple-400",
-      border: "border-purple-300 dark:border-purple-700",
-    },
-    {
-      bg: "bg-amber-100 dark:bg-amber-900/30",
-      text: "text-amber-600 dark:text-amber-400",
-      border: "border-amber-300 dark:border-amber-700",
-    },
-    {
-      bg: "bg-pink-100 dark:bg-pink-900/30",
-      text: "text-pink-600 dark:text-pink-400",
-      border: "border-pink-300 dark:border-pink-700",
-    },
-    {
-      bg: "bg-indigo-100 dark:bg-indigo-900/30",
-      text: "text-indigo-600 dark:text-indigo-400",
-      border: "border-indigo-300 dark:border-indigo-700",
-    },
-    {
-      bg: "bg-cyan-100 dark:bg-cyan-900/30",
-      text: "text-cyan-600 dark:text-cyan-400",
-      border: "border-cyan-300 dark:border-cyan-700",
-    },
-  ];
-
-  return colorPalette[Math.abs(hash) % colorPalette.length];
-};
+import { getTechColor } from "../utils/techColors";
 
 const projects = [
   {
@@ -150,11 +101,11 @@ const Projects = () => {
             >
               <SimpleCard className="h-full w-full p-6 flex flex-col hover:shadow-lg transition-shadow duration-300">
                 <div className="relative aspect-video overflow-hidden rounded-lg mb-4 group">
-                  <OptimizedImage
+                  <img
                     src={project.image}
                     alt={`${project.title} screenshot`}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    priority={index === 0}
+                    loading={index === 0 ? "eager" : "lazy"}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="flex gap-4">

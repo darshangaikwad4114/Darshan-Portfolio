@@ -16,13 +16,15 @@ export default defineConfig(({ mode }) => {
       minify: "terser",
       terserOptions: {
         compress: {
-          drop_console: isProduction, // Keep console logs in development
-          drop_debugger: true,
+          drop_console: isProduction, // Remove console logs in production
+          drop_debugger: isProduction, // Remove debugger statements in production
+          pure_funcs: isProduction
+            ? ["console.log", "console.info", "console.debug"]
+            : [],
         },
       },
-      // Change CSS minification from lightningcss to default
-      cssMinify: true, // Changed from 'lightningcss' to true
-      cssCodeSplit: false, // Use a single CSS file
+      cssMinify: true,
+      cssCodeSplit: false, // Use a single CSS file for better caching
       rollupOptions: {
         output: {
           manualChunks: {
@@ -32,7 +34,7 @@ export default defineConfig(({ mode }) => {
           },
         },
       },
-      // Generate sourcemaps in development
+      // Generate sourcemaps only in development
       sourcemap: !isProduction,
     },
 
@@ -51,6 +53,11 @@ export default defineConfig(({ mode }) => {
       host: true, // Listen on all addresses, including LAN and public addresses
       hmr: {
         overlay: true,
+      },
+      // Add security headers
+      headers: {
+        "X-Frame-Options": "DENY",
+        "X-Content-Type-Options": "nosniff",
       },
       // Proxy configuration removed as it's not needed
     },

@@ -1,8 +1,8 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_GITHUB_TOKEN: string;
-  // add other env variables here
+  readonly VITE_APP_TITLE: string;
+  // Add other environment variables as needed
 }
 
 interface ImportMeta {
