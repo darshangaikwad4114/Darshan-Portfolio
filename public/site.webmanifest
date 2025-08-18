@@ -1,0 +1,17 @@
+{
+  "name": "Darshan Gaikwad Portfolio",
+  "short_name": "Darshan",
+  "description": "Portfolio of Darshan Gaikwad – Full Stack / Frontend Developer building modern React applications.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0090f5",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <meta
       name="description"
       content="Portfolio of Darshan Gaikwad, Full Stack Web Developer with over 1 year of experience building scalable and performant web applications using the MERN stack. Passionate about clean code, intuitive UI/UX, and solving real-world problems through modern web technologies."
@@ -45,7 +46,25 @@
     <!-- Add resource hints -->
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
     <title>Darshan Gaikwad | Full Stack Developer</title>
+    <link
+      rel="preload"
+      as="image"
+      href="/images/profile.webp"
+      type="image/webp"
+      imagesrcset="/images/profile.webp 1x"
+    />
+    <script>
+      try {
+        const stored = localStorage.getItem("theme");
+        if (stored === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
