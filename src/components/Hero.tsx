@@ -19,9 +19,11 @@ const Hero = () => {
 
   const titles = [
     "Full Stack Developer",
-    "Freelancer",
+    "Future Tech Innovator",
     "Open Source Contributor",
-    "Trekking Mountains",
+    "AI & Cloud Explorer",
+    "Solution Architect",
+    "Digital Transformation Leader",
   ];
 
   // Track when hero section is fully loaded
@@ -114,7 +116,8 @@ const Hero = () => {
               {/* Description */}
               <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
                 I create modern web applications with clean code and exceptional
-                user experiences.
+                user experiences. Always exploring cutting-edge technologies and 
+                passionate about building solutions that make a difference.
               </p>
 
               {/* Call-to-action buttons */}

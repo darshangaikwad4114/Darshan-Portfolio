@@ -63,6 +63,16 @@ const services = [
     iconBg: "bg-gradient-to-br from-violet-500 to-purple-500",
     category: "Security",
   },
+  {
+    icon: <Code2 className="w-6 h-6" />,
+    title: "AI Integration & Future Tech Solutions",
+    description:
+      "Exploring and implementing cutting-edge technologies like AI/ML integration, blockchain solutions, and cloud-native architectures to future-proof your digital presence.",
+    spotlightColor: "rgba(16, 185, 129, 0.15)",
+    gradient: "from-emerald-500/10 to-teal-500/10",
+    iconBg: "bg-gradient-to-br from-emerald-500 to-teal-500",
+    category: "Innovation",
+  },
 ];
 
 const containerVariants = {
@@ -131,12 +141,12 @@ const Services = () => {
             Freelance Services
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Specialized web development services for impactful digital
-            experiences. I deliver{" "}
+            From current expertise to future innovations - specialized services
+            designed to transform your digital vision into reality. I deliver{" "}
             <span className="font-semibold text-blue-600 dark:text-blue-400">
               exceptional results
             </span>{" "}
-            using modern technologies and SEO best practices.
+            with both proven technologies and emerging solutions.
           </p>
         </motion.div>
 
