@@ -63,7 +63,7 @@ const Experience = () => {
             Experience & Education
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300">
-            Professional background and academic foundation
+            Building on solid foundations to achieve future aspirations in technology and innovation
           </p>
         </motion.div>
 

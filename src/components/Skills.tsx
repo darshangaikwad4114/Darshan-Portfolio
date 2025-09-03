@@ -209,6 +209,45 @@ const skillCategories = [
       },
     ],
   },
+  {
+    title: "Emerging Technologies & Learning",
+    icon: <Globe className="w-6 h-6" />,
+    iconBg: "bg-gradient-to-br from-purple-500 to-pink-500",
+    skills: [
+      {
+        name: "Python",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+      },
+      {
+        name: "GraphQL",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg",
+      },
+      {
+        name: "Prisma",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg",
+      },
+      {
+        name: "Kubernetes",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-original.svg",
+      },
+      {
+        name: "TensorFlow",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original.svg",
+      },
+      {
+        name: "Rust",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg",
+      },
+      {
+        name: "Go",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg",
+      },
+      {
+        name: "Blockchain",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bitcoin/bitcoin-original.svg",
+      },
+    ],
+  },
 ];
 
 const Skills = () => {
@@ -247,7 +286,7 @@ const Skills = () => {
             Skills & Technologies
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Modern technologies and frameworks I use to build digital solutions.
+            Current expertise and emerging technologies I'm exploring to stay ahead of the curve.
           </p>
         </motion.div>
 
