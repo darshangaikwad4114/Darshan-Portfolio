@@ -11,17 +11,19 @@ import {
 import { Link } from "react-scroll";
 import DecryptedText from "./DecryptedText";
 import { useAnalytics } from "../hooks/useAnalytics";
+import { useClickSound } from "../hooks/useClickSound";
 
 const Hero = () => {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
   const [key, setKey] = useState(0);
   const { trackInteraction } = useAnalytics();
+  const { playClickSound } = useClickSound();
 
   const titles = [
     "Full Stack Developer",
-    "Freelancer",
+    "JavaScript Specialist",
+    "UI/UX Enthusiast",
     "Open Source Contributor",
-    "Trekking Mountains",
   ];
 
   // Track when hero section is fully loaded
@@ -62,12 +64,20 @@ const Hero = () => {
 
   // Track resume download
   const handleResumeClick = () => {
+    playClickSound();
     trackInteraction("resume_download", "click");
   };
 
   // Track hire me button click
   const handleHireMeClick = () => {
+    playClickSound();
     trackInteraction("hire_me_button", "click");
+  };
+
+  // Handle social link clicks
+  const handleSocialClick = (platform: string) => {
+    playClickSound();
+    trackInteraction(`social_${platform.toLowerCase()}`, "click");
   };
 
   return (
@@ -76,7 +86,8 @@ const Hero = () => {
       className="min-h-screen flex items-center bg-gray-50 dark:bg-gray-900 pt-16"
     >
       <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
+          {/* Main Hero Content */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Content column */}
             <motion.div
@@ -114,7 +125,8 @@ const Hero = () => {
               {/* Description */}
               <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
                 I create modern web applications with clean code and exceptional
-                user experiences.
+                user experiences. Passionate about building high-performance,
+                user-centric software solutions.
               </p>
 
               {/* Call-to-action buttons */}
@@ -185,6 +197,7 @@ const Hero = () => {
                     aria-label={`${social.label} Profile`}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={() => handleSocialClick(social.label)}
                   >
                     {social.icon}
                   </motion.a>
@@ -211,25 +224,25 @@ const Hero = () => {
               </div>
             </motion.div>
           </div>
+
+          {/* Scroll down indicator */}
+          <motion.div
+            className="absolute bottom-8 left-0 right-0 flex justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+          >
+            <Link
+              to="skills"
+              spy={true}
+              smooth={true}
+              offset={-80}
+              duration={800}
+              className="cursor-pointer"
+            ></Link>
+          </motion.div>
         </div>
       </div>
-
-      {/* Scroll down indicator */}
-      <motion.div
-        className="absolute bottom-8 left-0 right-0 flex justify-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 0.5 }}
-      >
-        <Link
-          to="skills"
-          spy={true}
-          smooth={true}
-          offset={-80}
-          duration={800}
-          className="cursor-pointer"
-        ></Link>
-      </motion.div>
     </section>
   );
 };

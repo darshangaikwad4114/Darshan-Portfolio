@@ -3,12 +3,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { Link } from "react-scroll";
 import { useTheme } from "../hooks/useTheme";
+import { useClickSound } from "../hooks/useClickSound";
 import Logo from "./Logo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { playClickSound } = useClickSound();
 
   const navigation = [
     { name: "About", to: "about", offset: -80 },
@@ -28,7 +30,20 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => {
+    playClickSound();
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleNavClick = (itemName: string) => {
+    playClickSound();
+    console.log(`Navigating to ${itemName}`);
+  };
+
+  const handleThemeToggle = () => {
+    playClickSound();
+    toggleTheme();
+  };
 
   return (
     <motion.header
@@ -58,6 +73,7 @@ const Header = () => {
                 duration={800}
                 className="px-4 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 font-medium text-sm"
                 activeClass="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
+                onClick={() => handleNavClick(item.name)}
               >
                 {item.name}
               </Link>
@@ -68,7 +84,7 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-2">
             {/* Theme Toggle */}
             <motion.button
-              onClick={toggleTheme}
+              onClick={handleThemeToggle}
               className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

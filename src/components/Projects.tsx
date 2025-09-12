@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import SimpleCard from "./SimpleCard";
 import { getTechColor } from "../utils/techColors";
+import { useClickSound } from "../hooks/useClickSound";
 
 const projects = [
   {
@@ -63,6 +64,16 @@ const projects = [
 ];
 
 const Projects = () => {
+  const { playClickSound } = useClickSound();
+
+  const handleProjectLinkClick = (
+    type: "github" | "live",
+    projectTitle: string,
+  ) => {
+    playClickSound();
+    console.log(`Clicked ${type} link for ${projectTitle}`);
+  };
+
   return (
     <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-6">
@@ -115,6 +126,9 @@ const Projects = () => {
                         rel="noopener noreferrer"
                         className="bg-white dark:bg-gray-800 p-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-lg"
                         aria-label={`View ${project.title} source code`}
+                        onClick={() =>
+                          handleProjectLinkClick("github", project.title)
+                        }
                       >
                         <Github className="w-5 h-5 text-gray-800 dark:text-gray-200" />
                       </a>
@@ -124,6 +138,9 @@ const Projects = () => {
                         rel="noopener noreferrer"
                         className="bg-white dark:bg-gray-800 p-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-blue-50 dark:hover:bg-blue-900/50 shadow-lg"
                         aria-label={`View ${project.title} live demo`}
+                        onClick={() =>
+                          handleProjectLinkClick("live", project.title)
+                        }
                       >
                         <ExternalLink className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                       </a>

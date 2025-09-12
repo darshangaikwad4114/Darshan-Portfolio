@@ -5,6 +5,7 @@ import { MdEmail, MdSend } from "react-icons/md";
 import SimpleCard from "./SimpleCard";
 import { useAnalytics } from "../hooks/useAnalytics";
 import { useForm, ValidationError } from "@formspree/react";
+import { useClickSound } from "../hooks/useClickSound";
 
 // Use the form ID provided by Formspree
 const FORMSPREE_FORM_ID = "moveowzg";
@@ -75,11 +76,24 @@ const Contact = () => {
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const { trackEvent } = useAnalytics();
+  const { playClickSound } = useClickSound();
 
   // Use Formspree's useForm hook
   const [state, handleSubmit] = useForm(FORMSPREE_FORM_ID);
   const isSubmitting = state.submitting;
   const submitSuccess = state.succeeded;
+
+  // Custom submit handler that includes click sound
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    playClickSound();
+    handleSubmit(e);
+  };
+
+  // Handle contact method clicks
+  const handleContactMethodClick = (method: string) => {
+    playClickSound();
+    trackEvent(`contact_${method.toLowerCase()}_click`, { method });
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -181,6 +195,7 @@ const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 flex flex-col group-hover:scale-[1.02] transition-transform duration-300"
+                  onClick={() => handleContactMethodClick(method.title)}
                 >
                   <div
                     className={`w-10 h-10 ${method.iconBg} rounded-lg flex items-center justify-center mb-3 text-white shadow-lg group-hover:scale-105 transition-transform duration-300 mx-auto`}
@@ -227,7 +242,7 @@ const Contact = () => {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleFormSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 gap-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
