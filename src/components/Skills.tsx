@@ -1,32 +1,7 @@
 import { motion } from "framer-motion";
 import { Code2, Globe, Server, Database } from "lucide-react";
 import MotionCard from "./MotionCard";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.3,
-      ease: "easeOut",
-    },
-  },
-};
+import { animationVariants, viewportConfig } from "../utils/animations";
 
 const skillCategories = [
   {
@@ -252,17 +227,17 @@ const Skills = () => {
         </motion.div>
 
         <motion.div
-          variants={containerVariants}
+          variants={animationVariants.containerFast}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={viewportConfig.default}
           className="grid grid-cols-1 lg:grid-cols-2 gap-6"
           role="list"
         >
           {skillCategories.map((category) => (
             <motion.div
               key={category.title}
-              variants={cardVariants}
+              variants={animationVariants.card}
               className="group"
               role="listitem"
             >
@@ -303,6 +278,10 @@ const Skills = () => {
                               alt={`${skill.name} icon`}
                               className="w-4 h-4 object-contain"
                               loading="lazy"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).style.display =
+                                  "none";
+                              }}
                             />
                           </div>
                           <span className="font-medium text-gray-800 dark:text-gray-200 text-sm whitespace-nowrap">

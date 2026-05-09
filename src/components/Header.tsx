@@ -4,6 +4,7 @@ import { Menu, X, Sun, Moon } from "lucide-react";
 import { Link } from "react-scroll";
 import { useTheme } from "../hooks/useTheme";
 import { useClickSound } from "../hooks/useClickSound";
+import { navigationItems } from "../constants/navigation";
 import Logo from "./Logo";
 
 const Header = () => {
@@ -11,15 +12,6 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { playClickSound } = useClickSound();
-
-  const navigation = [
-    { name: "About", to: "about", offset: -80 },
-    { name: "Skills", to: "skills", offset: -80 },
-    { name: "Experience", to: "experience", offset: -80 },
-    { name: "Projects", to: "projects", offset: -80 },
-    { name: "Services", to: "services", offset: -80 },
-    { name: "Contact", to: "contact", offset: -80 },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,9 +27,8 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleNavClick = (itemName: string) => {
+  const handleNavClick = () => {
     playClickSound();
-    console.log(`Navigating to ${itemName}`);
   };
 
   const handleThemeToggle = () => {
@@ -63,7 +54,7 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
-            {navigation.map((item) => (
+            {navigationItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.to}
@@ -73,7 +64,7 @@ const Header = () => {
                 duration={800}
                 className="px-4 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 font-medium text-sm"
                 activeClass="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                onClick={() => handleNavClick(item.name)}
+                onClick={handleNavClick}
               >
                 {item.name}
               </Link>
@@ -125,7 +116,7 @@ const Header = () => {
               className="md:hidden overflow-hidden bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 mt-2 mb-4 shadow-lg"
             >
               <div className="p-4 space-y-1">
-                {navigation.map((item) => (
+                {navigationItems.map((item) => (
                   <Link
                     key={item.name}
                     to={item.to}

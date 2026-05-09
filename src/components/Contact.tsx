@@ -6,65 +6,18 @@ import SimpleCard from "./SimpleCard";
 import { useAnalytics } from "../hooks/useAnalytics";
 import { useForm, ValidationError } from "@formspree/react";
 import { useClickSound } from "../hooks/useClickSound";
+import { animationVariants, viewportConfig } from "../utils/animations";
+import { contactMethods as contactMethodsData } from "../data/contactMethods";
 
 // Use the form ID provided by Formspree
 const FORMSPREE_FORM_ID = "moveowzg";
+const SUCCESS_MESSAGE_DURATION_MS = 4000;
 
-const contactMethods = [
-  {
-    icon: <MdEmail className="w-5 h-5" />,
-    title: "Email Me",
-    description: "Send me an email anytime",
-    value: "darshangaikwad4114@gmail.com",
-    href: "https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=darshangaikwad4114@gmail.com",
-    iconBg: "bg-gradient-to-br from-blue-500 to-cyan-500",
-  },
-  {
-    icon: <FaGithub className="w-5 h-5" />,
-    title: "GitHub",
-    description: "Check out my projects",
-    value: "darshangaikwad4114",
-    href: "https://github.com/darshangaikwad4114",
-    iconBg: "bg-gradient-to-br from-purple-500 to-pink-500",
-  },
-  {
-    icon: <FaLinkedinIn className="w-5 h-5" />,
-    title: "LinkedIn",
-    description: "Let's connect professionally",
-    value: "darshan-gaikwad",
-    href: "https://www.linkedin.com/in/darshan-gaikwad/",
-    iconBg: "bg-gradient-to-br from-green-500 to-emerald-500",
-  },
-];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-    scale: 0.95,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15,
-      duration: 0.6,
-    },
-  },
+// Map icon types to components
+const iconMap: Record<string, JSX.Element> = {
+  email: <MdEmail className="w-5 h-5" />,
+  github: <FaGithub className="w-5 h-5" />,
+  linkedin: <FaLinkedinIn className="w-5 h-5" />,
 };
 
 const Contact = () => {
@@ -111,9 +64,6 @@ const Contact = () => {
       try {
         trackEvent("contact_form_submit", {
           success: true,
-          formLength: formData.message.length,
-          hasName: Boolean(formData.name),
-          hasEmail: Boolean(formData.email),
           timestamp: new Date().toISOString(),
         });
       } catch (error) {
@@ -132,12 +82,12 @@ const Contact = () => {
       // Hide success message after 4 seconds
       const timer = setTimeout(() => {
         setShowSuccessMessage(false);
-      }, 4000);
+      }, SUCCESS_MESSAGE_DURATION_MS);
 
       // Clean up timer on component unmount
       return () => clearTimeout(timer);
     }
-  }, [submitSuccess, formData, trackEvent]);
+  }, [submitSuccess, trackEvent]);
 
   return (
     <section
@@ -151,7 +101,7 @@ const Contact = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={viewportConfig.default}
           className="text-center mb-12"
         >
           <motion.span
@@ -175,17 +125,17 @@ const Contact = () => {
 
         {/* Contact Methods */}
         <motion.div
-          variants={containerVariants}
+          variants={animationVariants.containerSlow}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={viewportConfig.default}
           className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 max-w-3xl mx-auto"
           role="list"
         >
-          {contactMethods.map((method) => (
+          {contactMethodsData.map((method) => (
             <motion.div
-              key={method.title}
-              variants={cardVariants}
+              key={method.id}
+              variants={animationVariants.cardSpring}
               className="group"
               role="listitem"
             >
@@ -200,7 +150,7 @@ const Contact = () => {
                   <div
                     className={`w-10 h-10 ${method.iconBg} rounded-lg flex items-center justify-center mb-3 text-white shadow-lg group-hover:scale-105 transition-transform duration-300 mx-auto`}
                   >
-                    {method.icon}
+                    {iconMap[method.icon]}
                   </div>
 
                   <h3 className="text-base font-bold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">

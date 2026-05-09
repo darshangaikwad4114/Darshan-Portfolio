@@ -15,7 +15,7 @@ import { useClickSound } from "../hooks/useClickSound";
 
 const Hero = () => {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-  const [key, setKey] = useState(0);
+  const [titleRotationKey, setTitleRotationKey] = useState(0);
   const { trackInteraction } = useAnalytics();
   const { playClickSound } = useClickSound();
 
@@ -37,7 +37,7 @@ const Hero = () => {
     // Title rotation logic
     const interval = setInterval(() => {
       setCurrentTitleIndex((prevIndex) => (prevIndex + 1) % titles.length);
-      setKey((prev) => prev + 1);
+      setTitleRotationKey((prev) => prev + 1);
     }, 2000);
 
     // Track hero section visibility
@@ -108,7 +108,7 @@ const Hero = () => {
                 {/* Animated title */}
                 <div className="text-xl lg:text-2xl font-semibold text-gray-700 dark:text-gray-300 min-h-[32px] flex items-center justify-center lg:justify-start">
                   <DecryptedText
-                    key={key}
+                    key={titleRotationKey}
                     text={titles[currentTitleIndex]}
                     speed={25}
                     sequential={true}

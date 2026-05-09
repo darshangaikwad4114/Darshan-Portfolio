@@ -23,6 +23,18 @@ export const animationVariants = {
     },
   },
 
+  // Container with reduced stagger for skills
+  containerFast: {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
+      },
+    },
+  },
+
   // Card animations with performance optimizations
   card: {
     hidden: {
@@ -39,6 +51,26 @@ export const animationVariants = {
         stiffness: 120, // Increased for snappier animation
         damping: 20, // Increased for less bounce
         duration: 0.4, // Reduced from 0.6
+      },
+    },
+  },
+
+  // Card animations with spring effect (used in Contact)
+  cardSpring: {
+    hidden: {
+      opacity: 0,
+      y: 30,
+      scale: 0.95,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        duration: 0.6,
       },
     },
   },

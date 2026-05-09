@@ -73,7 +73,8 @@ export const getTechColor = (techName: string) => {
   return color;
 };
 
-// 🚀 OPTIMIZATION 5: Hook for multiple tech stacks
+// 🚀 OPTIMIZATION 5: Hook for multiple tech stacks (deprecated - use getTechColor directly)
+// Kept for backwards compatibility but prefer: techStack.map(tech => getTechColor(tech))
 export const useTechColors = (techStack: string[]) => {
   return useMemo(() => {
     return techStack.map((tech) => ({
