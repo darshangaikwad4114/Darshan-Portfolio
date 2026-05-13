@@ -11,13 +11,11 @@ import {
 import { Link } from "react-scroll";
 import DecryptedText from "./DecryptedText";
 import { useAnalytics } from "../hooks/useAnalytics";
-import { useClickSound } from "../hooks/useClickSound";
 
 const Hero = () => {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
   const [titleRotationKey, setTitleRotationKey] = useState(0);
   const { trackInteraction } = useAnalytics();
-  const { playClickSound } = useClickSound();
 
   const titles = [
     "Full Stack Developer",
@@ -64,19 +62,16 @@ const Hero = () => {
 
   // Track resume download
   const handleResumeClick = () => {
-    playClickSound();
     trackInteraction("resume_download", "click");
   };
 
   // Track hire me button click
   const handleHireMeClick = () => {
-    playClickSound();
     trackInteraction("hire_me_button", "click");
   };
 
   // Handle social link clicks
   const handleSocialClick = (platform: string) => {
-    playClickSound();
     trackInteraction(`social_${platform.toLowerCase()}`, "click");
   };
 
@@ -216,7 +211,11 @@ const Hero = () => {
                 <div className="relative w-full h-full">
                   <img
                     src="/images/profile.webp"
-                    loading="lazy"
+                    width={320}
+                    height={320}
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                     alt="Darshan Gaikwad"
                     className="rounded-full w-full h-full object-cover shadow-lg border-4 border-white dark:border-gray-800"
                   />

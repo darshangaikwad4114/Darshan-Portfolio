@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { Link } from "react-scroll";
 import { useTheme } from "../hooks/useTheme";
-import { useClickSound } from "../hooks/useClickSound";
 import { navigationItems } from "../constants/navigation";
 import Logo from "./Logo";
 
@@ -11,7 +10,6 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  const { playClickSound } = useClickSound();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,16 +21,10 @@ const Header = () => {
   }, []);
 
   const toggleMenu = () => {
-    playClickSound();
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleNavClick = () => {
-    playClickSound();
-  };
-
   const handleThemeToggle = () => {
-    playClickSound();
     toggleTheme();
   };
 
@@ -48,7 +40,7 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-6">
-        <div className="flex items-center justify-evenly h-16">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Logo />
 
@@ -64,7 +56,6 @@ const Header = () => {
                 duration={800}
                 className="px-4 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 font-medium text-sm"
                 activeClass="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                onClick={handleNavClick}
               >
                 {item.name}
               </Link>
@@ -76,7 +67,7 @@ const Header = () => {
             {/* Theme Toggle */}
             <motion.button
               onClick={handleThemeToggle}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle theme"
@@ -92,7 +83,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <motion.button
             onClick={toggleMenu}
-            className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 md:hidden"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-label="Toggle menu"
@@ -135,10 +126,11 @@ const Header = () => {
                 {/* Mobile Theme Toggle */}
                 <div className="pt-2 border-t border-gray-200 dark:border-gray-700 flex justify-center">
                   <motion.button
-                    onClick={toggleTheme}
-                    className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                    onClick={handleThemeToggle}
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    aria-label="Toggle theme"
                   >
                     {theme === "dark" ? (
                       <Sun className="w-4 h-4 text-yellow-500" />

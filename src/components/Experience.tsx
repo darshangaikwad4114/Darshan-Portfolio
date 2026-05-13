@@ -54,7 +54,7 @@ const Experience = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold rounded-full mb-4 backdrop-blur-sm"
           >
-            ✨ Career Journey
+            Career Journey
           </motion.span>
           <h2
             id="experience-heading"
@@ -108,15 +108,15 @@ const Experience = () => {
                       <div className="text-sm text-gray-600 dark:text-gray-300">
                         <ul className="space-y-1">
                           <li>
-                            • Developing full-stack web applications using
+                            - Developing full-stack web applications using
                             React.js and Node.js
                           </li>
                           <li>
-                            • Implementing responsive designs with modern CSS
+                            - Implementing responsive designs with modern CSS
                             frameworks
                           </li>
                           <li>
-                            • Collaborating with cross-functional teams in agile
+                            - Collaborating with cross-functional teams in agile
                             environment
                           </li>
                         </ul>

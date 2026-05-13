@@ -252,8 +252,9 @@ body {
 }
 
 /* Consistent focus styles */
-:focus {
-  outline: none;
+:focus-visible {
+  outline: 2px solid rgb(var(--primary-rgb));
+  outline-offset: 3px;
 }
 
 /* Consistent spacing for touch targets */

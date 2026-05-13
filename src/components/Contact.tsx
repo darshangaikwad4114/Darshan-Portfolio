@@ -5,7 +5,6 @@ import { MdEmail, MdSend } from "react-icons/md";
 import SimpleCard from "./SimpleCard";
 import { useAnalytics } from "../hooks/useAnalytics";
 import { useForm, ValidationError } from "@formspree/react";
-import { useClickSound } from "../hooks/useClickSound";
 import { animationVariants, viewportConfig } from "../utils/animations";
 import { contactMethods as contactMethodsData } from "../data/contactMethods";
 
@@ -26,25 +25,49 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>(
+    {},
+  );
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const { trackEvent } = useAnalytics();
-  const { playClickSound } = useClickSound();
 
   // Use Formspree's useForm hook
   const [state, handleSubmit] = useForm(FORMSPREE_FORM_ID);
   const isSubmitting = state.submitting;
   const submitSuccess = state.succeeded;
+  const formErrors = {
+    name:
+      touchedFields.name && !formData.name.trim()
+        ? "Enter your full name."
+        : "",
+    email:
+      touchedFields.email && !/^\S+@\S+\.\S+$/.test(formData.email)
+        ? "Enter a valid email address."
+        : "",
+    message:
+      touchedFields.message && !formData.message.trim()
+        ? "Tell me a little about your project."
+        : "",
+  };
+  const hasClientErrors =
+    !formData.name.trim() ||
+    !/^\S+@\S+\.\S+$/.test(formData.email) ||
+    !formData.message.trim();
 
-  // Custom submit handler that includes click sound
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    playClickSound();
+    setTouchedFields({ name: true, email: true, message: true });
+
+    if (hasClientErrors) {
+      e.preventDefault();
+      return;
+    }
+
     handleSubmit(e);
   };
 
   // Handle contact method clicks
   const handleContactMethodClick = (method: string) => {
-    playClickSound();
     trackEvent(`contact_${method.toLowerCase()}_click`, { method });
   };
 
@@ -56,6 +79,13 @@ const Contact = () => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFocusedField(null);
+    setTouchedFields((prev) => ({ ...prev, [e.target.name]: true }));
   };
 
   // Handle form submission success
@@ -110,7 +140,7 @@ const Contact = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold rounded-full mb-4"
           >
-            🤝 Let's Connect
+            Let's Connect
           </motion.span>
           <h2
             id="contact-heading"
@@ -192,7 +222,7 @@ const Contact = () => {
                 </p>
               </div>
 
-              <form onSubmit={handleFormSubmit} className="space-y-4">
+              <form onSubmit={handleFormSubmit} className="space-y-4" noValidate>
                 <div className="grid grid-cols-1 gap-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
@@ -212,11 +242,23 @@ const Contact = () => {
                           value={formData.name}
                           onChange={handleChange}
                           onFocus={() => setFocusedField("name")}
-                          onBlur={() => setFocusedField(null)}
+                          onBlur={handleBlur}
+                          aria-invalid={Boolean(formErrors.name)}
+                          aria-describedby={
+                            formErrors.name ? "name-error" : undefined
+                          }
                           className="w-full px-3 py-3 rounded-lg border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 placeholder:text-gray-400"
                           placeholder="Your full name"
                           required
                         />
+                        {formErrors.name && (
+                          <p
+                            id="name-error"
+                            className="mt-1 text-sm text-red-600 dark:text-red-400"
+                          >
+                            {formErrors.name}
+                          </p>
+                        )}
                         <ValidationError
                           prefix="Name"
                           field="name"
@@ -242,11 +284,23 @@ const Contact = () => {
                           value={formData.email}
                           onChange={handleChange}
                           onFocus={() => setFocusedField("email")}
-                          onBlur={() => setFocusedField(null)}
+                          onBlur={handleBlur}
+                          aria-invalid={Boolean(formErrors.email)}
+                          aria-describedby={
+                            formErrors.email ? "email-error" : undefined
+                          }
                           className="w-full px-3 py-3 rounded-lg border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300 placeholder:text-gray-400"
                           placeholder="your.email@example.com"
                           required
                         />
+                        {formErrors.email && (
+                          <p
+                            id="email-error"
+                            className="mt-1 text-sm text-red-600 dark:text-red-400"
+                          >
+                            {formErrors.email}
+                          </p>
+                        )}
                         <ValidationError
                           prefix="Email"
                           field="email"
@@ -272,12 +326,24 @@ const Contact = () => {
                         value={formData.message}
                         onChange={handleChange}
                         onFocus={() => setFocusedField("message")}
-                        onBlur={() => setFocusedField(null)}
+                        onBlur={handleBlur}
+                        aria-invalid={Boolean(formErrors.message)}
+                        aria-describedby={
+                          formErrors.message ? "message-error" : undefined
+                        }
                         rows={4}
                         className="w-full px-3 py-3 rounded-lg border border-gray-300/50 dark:border-gray-600/50 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm text-gray-900 dark:text-white resize-none transition-all duration-300 placeholder:text-gray-400"
                         placeholder="Tell me about your project..."
                         required
                       />
+                      {formErrors.message && (
+                        <p
+                          id="message-error"
+                          className="mt-1 text-sm text-red-600 dark:text-red-400"
+                        >
+                          {formErrors.message}
+                        </p>
+                      )}
                       <ValidationError
                         prefix="Message"
                         field="message"

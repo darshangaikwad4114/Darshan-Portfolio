@@ -2,16 +2,9 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import SimpleCard from "./SimpleCard";
 import { getTechColor } from "../utils/techColors";
-import { useClickSound } from "../hooks/useClickSound";
 import { projects } from "../data/projects";
 
 const Projects = () => {
-  const { playClickSound } = useClickSound();
-
-  const handleProjectLinkClick = () => {
-    playClickSound();
-  };
-
   return (
     <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-6">
@@ -28,7 +21,7 @@ const Projects = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold rounded-full mb-4 backdrop-blur-sm"
           >
-            🚀 Proof of Work
+            Proof of Work
           </motion.span>
           <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Featured Projects
@@ -55,18 +48,16 @@ const Projects = () => {
                     alt={`${project.title} screenshot`}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading={index === 0 ? "eager" : "lazy"}
+                    decoding="async"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="flex gap-4">
                       <a
                         href={project.links.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-white dark:bg-gray-800 p-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-lg"
+                        className="bg-white dark:bg-gray-800 p-3 rounded-full transform translate-y-0 sm:translate-y-4 sm:group-hover:translate-y-0 focus-visible:translate-y-0 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-lg"
                         aria-label={`View ${project.title} source code`}
-                        onClick={() =>
-                          handleProjectLinkClick()
-                        }
                       >
                         <Github className="w-5 h-5 text-gray-800 dark:text-gray-200" />
                       </a>
@@ -74,11 +65,8 @@ const Projects = () => {
                         href={project.links.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-white dark:bg-gray-800 p-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-blue-50 dark:hover:bg-blue-900/50 shadow-lg"
+                        className="bg-white dark:bg-gray-800 p-3 rounded-full transform translate-y-0 sm:translate-y-4 sm:group-hover:translate-y-0 focus-visible:translate-y-0 transition-all duration-300 hover:bg-blue-50 dark:hover:bg-blue-900/50 shadow-lg"
                         aria-label={`View ${project.title} live demo`}
-                        onClick={() =>
-                          handleProjectLinkClick()
-                        }
                       >
                         <ExternalLink className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                       </a>

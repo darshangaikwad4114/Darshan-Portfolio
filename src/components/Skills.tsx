@@ -175,7 +175,7 @@ const Skills = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold rounded-full mb-4 backdrop-blur-sm"
           >
-            ⚡ Technical Arsenal
+            Technical Arsenal
           </motion.span>
           <h2
             id="skills-heading"
@@ -214,9 +214,13 @@ const Skills = () => {
                 <div className="w-4 h-4 flex items-center justify-center mr-2 transition-transform duration-200">
                   <img
                     src={skill.icon}
-                    alt={`${skill.name} icon`}
+                    width={16}
+                    height={16}
+                    alt=""
+                    aria-hidden="true"
                     className="w-4 h-4 object-contain"
                     loading="lazy"
+                    decoding="async"
                     onError={(e) => {
                       (e.target as HTMLImageElement).style.display = "none";
                     }}
